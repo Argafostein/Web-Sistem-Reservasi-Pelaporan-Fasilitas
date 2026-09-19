@@ -1,0 +1,1001 @@
+/* =========================================================
+   RESET & GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: #f7f9fc;
+    color: #172033;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid #e8ecf2;
+    backdrop-filter: blur(12px);
+}
+
+.navbar-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 16px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2563eb;
+    color: white;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link {
+    padding: 9px 16px;
+
+    color: #667085;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 8px;
+
+    transition: 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+.nav-link.active {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+    overflow: hidden;
+}
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+/* .summary {
+    max-width: 1180px;
+
+    margin: 24px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.summary-card {
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ecf2;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 14px rgba(16, 24, 40, 0.04);
+
+    transition: 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.07);
+}
+
+.summary-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.summary-icon.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.summary-icon.green {
+    background: #ecfdf3;
+    color: #16a34a;
+}
+
+.summary-icon.red {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-content span {
+    color: #667085;
+    font-size: 13px;
+}
+
+.summary-content strong {
+    margin-top: 2px;
+
+    color: #101828;
+    font-size: 24px;
+    line-height: 1.2;
+} */
+
+
+/* =========================================================
+   GENERAL SECTION
+========================================================= */
+
+.search-section,
+.facility-section,
+.reservation-section,
+.about-section {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-section {
+    margin-top: 50px;
+}
+
+.facility-section {
+    margin-top: 15px;
+}
+
+.reservation-section {
+    margin-top: 80px;
+}
+
+.about-section {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.section-label {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.section-heading h2,
+.about-section h2 {
+    color: #101828;
+
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -0.7px;
+}
+
+.section-heading p,
+.about-section p {
+    margin-top: 8px;
+
+    color: #667085;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.search-box {
+    padding: 24px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
+    gap: 16px;
+    align-items: end;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ecf2;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(16, 24, 40, 0.04);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    color: #344054;
+
+    background: #ffffff;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-button {
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: 0.2s ease;
+}
+
+.search-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DATE BOX
+========================================================= */
+
+.date-box {
+    min-width: 190px;
+
+    padding: 12px 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ecf2;
+    border-radius: 10px;
+}
+
+.date-box span {
+    color: #98a2b3;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.date-box strong {
+    margin-top: 2px;
+
+    color: #344054;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FACILITY CARD
+========================================================= */
+
+.facility-card {
+    margin-bottom: 20px;
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ecf2;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(16, 24, 40, 0.04);
+
+    transition: 0.2s ease;
+}
+
+.facility-card:hover {
+    border-color: #d5def0;
+    box-shadow: 0 8px 28px rgba(16, 24, 40, 0.07);
+}
+
+.facility-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.facility-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.facility-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 12px;
+
+    font-size: 23px;
+}
+
+.facility-main h3 {
+    color: #101828;
+
+    font-size: 18px;
+    line-height: 1.3;
+}
+
+.location {
+    margin-top: 4px;
+
+    color: #667085;
+    font-size: 13px;
+}
+
+.facility-status {
+    padding: 7px 11px;
+
+    background: #ecfdf3;
+    color: #15803d;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   FACILITY INFO
+========================================================= */
+
+.facility-info {
+    margin-top: 20px;
+    padding: 14px 0;
+
+    display: flex;
+    gap: 28px;
+
+    border-top: 1px solid #f0f2f5;
+    border-bottom: 1px solid #f0f2f5;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+.schedule {
+    margin-top: 18px;
+
+    border: 1px solid #eaecf0;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.schedule-title,
+.schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.schedule-title {
+    padding: 11px 14px;
+
+    background: #f8fafc;
+
+    color: #667085;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.schedule-row {
+    padding: 12px 14px;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 13px;
+}
+
+.time {
+    color: #344054;
+    font-weight: 600;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    width: fit-content;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status i {
+    width: 7px;
+    height: 7px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+.status.available {
+    color: #15803d;
+}
+
+.status.available i {
+    background: #22c55e;
+}
+
+.status.unavailable {
+    color: #dc2626;
+}
+
+.status.unavailable i {
+    background: #ef4444;
+}
+
+
+/* =========================================================
+   FACILITY ACTION
+========================================================= */
+
+.facility-action {
+    margin-top: 18px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.reserve-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+
+    background: #2563eb;
+    color: white;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.reserve-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESERVATION CARD
+========================================================= */
+
+.reservation-card {
+    display: grid;
+    grid-template-columns: 0.75fr 1.5fr;
+    gap: 45px;
+
+    padding: 34px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8ecf2;
+    border-radius: 18px;
+
+    box-shadow: 0 5px 20px rgba(16, 24, 40, 0.04);
+}
+
+.reservation-info {
+    padding: 10px 0;
+}
+
+.reservation-icon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 12px;
+
+    font-size: 23px;
+}
+
+.reservation-info h3 {
+    color: #101828;
+    font-size: 20px;
+}
+
+.reservation-info p {
+    margin-top: 10px;
+
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   RESERVATION FORM
+========================================================= */
+
+.reservation-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group small {
+    margin-top: 2px;
+
+    color: #98a2b3;
+    font-size: 11px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-submit {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 2px;
+}
+
+.submit-button {
+    padding: 11px 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.submit-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-section {
+    padding: 45px;
+
+    text-align: center;
+
+    background: #f0f6ff;
+
+    border: 1px solid #dbeafe;
+    border-radius: 18px;
+}
+
+.about-section h2 {
+    margin-bottom: 12px;
+}
+
+.about-section p {
+    max-width: 650px;
+    margin: 0 auto;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    margin-top: 80px;
+    padding: 30px 24px;
+
+    background: #101828;
+
+    color: #ffffff;
+}
+
+.footer-content {
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.footer-content strong {
+    font-size: 15px;
+}
+
+.footer-content span {
+    color: #98a2b3;
+    font-size: 13px;
+}
+
+footer > p {
+    max-width: 1180px;
+
+    margin: 16px auto 0;
+
+    color: #667085;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .navbar-container,
+    .hero,
+    .summary,
+    .search-section,
+    .facility-section,
+    .reservation-section,
+    .about-section {
+        max-width: calc(100% - 40px);
+    }
+
+    .hero {
+        padding: 55px 45px;
+    }
+
+    .search-box {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search-button {
+        width: 100%;
+    }
+
+    .reservation-card {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar-container {
+        padding: 13px 0;
+    }
+
+    .navigation {
+        gap: 2px;
+    }
+
+    .nav-link {
+        padding: 8px 9px;
+        font-size: 12px;
+    }
+
+    .brand-logo {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero {
+        min-height: auto;
+
+        margin-top: 20px;
+        padding: 45px 28px;
+
+        border-radius: 18px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+        letter-spacing: -1.5px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .search-section,
+    .facility-section,
+    .reservation-section,
+    .about-section {
+        margin-top: 55px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .section-heading h2,
+    .about-section h2 {
+        font-size: 25px;
+    }
+
+    .search-box {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .date-box {
+        width: 100%;
+    }
+
+    .facility-card {
+        padding: 18px;
+    }
+
+    .facility-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .facility-status {
+        margin-left: 66px;
+    }
+
+    .facility-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .schedule-title,
+    .schedule-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .reservation-card {
+        padding: 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-submit {
+        justify-content: stretch;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+
+    .about-section {
+        padding: 30px 22px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    footer {
+        margin-top: 55px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .navbar-container,
+    .hero,
+    .summary,
+    .search-section,
+    .facility-section,
+    .reservation-section,
+    .about-section {
+        max-width: calc(100% - 24px);
+    }
+
+    .navigation {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .nav-link {
+        padding: 6px 7px;
+        font-size: 11px;
+    }
+
+    .hero {
+        padding: 35px 22px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .facility-main h3 {
+        font-size: 16px;
+    }
+
+    .schedule-title,
+    .schedule-row {
+        font-size: 11px;
+    }
+}
