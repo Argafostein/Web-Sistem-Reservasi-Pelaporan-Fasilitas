@@ -29,18 +29,13 @@
 
             <nav class="navigation">
 
-                <a href="#fasilitas" class="nav-link active">
+                <a href="{{ route('fasilitas') }}" class="nav-link active">
                     Fasilitas
                 </a>
 
-                <a href="#signup" class="nav-link">
+                <a href="{{ route('register') }}" class="nav-link">
                     Sign Up
                 </a>
-
-                <a href="#login" class="nav-link">
-                    Login
-                </a>
-
             </nav>
 
         </div>
