@@ -1,18 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReservasiController;
 
 Route::get('/', function () {
-    return view('login');
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
+    return view('fasilitas');
+})->name('fasilitas');
 
 Route::get('/fasilitas', function () {
     return view('fasilitas');
-});
+})->name('fasilitas');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
 
 // Pengguna — reservasi
 Route::get('/riwayat-reservasi', function () {
@@ -41,6 +46,5 @@ Route::get('/antrian-laporan', function () {
     return view('antrian-laporan');
 });
 
-use App\Http\Controllers\ReservasiController;
 
 Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservasi.store');
