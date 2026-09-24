@@ -33,9 +33,38 @@
                     Fasilitas
                 </a>
 
-                <a href="{{ route('register') }}" class="nav-link">
-                    Sign Up
-                </a>
+                @if (auth()->check())
+                    <div class="profile-menu">
+
+                        <a href="#" class="profile-button">
+                            👤 {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="profile-dropdown">
+
+                            <a href="#">
+                                Profil Saya
+                            </a>
+
+                            <form
+                                method="POST"
+                                action="{{ route('logout') }}"
+                            >
+                                @csrf
+
+                                <button type="submit">
+                                    Logout
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                @else
+                    <a href="{{ route('register') }}" class="nav-link">
+                        Sign Up
+                    </a>
+                @endif
             </nav>
 
         </div>
@@ -49,68 +78,6 @@
     ========================================== -->
 
     <main>
-
-
-
-        <!-- =====================================
-             SUMMARY
-        ====================================== -->
-
-        <!-- <section class="summary">
-
-            <div class="summary-card">
-
-                <div class="summary-icon blue">
-                    🏢
-                </div>
-
-                <div class="summary-content">
-
-                    <span>Total Fasilitas</span>
-
-                    <strong>3</strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <div class="summary-icon green">
-                    ✓
-                </div>
-
-                <div class="summary-content">
-
-                    <span>Slot Tersedia</span>
-
-                    <strong>6</strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <div class="summary-icon red">
-                    ×
-                </div>
-
-                <div class="summary-content">
-
-                    <span>Slot Terpakai</span>
-
-                    <strong>3</strong>
-
-                </div>
-
-            </div>
-
-        </section> -->
-
-
 
         <!-- =====================================
              SRS 2 - PENCARIAN FASILITAS
@@ -241,350 +208,101 @@
 
         <section class="facility-section">
 
-            <article class="facility-card">
+            @forelse ($facilities as $facility)
 
-                <div class="facility-top">
+                <article class="facility-card">
 
-                    <div class="facility-main">
+                    <div class="facility-top">
 
-                        <div class="facility-icon">
-                            🏢
-                        </div>
+                        <div class="facility-main">
 
-                        <div>
+                            <div class="facility-icon">
+                                🏢
+                            </div>
 
-                            <h3>
-                                Ruang Seminar A201
-                            </h3>
+                            <div>
 
-                            <p class="location">
-                                Gedung A · Lantai 2
-                            </p>
+                                <h3>
+                                    {{ $facility->name }}
+                                </h3>
 
-                        </div>
+                                <p class="location">
+                                    {{ $facility->location }}
+                                </p>
 
-                    </div>
-
-
-                    <!-- <span class="facility-status">
-                        2 slot tersedia
-                    </span> -->
-
-                </div>
-
-
-                <div class="facility-info">
-
-                    <span>
-                        👥 Kapasitas: 50 orang
-                    </span>
-
-                    <span>
-                        🏷️ Tipe: Ruang Seminar
-                    </span>
-
-                </div>
-
-
-                <div class="schedule">
-
-                    <div class="schedule-title">
-
-                        <span>
-                            Slot Waktu
-                        </span>
-
-                        <span>
-                            Status
-                        </span>
-
-                    </div>
-
-
-                    <div class="schedule-row">
-
-                        <span class="time">
-                            08:00 — 10:00
-                        </span>
-
-                        <span class="status available">
-
-                            <i></i>
-
-                            Tersedia
-
-                        </span>
-
-                    </div>
-
-
-                    <div class="schedule-row">
-
-                        <span class="time">
-                            10:00 — 12:00
-                        </span>
-
-                        <span class="status unavailable">
-
-                            <i></i>
-
-                            Tidak tersedia
-
-                        </span>
-
-                    </div>
-
-
-                    <div class="schedule-row">
-
-                        <span class="time">
-                            13:00 — 15:00
-                        </span>
-
-                        <span class="status available">
-
-                            <i></i>
-
-                            Tersedia
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="facility-action">
-
-                    <a href="#reservasi" class="reserve-button">
-                        Ajukan Reservasi
-                    </a>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- =====================================
-                 FASILITAS 2
-            ====================================== -->
-
-            <article class="facility-card">
-
-                <div class="facility-top">
-
-                    <div class="facility-main">
-
-                        <div class="facility-icon">
-                            🏛️
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Aula Fakultas B101
-                            </h3>
-
-                            <p class="location">
-                                Gedung B · Lantai 1
-                            </p>
+                            </div>
 
                         </div>
 
                     </div>
 
 
-                    <!-- <span class="facility-status">
-                        2 slot tersedia
-                    </span> -->
-
-                </div>
-
-
-                <div class="facility-info">
-
-                    <span>
-                        👥 Kapasitas: 100 orang
-                    </span>
-
-                    <span>
-                        🏷️ Tipe: Aula
-                    </span>
-
-                </div>
-
-
-                <div class="schedule">
-
-                    <div class="schedule-title">
+                    <div class="facility-info">
 
                         <span>
-                            Slot Waktu
+                            👥 Kapasitas:
+                            {{ $facility->capacity ?? '-' }} orang
                         </span>
 
                         <span>
-                            Status
+                            🏷️ Status:
+                            {{ ucfirst($facility->status) }}
                         </span>
 
                     </div>
 
 
-                    <div class="schedule-row">
+                    <div class="schedule">
 
-                        <span class="time">
-                            08:00 — 10:00
-                        </span>
+                        <div class="schedule-title">
 
-                        <span class="status unavailable">
+                            <span>
+                                Informasi
+                            </span>
 
-                            <i></i>
+                            <span>
+                                Status
+                            </span>
 
-                            Tidak tersedia
-
-                        </span>
-
-                    </div>
-
-
-                    <div class="schedule-row">
-
-                        <span class="time">
-                            10:00 — 15:00
-                        </span>
-
-                        <span class="status available">
-
-                            <i></i>
-
-                            Tersedia
-
-                        </span>
-
-                    </div>
-                </div>
-
-
-                <div class="facility-action">
-
-                    <a href="#reservasi" class="reserve-button">
-                        Ajukan Reservasi
-                    </a>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- =====================================
-                 FASILITAS 3
-            ====================================== -->
-
-            <article class="facility-card">
-
-                <div class="facility-top">
-
-                    <div class="facility-main">
-
-                        <div class="facility-icon">
-                            💻
                         </div>
 
-                        <div>
 
-                            <h3>
-                                Laboratorium Komputer C301
-                            </h3>
+                        <div class="schedule-row">
 
-                            <p class="location">
-                                Gedung C · Lantai 3
-                            </p>
+                            <span class="time">
+                                {{ $facility->description ?? 'Tidak ada deskripsi' }}
+                            </span>
+
+                            <span class="status {{ $facility->status === 'available' ? 'available' : 'unavailable' }}">
+
+                                <i></i>
+
+                                {{ $facility->status === 'available' ? 'Tersedia' : 'Tidak tersedia' }}
+
+                            </span>
 
                         </div>
 
                     </div>
 
-<!-- 
-                    <span class="facility-status">
-                        2 slot tersedia
-                    </span> -->
 
-                </div>
+                    <div class="facility-action">
 
-
-                <div class="facility-info">
-
-                    <span>
-                        👥 Kapasitas: 40 orang
-                    </span>
-
-                    <span>
-                        🏷️ Tipe: Laboratorium
-                    </span>
-
-                </div>
-
-
-                <div class="schedule">
-
-                    <div class="schedule-title">
-
-                        <span>
-                            Slot Waktu
-                        </span>
-
-                        <span>
-                            Status
-                        </span>
+                        <a href="#reservasi" class="reserve-button">
+                            Ajukan Reservasi
+                        </a>
 
                     </div>
 
+                </article>
 
-                    <div class="schedule-row">
+            @empty
 
-                        <span class="time">
-                            08:00 — 12:00
-                        </span>
+                <p>
+                    Belum ada fasilitas yang tersedia.
+                </p>
 
-                        <span class="status available">
-
-                            <i></i>
-
-                            Tersedia
-
-                        </span>
-
-                    </div>
-
-                    <div class="schedule-row">
-
-                        <span class="time">
-                            13:00 — 15:00
-                        </span>
-
-                        <span class="status unavailable">
-
-                            <i></i>
-
-                            Tidak tersedia
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="facility-action">
-
-                    <a href="#reservasi" class="reserve-button">
-                        Ajukan Reservasi
-                    </a>
-
-                </div>
-
-            </article>
+            @endforelse
 
         </section>
 

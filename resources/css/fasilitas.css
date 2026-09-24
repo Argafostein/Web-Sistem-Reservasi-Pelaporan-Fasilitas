@@ -112,6 +112,106 @@ button {
     background: #eff6ff;
 }
 
+/* =========================================
+   PROFILE MENU
+========================================= */
+
+.profile-menu {
+    position: relative;
+}
+
+/* Tombol profile */
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    color: #333;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.profile-button:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+/* Dropdown */
+.profile-dropdown {
+    position: absolute;
+
+    top: calc(100% + 8px);
+    right: 0;
+
+    width: 180px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+    padding: 8px;
+
+    display: none;
+
+    z-index: 1000;
+}
+
+/* Munculkan dropdown saat hover */
+.profile-menu:hover .profile-dropdown {
+    display: block;
+}
+
+/* Item dropdown */
+.profile-dropdown a,
+.profile-dropdown button {
+    display: block;
+
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: background-color 0.2s ease;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+    background-color: #f3f4f6;
+}
+
+/* Form logout */
+.profile-dropdown form {
+    margin: 0;
+}
+
 
 /* =========================================================
    MAIN
