@@ -45,6 +45,3 @@ Route::get('/antrian-reservasi', function () {
 Route::get('/antrian-laporan', function () {
     return view('antrian-laporan');
 });
-
-
-Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservasi.store');
