@@ -1,0 +1,1335 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   GLOBAL
+======================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f5f7fb;
+
+    color: #172033;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.navbar {
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e9f0;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+
+.navbar-container {
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding: 15px 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+/* ========================================
+   BRAND
+======================================== */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: #172033;
+}
+
+
+.brand-logo {
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+.brand-text {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.brand-text strong {
+    font-size: 15px;
+
+    color: #172033;
+}
+
+
+.brand-text span {
+    font-size: 11px;
+
+    color: #8993a4;
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.navigation {
+    display: flex;
+
+    gap: 6px;
+}
+
+
+.nav-link {
+    text-decoration: none;
+
+    color: #64748b;
+
+    padding: 9px 15px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: all 0.2s ease;
+}
+
+
+.nav-link:hover {
+    color: #2563eb;
+
+    background: #eff6ff;
+}
+
+
+.nav-link.active {
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    font-weight: 600;
+}
+
+
+/* ========================================
+   MAIN
+======================================== */
+
+main {
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding: 35px 24px 60px;
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 300px;
+
+    border-radius: 20px;
+
+    padding: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: linear-gradient(
+        120deg,
+        #1d4ed8,
+        #4338ca
+    );
+
+    color: white;
+
+    box-shadow:
+        0 15px 35px rgba(37, 99, 235, 0.18);
+}
+
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+
+.hero-badge {
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    margin-bottom: 13px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.13);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.3px;
+}
+
+
+.hero h1 {
+    font-size: 38px;
+
+    line-height: 1.2;
+
+    margin-bottom: 12px;
+}
+
+
+.hero h1 span {
+    color: #bfdbfe;
+}
+
+
+.hero p {
+    max-width: 560px;
+
+    font-size: 15px;
+
+    color: #dbeafe;
+
+    margin-bottom: 22px;
+}
+
+
+/* ========================================
+   HERO BUTTON
+======================================== */
+
+.hero-button {
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #1d4ed8;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.hero-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ========================================
+   HERO DECORATION
+======================================== */
+
+.hero-decoration {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+.decoration-one {
+    width: 320px;
+
+    height: 320px;
+
+    right: -80px;
+
+    top: -130px;
+}
+
+
+.decoration-two {
+    width: 190px;
+
+    height: 190px;
+
+    right: 180px;
+
+    bottom: -120px;
+}
+
+
+/* ========================================
+   SUMMARY
+======================================== */
+
+.summary {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-top: 22px;
+
+    margin-bottom: 50px;
+}
+
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #e6eaf0;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.03);
+
+    transition: 0.2s;
+}
+
+
+.summary-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.07);
+}
+
+
+.summary-icon {
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+.summary-icon.blue {
+    background: #eff6ff;
+
+    color: #2563eb;
+}
+
+
+.summary-icon.green {
+    background: #ecfdf5;
+
+    color: #16a34a;
+}
+
+
+.summary-icon.red {
+    background: #fef2f2;
+
+    color: #dc2626;
+}
+
+
+.summary-content {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.summary-content span {
+    color: #8993a4;
+
+    font-size: 12px;
+}
+
+
+.summary-content strong {
+    color: #172033;
+
+    font-size: 21px;
+}
+
+
+/* ========================================
+   SECTION HEADING
+======================================== */
+
+.section-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin-bottom: 20px;
+}
+
+
+.section-label {
+    color: #2563eb;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.2px;
+}
+
+
+.section-heading h2 {
+    font-size: 24px;
+
+    color: #111827;
+
+    margin-top: 3px;
+}
+
+
+.section-heading p {
+    color: #7b8494;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   SEARCH SECTION
+======================================== */
+
+.search-section {
+    margin-bottom: 50px;
+}
+
+
+.search-box {
+    background: white;
+
+    border: 1px solid #e3e8f0;
+
+    border-radius: 15px;
+
+    padding: 23px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        auto;
+
+    gap: 15px;
+
+    align-items: end;
+
+    box-shadow:
+        0 4px 15px rgba(15, 23, 42, 0.03);
+}
+
+
+/* ========================================
+   FORM GROUP
+======================================== */
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.form-group label {
+    color: #344054;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #dce2ea;
+
+    border-radius: 9px;
+
+    padding: 11px 12px;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px #eff6ff;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+/* ========================================
+   SEARCH BUTTON
+======================================== */
+
+.search-button {
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 11px 18px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.search-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   FACILITY SECTION
+======================================== */
+
+.facility-section {
+    margin-bottom: 60px;
+}
+
+
+/* ========================================
+   DATE BOX
+======================================== */
+
+.date-box {
+    min-width: 190px;
+
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    padding: 11px 15px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.date-box span {
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+
+.date-box strong {
+    color: #334155;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   FACILITY CARD
+======================================== */
+
+.facility-card {
+    background: white;
+
+    border: 1px solid #e3e8f0;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    margin-bottom: 18px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.facility-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 10px 28px rgba(30, 64, 175, 0.08);
+}
+
+
+/* ========================================
+   FACILITY TOP
+======================================== */
+
+.facility-top {
+    padding: 21px 23px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.facility-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.facility-icon {
+    width: 47px;
+
+    height: 47px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eff6ff;
+
+    font-size: 21px;
+}
+
+
+.facility-main h3 {
+    font-size: 17px;
+
+    color: #172033;
+
+    margin-bottom: 2px;
+}
+
+
+.location {
+    color: #7b8494;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   FACILITY STATUS
+======================================== */
+
+.facility-status {
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    border-radius: 20px;
+
+    padding: 6px 11px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* ========================================
+   FACILITY INFO
+======================================== */
+
+.facility-info {
+    display: flex;
+
+    gap: 25px;
+
+    padding: 0 23px 17px;
+
+    color: #7b8494;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   SCHEDULE
+======================================== */
+
+.schedule {
+    border-top: 1px solid #edf0f4;
+}
+
+
+.schedule-title {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    padding: 10px 23px;
+
+    background: #fafbfc;
+
+    color: #8a94a6;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+.schedule-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    padding: 13px 23px;
+
+    border-top: 1px solid #f1f3f6;
+
+    transition: 0.15s;
+}
+
+
+.schedule-row:hover {
+    background: #fafcff;
+}
+
+
+.time {
+    color: #344054;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    width: fit-content;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.status i {
+    width: 8px;
+
+    height: 8px;
+
+    display: block;
+
+    border-radius: 50%;
+}
+
+
+.status.available {
+    color: #15803d;
+}
+
+
+.status.available i {
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 3px #dcfce7;
+}
+
+
+.status.unavailable {
+    color: #dc2626;
+}
+
+
+.status.unavailable i {
+    background: #ef4444;
+
+    box-shadow:
+        0 0 0 3px #fee2e2;
+}
+
+
+/* ========================================
+   FACILITY ACTION
+======================================== */
+
+.facility-action {
+    padding: 17px 23px;
+
+    border-top: 1px solid #edf0f4;
+
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+.reserve-button {
+    display: inline-block;
+
+    padding: 9px 15px;
+
+    border-radius: 8px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+
+.reserve-button:hover {
+    background: #2563eb;
+
+    color: white;
+}
+
+
+/* ========================================
+   RESERVATION SECTION
+======================================== */
+
+.reservation-section {
+    margin-bottom: 60px;
+}
+
+
+.reservation-card {
+    background: white;
+
+    border: 1px solid #e3e8f0;
+
+    border-radius: 15px;
+
+    padding: 28px;
+
+    display: grid;
+
+    grid-template-columns: 0.8fr 1.5fr;
+
+    gap: 40px;
+
+    box-shadow:
+        0 4px 15px rgba(15, 23, 42, 0.03);
+}
+
+
+/* ========================================
+   RESERVATION INFO
+======================================== */
+
+.reservation-info {
+    padding: 10px;
+}
+
+
+.reservation-icon {
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 13px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+
+    margin-bottom: 18px;
+}
+
+
+.reservation-info h3 {
+    color: #172033;
+
+    font-size: 19px;
+
+    margin-bottom: 8px;
+}
+
+
+.reservation-info p {
+    color: #7b8494;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
+
+form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+.form-group small {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* ========================================
+   SUBMIT BUTTON
+======================================== */
+
+.form-submit {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 5px;
+}
+
+
+.submit-button {
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 12px 20px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.submit-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 15px rgba(37, 99, 235, 0.2);
+}
+
+
+/* ========================================
+   ABOUT
+======================================== */
+
+.about-section {
+    background: #eef4ff;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+    margin-bottom: 30px;
+}
+
+
+.about-section h2 {
+    color: #172033;
+
+    font-size: 22px;
+
+    margin: 5px 0 8px;
+}
+
+
+.about-section p {
+    max-width: 700px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+    border-top: 1px solid #e5e7eb;
+
+    background: white;
+
+    padding: 25px 24px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+.footer-content {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.footer-content strong {
+    color: #475569;
+
+    font-size: 12px;
+}
+
+
+.footer-content span {
+    color: #94a3b8;
+}
+
+
+footer > p {
+    max-width: 1150px;
+
+    margin: auto;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 850px) {
+
+    .search-box {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .search-button {
+        width: 100%;
+    }
+
+
+    .reservation-card {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .navbar-container {
+        padding: 13px 17px;
+    }
+
+
+    .brand-text span {
+        display: none;
+    }
+
+
+    .navigation {
+        gap: 2px;
+    }
+
+
+    .nav-link {
+        padding: 7px 8px;
+
+        font-size: 11px;
+    }
+
+
+    main {
+        padding: 22px 15px 45px;
+    }
+
+
+    .hero {
+        min-height: 270px;
+
+        padding: 30px 24px;
+
+        border-radius: 16px;
+    }
+
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+
+    .hero p {
+        font-size: 13px;
+    }
+
+
+    .summary {
+        grid-template-columns: 1fr;
+
+        margin-bottom: 35px;
+    }
+
+
+    .section-heading {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .date-box {
+        width: 100%;
+    }
+
+
+    .search-box {
+        grid-template-columns: 1fr;
+
+        padding: 18px;
+    }
+
+
+    .facility-top {
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+    }
+
+
+    .facility-status {
+        margin-left: 61px;
+    }
+
+
+    .facility-info {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    .schedule-title,
+    .schedule-row {
+        padding-left: 17px;
+
+        padding-right: 17px;
+    }
+
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+
+    .reservation-card {
+        padding: 20px;
+    }
+
+
+    .footer-content {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+}
