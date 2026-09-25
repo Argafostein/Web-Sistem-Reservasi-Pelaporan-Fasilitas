@@ -42,15 +42,21 @@ Route::post('/register', [AuthController::class, 'register'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
+
 // Pengguna — reservasi
+
+Route::get('/reservasi', function () {
+    return view('reservasi');
+});
+
 Route::get('/riwayat-reservasi', function () {
     return view('riwayat-reservasi');
 });
 
 // Pengguna — laporan
-Route::get('/laporan', function () {
-    return view('laporan');
-});
+Route::get('/reservasi', function () {
+    return view('reservasi');
+})->name('reservasi');
 
 Route::get('/riwayat-laporan', function () {
     return view('riwayat-laporan');
