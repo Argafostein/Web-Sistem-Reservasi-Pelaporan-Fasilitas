@@ -1,339 +1,233 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Fasilitas Kampus</title>
-
+@push('styles')
     @vite('resources/css/fasilitas.css')
-    <!-- <link rel="stylesheet" href="{{ asset('fasilitas.css') }}"> -->
-</head>
+@endpush
 
-<body>
+@section('content')
+<!-- =====================================
+     SRS 2 - PENCARIAN FASILITAS
+====================================== -->
 
-    <!-- =========================================
-         NAVBAR
-    ========================================== -->
+<section class="search-section" id="fasilitas">
 
-    <header class="navbar">
+    <div class="section-heading">
 
-        <div class="navbar-container">
+        <div>
+            <h2>
+                Temukan Fasilitas
+            </h2>
 
-            <a href="#" class="brand">
-                <div class="brand-logo">
-                    FK
-                </div>
-            </a>
+            <p>
+                Cari berdasarkan tipe, lokasi, atau kapasitas.
+            </p>
+        </div>
 
-            <nav class="navigation">
+    </div>
 
-                <a href="{{ route('fasilitas') }}" class="nav-link active">
-                    Fasilitas
-                </a>
 
-                <a href="{{ route('reservasi') }}" class="nav-link active">
-                    Reservasi
-                </a>
+    <!-- Search box -->
 
-                @if (auth()->check())
-                    <div class="profile-menu">
+    <div class="search-box">
 
-                        <a href="#" class="profile-button">
-                            👤 {{ Auth::user()->name }}
-                        </a>
+        <div class="form-group">
 
-                        <div class="profile-dropdown">
+            <label for="tipe">
+                Tipe Fasilitas
+            </label>
 
-                            <a href="#">
-                                Profil Saya
-                            </a>
+            <select id="tipe">
 
-                            <form
-                                method="POST"
-                                action="{{ route('logout') }}"
-                            >
-                                @csrf
+                <option value="">
+                    Semua tipe
+                </option>
 
-                                <button type="submit">
-                                    Logout
-                                </button>
-                            </form>
+                <option value="ruang-seminar">
+                    Ruang Seminar
+                </option>
 
-                        </div>
+                <option value="aula">
+                    Aula
+                </option>
 
-                    </div>
-                @else
-                    <a href="{{ route('register') }}" class="nav-link">
-                        Sign Up
-                    </a>
-                @endif
-            </nav>
+                <option value="laboratorium">
+                    Laboratorium
+                </option>
+
+            </select>
 
         </div>
 
-    </header>
+
+        <div class="form-group">
+
+            <label for="lokasi">
+                Lokasi
+            </label>
+
+            <select id="lokasi">
+
+                <option value="">
+                    Semua lokasi
+                </option>
+
+                <option value="gedung-a">
+                    Gedung A
+                </option>
+
+                <option value="gedung-b">
+                    Gedung B
+                </option>
+
+                <option value="gedung-c">
+                    Gedung C
+                </option>
+
+            </select>
+
+        </div>
 
 
+        <div class="form-group">
 
-    <!-- =========================================
-         MAIN
-    ========================================== -->
+            <label for="kapasitas">
+                Kapasitas
+            </label>
 
-    <main>
+            <select id="kapasitas">
 
-        <!-- =====================================
-             SRS 2 - PENCARIAN FASILITAS
-        ====================================== -->
+                <option value="">
+                    Semua kapasitas
+                </option>
 
-        <section class="search-section" id="fasilitas">
+                <option value="20">
+                    Minimal 20 orang
+                </option>
 
-            <div class="section-heading">
+                <option value="50">
+                    Minimal 50 orang
+                </option>
 
-                <div>
-                    <h2>
-                        Temukan Fasilitas
-                    </h2>
+                <option value="100">
+                    Minimal 100 orang
+                </option>
 
-                    <p>
-                        Cari berdasarkan tipe, lokasi, atau kapasitas.
-                    </p>
+            </select>
+
+        </div>
+
+
+        <button type="button" class="search-button">
+            Cari Fasilitas
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     DAFTAR FASILITAS
+====================================== -->
+
+<section class="facility-section">
+
+    @forelse ($facilities as $facility)
+
+        <article class="facility-card">
+
+            <div class="facility-top">
+
+                <div class="facility-main">
+
+                    <div class="facility-icon">
+                        🏢
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            {{ $facility->name }}
+                        </h3>
+
+                        <p class="location">
+                            {{ $facility->location }}
+                        </p>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- Search box -->
+            <div class="facility-info">
 
-            <div class="search-box">
+                <span>
+                    👥 Kapasitas:
+                    {{ $facility->capacity ?? '-' }} orang
+                </span>
 
-                <div class="form-group">
-
-                    <label for="tipe">
-                        Tipe Fasilitas
-                    </label>
-
-                    <select id="tipe">
-
-                        <option value="">
-                            Semua tipe
-                        </option>
-
-                        <option value="ruang-seminar">
-                            Ruang Seminar
-                        </option>
-
-                        <option value="aula">
-                            Aula
-                        </option>
-
-                        <option value="laboratorium">
-                            Laboratorium
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="lokasi">
-                        Lokasi
-                    </label>
-
-                    <select id="lokasi">
-
-                        <option value="">
-                            Semua lokasi
-                        </option>
-
-                        <option value="gedung-a">
-                            Gedung A
-                        </option>
-
-                        <option value="gedung-b">
-                            Gedung B
-                        </option>
-
-                        <option value="gedung-c">
-                            Gedung C
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="kapasitas">
-                        Kapasitas
-                    </label>
-
-                    <select id="kapasitas">
-
-                        <option value="">
-                            Semua kapasitas
-                        </option>
-
-                        <option value="20">
-                            Minimal 20 orang
-                        </option>
-
-                        <option value="50">
-                            Minimal 50 orang
-                        </option>
-
-                        <option value="100">
-                            Minimal 100 orang
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <button type="button" class="search-button">
-                    Cari Fasilitas
-                </button>
+                <span>
+                    🏷️ Status:
+                    {{ ucfirst($facility->status) }}
+                </span>
 
             </div>
 
-        </section>
+
+            <div class="schedule">
+
+                <div class="schedule-title">
+
+                    <span>
+                        Informasi
+                    </span>
+
+                    <span>
+                        Status
+                    </span>
+
+                </div>
 
 
+                <div class="schedule-row">
 
-        <!-- =====================================
-             DAFTAR FASILITAS
-        ====================================== -->
+                    <span class="time">
+                        {{ $facility->description ?? 'Tidak ada deskripsi' }}
+                    </span>
 
-        <section class="facility-section">
+                    <span class="status {{ $facility->status === 'available' ? 'available' : 'unavailable' }}">
 
-            @forelse ($facilities as $facility)
+                        <i></i>
 
-                <article class="facility-card">
+                        {{ $facility->status === 'available' ? 'Tersedia' : 'Tidak tersedia' }}
 
-                    <div class="facility-top">
+                    </span>
 
-                        <div class="facility-main">
+                </div>
 
-                            <div class="facility-icon">
-                                🏢
-                            </div>
-
-                            <div>
-
-                                <h3>
-                                    {{ $facility->name }}
-                                </h3>
-
-                                <p class="location">
-                                    {{ $facility->location }}
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+            </div>
 
 
-                    <div class="facility-info">
+            <div class="facility-action">
 
-                        <span>
-                            👥 Kapasitas:
-                            {{ $facility->capacity ?? '-' }} orang
-                        </span>
+                <a href="#reservasi" class="reserve-button">
+                    Ajukan Reservasi
+                </a>
 
-                        <span>
-                            🏷️ Status:
-                            {{ ucfirst($facility->status) }}
-                        </span>
+            </div>
 
-                    </div>
+        </article>
 
-
-                    <div class="schedule">
-
-                        <div class="schedule-title">
-
-                            <span>
-                                Informasi
-                            </span>
-
-                            <span>
-                                Status
-                            </span>
-
-                        </div>
-
-
-                        <div class="schedule-row">
-
-                            <span class="time">
-                                {{ $facility->description ?? 'Tidak ada deskripsi' }}
-                            </span>
-
-                            <span class="status {{ $facility->status === 'available' ? 'available' : 'unavailable' }}">
-
-                                <i></i>
-
-                                {{ $facility->status === 'available' ? 'Tersedia' : 'Tidak tersedia' }}
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="facility-action">
-
-                        <a href="#reservasi" class="reserve-button">
-                            Ajukan Reservasi
-                        </a>
-
-                    </div>
-
-                </article>
-
-            @empty
-
-                <p>
-                    Belum ada fasilitas yang tersedia.
-                </p>
-
-            @endforelse
-
-        </section>
-
-    <!-- =========================================
-         FOOTER
-    ========================================== -->
-
-    <footer>
-
-        <div class="footer-content">
-
-            <strong>
-                Fasilitas Kampus
-            </strong>
-
-            <span>
-                Sistem Informasi Fasilitas Kampus
-            </span>
-
-        </div>
+    @empty
 
         <p>
-            © 2026 Fasilitas Kampus
+            Belum ada fasilitas yang tersedia.
         </p>
 
-    </footer>
+    @endforelse
 
-</body>
+</section>
 
-</html>
+@endsection

@@ -43,13 +43,6 @@ Route::post('/register', [AuthController::class, 'register'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
-
-// Pengguna — reservasi
-
-// Route::get('/reservasi', function () {
-//     return view('reservasi');
-// });
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/reservasi', [ReservationController::class, 'create'])
@@ -58,10 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/reservasi', [ReservationController::class, 'store'])
         ->name('reservasi.store');
 
-});
-
-Route::get('/riwayat-reservasi', function () {
-    return view('riwayat-reservasi');
+    Route::get('/riwayat-reservasi', [ReservationController::class, 'history'])
+        ->name('riwayat-reservasi');
 });
 
 // Pengguna — laporan

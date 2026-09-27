@@ -59,4 +59,14 @@ class ReservationController extends Controller
             ->route('reservasi')
             ->with('success', 'Reservasi berhasil diajukan.');
     }
+
+    public function history()
+    {
+        $reservations = Reservation::where('user_id', Auth::id())
+            ->with('facility')
+            ->latest()
+            ->get();
+
+        return view('riwayat-reservasi', compact('reservations'));
+    }
 }
