@@ -13,16 +13,20 @@
         Fasilitas
     </a>
 
-    <a href="{{ route('reservasi') }}"
-       class="nav-link {{ request()->routeIs('reservasi') ? 'active' : '' }}">
-        Reservasi
-    </a>
-
     @if (auth()->check())
+        <a href="{{ route('reservasi') }}"
+            class="nav-link {{ request()->routeIs('reservasi') ? 'active' : '' }}">
+            Reservasi
+        </a>
+
+        <a href="{{ route('lapor') }}"
+            class="nav-link {{ request()->routeIs('lapor') ? 'active' : '' }}">
+            Lapor
+        </a>
 
         <a href="{{ route('riwayat-reservasi') }}"
             class="nav-link {{ request()->routeIs('riwayat-reservasi') ? 'active' : '' }}">
-            Riwayat Reservasi
+            Riwayat
         </a>
 
         <div class="profile-menu">

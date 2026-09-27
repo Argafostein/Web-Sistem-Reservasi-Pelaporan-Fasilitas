@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\Facility;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     $facilities = Facility::limit(10)->get();
@@ -53,13 +54,19 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/riwayat-reservasi', [ReservationController::class, 'history'])
         ->name('riwayat-reservasi');
-});
 
-// Pengguna — laporan
-Route::get('/riwayat-laporan', function () {
-    return view('riwayat-laporan');
-});
+    Route::get('/laporan', [ReportController::class, 'create'])
+        ->name('lapor');
 
+    Route::post('/laporan', [ReportController::class, 'store'])
+        ->name('lapor.store');
+
+    Route::get('/riwayat-laporan', [ReportController::class, 'history'])
+        ->name('riwayat-laporan');
+
+    Route::get('/laporan/{report}', [ReportController::class, 'show'])
+        ->name('lapor.show');
+});
 // Petugas
 Route::get('/dashboard-petugas', function () {
     return view('dashboard-petugas');
