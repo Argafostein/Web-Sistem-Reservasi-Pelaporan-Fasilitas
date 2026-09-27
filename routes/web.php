@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\Facility;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     $facilities = Facility::limit(10)->get();
@@ -45,8 +46,18 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 // Pengguna — reservasi
 
-Route::get('/reservasi', function () {
-    return view('reservasi');
+// Route::get('/reservasi', function () {
+//     return view('reservasi');
+// });
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/reservasi', [ReservationController::class, 'create'])
+        ->name('reservasi');
+
+    Route::post('/reservasi', [ReservationController::class, 'store'])
+        ->name('reservasi.store');
+
 });
 
 Route::get('/riwayat-reservasi', function () {
@@ -54,10 +65,6 @@ Route::get('/riwayat-reservasi', function () {
 });
 
 // Pengguna — laporan
-Route::get('/reservasi', function () {
-    return view('reservasi');
-})->name('reservasi');
-
 Route::get('/riwayat-laporan', function () {
     return view('riwayat-laporan');
 });

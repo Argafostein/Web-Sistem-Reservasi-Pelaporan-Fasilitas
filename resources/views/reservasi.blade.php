@@ -75,17 +75,7 @@
 
     </header>
 
-
-
-    <!-- =========================================
-         MAIN
-    ========================================== -->
-
     <main>
-
-<!-- =====================================
-             SRS 3 - FORM RESERVASI
-        ====================================== -->
 
         <section class="reservation-section" id="reservasi">
 
@@ -136,8 +126,8 @@
 
                 <!-- Form -->
 
-                <form>
-
+                <form method="POST" action="{{ route('reservasi.store') }}">
+                    @csrf
 
                     <div class="form-row">
 
@@ -147,25 +137,23 @@
                                 Fasilitas
                             </label>
 
-                            <select id="fasilitas">
+                            <select id="fasilitas" name="facility_id" required>
 
                                 <option value="">
                                     Pilih fasilitas
                                 </option>
 
-                                <option>
-                                    Ruang Seminar
-                                </option>
-
-                                <option>
-                                    Aula Fakultas
-                                </option>
-
-                                <option>
-                                    Laboratorium Komputer
-                                </option>
+                                @foreach ($facilities as $facility)
+                                    <option value="{{ $facility->facility_id }}">
+                                        {{ $facility->name }}
+                                    </option>
+                                @endforeach
 
                             </select>
+
+                            @error('facility_id')
+                                <small class="error">{{ $message }}</small>
+                            @enderror
 
                         </div>
 
@@ -179,13 +167,18 @@
                             <input
                                 type="date"
                                 id="tanggal"
-                                value="2026-09-16"
+                                name="reservation_date"
+                                min="{{ date('Y-m-d') }}"
+                                required
                             >
+
+                            @error('reservation_date')
+                                <small class="error">{{ $message }}</small>
+                            @enderror
 
                         </div>
 
                     </div>
-
 
 
                     <div class="form-row">
@@ -196,10 +189,33 @@
                                 Waktu Mulai
                             </label>
 
-                            <input
-                                type="time"
+                            <select
                                 id="waktu-mulai"
+                                name="start_time"
+                                required
                             >
+                                <option value="">Pilih waktu mulai</option>
+
+                                @for ($hour = 7; $hour <= 19; $hour++)
+                                    @foreach ([0, 30] as $minute)
+                                        @php
+                                            $time = sprintf('%02d:%02d', $hour, $minute);
+                                        @endphp
+
+                                        <option
+                                            value="{{ $time }}"
+                                            {{ old('start_time') == $time ? 'selected' : '' }}
+                                        >
+                                            {{ $time }}
+                                        </option>
+                                    @endforeach
+                                @endfor
+
+                            </select>
+
+                            @error('start_time')
+                                <small class="error">{{ $message }}</small>
+                            @enderror
 
                         </div>
 
@@ -210,18 +226,38 @@
                                 Waktu Selesai
                             </label>
 
-                            <input
-                                type="time"
+                            <select
                                 id="waktu-selesai"
+                                name="end_time"
+                                required
                             >
+                                <option value="">Pilih waktu selesai</option>
+
+                                @for ($hour = 7; $hour <= 20; $hour++)
+                                    @foreach ([0, 30] as $minute)
+                                        @php
+                                            $time = sprintf('%02d:%02d', $hour, $minute);
+                                        @endphp
+
+                                        <option
+                                            value="{{ $time }}"
+                                            {{ old('end_time') == $time ? 'selected' : '' }}
+                                        >
+                                            {{ $time }}
+                                        </option>
+                                    @endforeach
+                                @endfor
+
+                            </select>
+
+                            @error('end_time')
+                                <small class="error">{{ $message }}</small>
+                            @enderror
 
                         </div>
 
                     </div>
 
-
-
-                    <!-- Tujuan penggunaan -->
 
                     <div class="form-group">
 
@@ -231,9 +267,15 @@
 
                         <textarea
                             id="tujuan"
+                            name="purpose"
                             rows="5"
                             placeholder="Contoh: Digunakan untuk kegiatan seminar mahasiswa."
+                            required
                         ></textarea>
+
+                        @error('purpose')
+                            <small class="error">{{ $message }}</small>
+                        @enderror
 
                         <small>
                             Jelaskan secara singkat tujuan penggunaan fasilitas.
@@ -241,9 +283,6 @@
 
                     </div>
 
-
-
-                    <!-- Tombol -->
 
                     <div class="form-submit">
 
@@ -261,6 +300,12 @@
             </div>
 
         </section>
+
+        @if (session('success'))
+            <div class="alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
 
     <!-- =========================================
