@@ -231,9 +231,47 @@
     color: #991b1b;
 }
 
+.status.cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
 .status.completed {
     background: #e0e7ff;
     color: #3730a3;
+}
+
+/* CANCEL BUTTON */
+.reservation-actions {
+    padding-bottom: 16px;
+    padding-right: 16px;
+
+    /* border-top: 1px solid #e5e7eb; */
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel-button {
+    padding: 10px 16px;
+
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+
+    background: #fff1f2;
+    color: #dc2626;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.cancel-button:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
 }
 
 

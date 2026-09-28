@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Facility;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
@@ -68,5 +69,48 @@ class ReservationController extends Controller
             ->get();
 
         return view('riwayat-reservasi', compact('reservations'));
+    }
+
+    public function cancel($id)
+    {
+        // Cari reservasi
+        $reservation = Reservation::findOrFail($id);
+
+        // Pastikan reservasi memang milik user yang sedang login
+        if ($reservation->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // Deadline = 1 jam setelah reservasi dibuat
+        $deadline = $reservation->created_at->copy()->addHour();
+
+        // Cek apakah sudah melewati deadline
+        if (now()->greaterThan($deadline)) {
+            return back()->with(
+                'error',
+                'Reservasi tidak dapat dibatalkan karena sudah melewati batas waktu 1 jam.'
+            );
+        }
+
+        // Reservasi yang sudah selesai/ditolak/dibatalkan tidak bisa dibatalkan lagi
+        if (in_array($reservation->status, [
+            'completed',
+            'rejected',
+            'cancelled'
+        ])) {
+            return back()->with(
+                'error',
+                'Reservasi ini tidak dapat dibatalkan.'
+            );
+        }
+
+        // Ubah status menjadi cancelled
+        $reservation->status = 'cancelled';
+        $reservation->save();
+
+        return back()->with(
+            'success',
+            'Reservasi berhasil dibatalkan.'
+        );
     }
 }

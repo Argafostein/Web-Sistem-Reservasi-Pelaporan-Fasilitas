@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/riwayat-reservasi', [ReservationController::class, 'history'])
         ->name('riwayat-reservasi');
 
+    Route::post('/riwayat-reservasi/{id}/cancel', [ReservationController::class, 'cancel'])
+    ->name('reservasi.cancel');
+
     Route::get('/laporan', [ReportController::class, 'create'])
         ->name('lapor');
 
@@ -67,6 +70,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan/{report}', [ReportController::class, 'show'])
         ->name('lapor.show');
 });
+
+// Pengguna — laporan
+Route::get('/riwayat-laporan', function () {
+    return view('riwayat-laporan');
+});
+
 // Petugas
 Route::get('/dashboard-petugas', function () {
     return view('dashboard-petugas');

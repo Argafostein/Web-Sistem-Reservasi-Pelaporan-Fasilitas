@@ -95,6 +95,12 @@
                                             Ditolak
                                         </span>
 
+                                    @elseif ($reservation->status === 'cancelled')
+
+                                        <span class="status cancelled">
+                                            Dibatalkan
+                                        </span>
+
                                     @elseif ($reservation->status === 'completed')
 
                                         <span class="status completed">
@@ -104,7 +110,7 @@
                                     @else
 
                                         <span class="status pending">
-                                            Menunggu
+                                            Menunggu Persetujuan
                                         </span>
 
                                     @endif
@@ -154,7 +160,6 @@
                                     <span class="detail-value">
                                         {{ auth()->user()->name }}
                                     </span>
-
                                 </div>
 
 
@@ -176,6 +181,42 @@
 
                             </div>
 
+                            @php
+                                $cancelDeadline = $reservation->created_at->copy()->addHour();
+
+                                $canCancel =
+                                    now()->lessThanOrEqualTo($cancelDeadline)
+                                    && !in_array($reservation->status, [
+                                        'completed',
+                                        'rejected',
+                                        'cancelled'
+                                    ]);
+                            @endphp
+
+                            @if ($canCancel)
+
+                                <div class="reservation-actions">
+
+                                    <form
+                                        action="{{ route('reservasi.cancel', $reservation->getKey()) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin membatalkan reservasi ini?')"
+                                    >
+
+                                        @csrf
+
+                                        <button
+                                            type="submit"
+                                            class="cancel-button"
+                                        >
+                                            Batalkan Reservasi
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            @endif
                         </div>
 
                     @endforeach
