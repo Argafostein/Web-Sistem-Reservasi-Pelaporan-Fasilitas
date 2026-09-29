@@ -18,8 +18,7 @@
 
 </head>
 
-<body>
-
+<body> 
     @include('layouts.navbar')
 
     <main>

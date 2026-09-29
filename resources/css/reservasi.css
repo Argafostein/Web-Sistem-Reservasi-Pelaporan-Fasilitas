@@ -1,3 +1,5 @@
+@import "flatpickr/dist/flatpickr.min.css";
+
 .alert-success {
     margin-bottom: 20px;
     padding: 14px 18px;
@@ -178,4 +180,205 @@
     border-color: #2563eb;
 
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* TIME PICKER */
+input[type="time"], .time-picker {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="time"]:focus, .time-picker:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.time-picker-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-top: 8px;
+}
+.time-picker-title {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+.time-picker-boxes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.time-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 8px 16px;
+    transition: all 0.2s;
+}
+.time-box-wrapper.active {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+.time-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #64748b;
+    padding: 2px;
+}
+.time-arrow:hover {
+    color: #1e293b;
+}
+.time-number {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    width: 60px;
+    text-align: center;
+}
+.time-separator {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+.time-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+}
+.time-action-btn {
+    height: 25px;
+    width: 50px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: #e4efff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.time-action-btn:hover {
+    border-color: #667085;
+    background: #f9fafb;
+}
+.main-time-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TIME ERROR
+========================================================= */
+.form-group small.time-error {
+    display: block;
+    margin-top: 6px;
+    color: #d92d20;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+/* FLATPICKR KALENDER TANGGAL */
+
+.flatpickr-calendar {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: Helvetica;
+}
+
+/* Header bulan */
+.flatpickr-months {
+    padding: 10px 8px;
+}
+
+.flatpickr-current-month {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Tombol next & previous */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    top: 12px;
+    border-radius: 8px;
+    padding: 7px;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+    background: #e0e9f7;
+}
+
+/* Nama hari */
+/* .flatpickr-weekdays {
+    margin: 4px 8px 0;
+} */
+
+span.flatpickr-weekday {
+    font-size: 13px;
+    font-weight: 600;
+    color: #667085;
+}
+
+/* Area tanggal */
+/* .flatpickr-days {
+    padding: 6px 8px 10px;
+} */
+
+.flatpickr-day {
+    height: 36px;
+    line-height: 36px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #344054;
+}
+
+/* Hover tanggal */
+.flatpickr-day:hover {
+    background: #f2f4f7;
+    border-color: transparent;
+}
+
+/* Hari ini */
+.flatpickr-day.today {
+    border-color: #98a2b3;
+    font-weight: 600;
+}
+
+/* Tanggal yang dipilih */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+/* Tanggal disabled */
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color: #d0d5dd;
 }

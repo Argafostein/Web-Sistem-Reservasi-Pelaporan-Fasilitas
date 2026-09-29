@@ -4,6 +4,10 @@
     @vite('resources/css/reservasi.css')
 @endpush
 
+@push('scripts')
+    @vite('resources/js/reservasi.js')
+@endpush
+
 @section('content')
 
 @if (session('success'))
@@ -17,7 +21,6 @@
     <div class="section-heading">
 
         <div>
-
             <span class="section-label">
                 RESERVASI
             </span>
@@ -29,16 +32,13 @@
             <p>
                 Isi informasi reservasi sesuai kebutuhan penggunaan fasilitas.
             </p>
-
         </div>
 
     </div>
 
-
     <div class="reservation-card">
 
-
-        <!-- Informasi -->
+        {{-- Informasi --}}
 
         <div class="reservation-info">
 
@@ -58,13 +58,14 @@
         </div>
 
 
+        {{-- Form --}}
 
-        <!-- Form -->
-
-        <form method="POST" action="{{ route('reservasi.store') }}">
+        <form method="POST" action="{{ route('reservasi.store') }}" onsubmit="return validateReservationTime()">
             @csrf
 
             <div class="form-row">
+
+                {{-- Fasilitas --}}
 
                 <div class="form-group">
 
@@ -79,19 +80,28 @@
                         </option>
 
                         @foreach ($facilities as $facility)
-                            <option value="{{ $facility->facility_id }}" {{ old('facility_id') == $facility->facility_id ? 'selected' : '' }}>
+
+                            <option
+                                value="{{ $facility->facility_id }}"
+                                {{ old('facility_id') == $facility->facility_id ? 'selected' : '' }}
+                            >
                                 {{ $facility->name }}
                             </option>
+
                         @endforeach
 
                     </select>
 
                     @error('facility_id')
-                        <small class="error">{{ $message }}</small>
+                        <small class="error">
+                            {{ $message }}
+                        </small>
                     @enderror
 
                 </div>
 
+
+                {{-- Tanggal --}}
 
                 <div class="form-group">
 
@@ -102,98 +112,328 @@
                     <input
                         type="date"
                         id="tanggal"
+                        placeholder="Pilih tanggal"
                         name="reservation_date"
                         value="{{ old('reservation_date') }}"
-                        min="{{ date('Y-m-d') }}"
+                        min="{{ date('d-m-Y') }}"
                         required
                     >
 
                     @error('reservation_date')
-                        <small class="error">{{ $message }}</small>
+                        <small class="error">
+                            {{ $message }}
+                        </small>
                     @enderror
 
                 </div>
 
             </div>
 
+
+            {{-- Waktu Mulai & Selesai --}}
 
             <div class="form-row">
 
-                <div class="form-group">
+                {{-- Waktu Mulai --}}
 
-                    <label for="waktu-mulai">
+                <div 
+                    class="form-group"
+                    x-data="timePicker('{{ old('start_time', '') }}')"
+                >
+
+                    <label>
                         Waktu Mulai
                     </label>
 
-                    <select
-                        id="waktu-mulai"
+                    <input
+                        type="text"
                         name="start_time"
+                        x-model="timeString"
+                        class="main-time-input"
+                        @click="open = !open"
+                        readonly
                         required
+                        placeholder="Pilih waktu mulai"
                     >
-                        <option value="">Pilih waktu mulai</option>
 
-                        @for ($hour = 7; $hour <= 19; $hour++)
-                            @foreach ([0, 30] as $minute)
-                                @php
-                                    $time = sprintf('%02d:%02d', $hour, $minute);
-                                @endphp
+                    <div
+                        class="time-picker-card"
+                        x-show="open"
+                        @click.outside="open = false"
+                        style="display: none;"
+                    >
 
-                                <option
-                                    value="{{ $time }}"
-                                    {{ old('start_time') == $time ? 'selected' : '' }}
+                        <div class="time-picker-title">
+                            Enter time
+                        </div>
+
+                        <div class="time-picker-boxes">
+
+                            <div
+                                class="time-box-wrapper"
+                                :class="{ 'active': activeTab === 'hour' }"
+                                @click="activeTab = 'hour'"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustHour(1)"
                                 >
-                                    {{ $time }}
-                                </option>
-                            @endforeach
-                        @endfor
+                                    ▲
+                                </button>
 
-                    </select>
+                                <span
+                                    class="time-number"
+                                    x-text="pad(hour)"
+                                ></span>
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustHour(-1)"
+                                >
+                                    ▼
+                                </button>
+
+                            </div>
+
+                            <span class="time-separator">
+                                :
+                            </span>
+
+                            <div
+                                class="time-box-wrapper"
+                                :class="{ 'active': activeTab === 'minute' }"
+                                @click="activeTab = 'minute'"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustMinute()"
+                                >
+                                    ▲
+                                </button>
+
+                                <span
+                                    class="time-number"
+                                    x-text="pad(minute)"
+                                ></span>
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustMinute()"
+                                >
+                                    ▼
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="time-actions">
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(9, 0)"
+                            >
+                                09:00
+                            </button>
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(12, 0)"
+                            >
+                                12:00
+                            </button>
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(15, 0)"
+                            >
+                                15:00
+                            </button>
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(18, 0)"
+                            >
+                                18:00
+                            </button>
+
+                        </div>
+
+                    </div>
 
                     @error('start_time')
-                        <small class="error">{{ $message }}</small>
+                        <small class="error">
+                            {{ $message }}
+                        </small>
                     @enderror
 
                 </div>
 
 
-                <div class="form-group">
+                {{-- Waktu Selesai --}}
 
-                    <label for="waktu-selesai">
+                <div
+                    class="form-group"
+                    x-data="timePicker('{{ old('end_time', '20:00') }}', true)"
+                >
+
+                    <label>
                         Waktu Selesai
                     </label>
 
-                    <select
-                        id="waktu-selesai"
+                    <input
+                        type="text"
                         name="end_time"
+                        x-model="timeString"
+                        class="main-time-input"
+                        @click="open = !open"
+                        readonly
                         required
+                        placeholder="Pilih waktu selesai"
                     >
-                        <option value="">Pilih waktu selesai</option>
 
-                        @for ($hour = 7; $hour <= 20; $hour++)
-                            @foreach ([0, 30] as $minute)
-                                @php
-                                    $time = sprintf('%02d:%02d', $hour, $minute);
-                                @endphp
+                    <div
+                        class="time-picker-card"
+                        x-show="open"
+                        @click.outside="open = false"
+                        style="display: none;"
+                    >
 
-                                <option
-                                    value="{{ $time }}"
-                                    {{ old('end_time') == $time ? 'selected' : '' }}
+                        <div class="time-picker-title">
+                            Enter time
+                        </div>
+
+                        <div class="time-picker-boxes">
+
+                            <div
+                                class="time-box-wrapper"
+                                :class="{ 'active': activeTab === 'hour' }"
+                                @click="activeTab = 'hour'"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustHour(1)"
                                 >
-                                    {{ $time }}
-                                </option>
-                            @endforeach
-                        @endfor
+                                    ▲
+                                </button>
 
-                    </select>
+                                <span
+                                    class="time-number"
+                                    x-text="pad(hour)"
+                                ></span>
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustHour(-1)"
+                                >
+                                    ▼
+                                </button>
+
+                            </div>
+
+                            <span class="time-separator">
+                                :
+                            </span>
+
+                            <div
+                                class="time-box-wrapper"
+                                :class="{ 'active': activeTab === 'minute' }"
+                                @click="activeTab = 'minute'"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustMinute()"
+                                >
+                                    ▲
+                                </button>
+
+                                <span
+                                    class="time-number"
+                                    x-text="pad(minute)"
+                                ></span>
+
+                                <button
+                                    type="button"
+                                    class="time-arrow"
+                                    @click.stop="adjustMinute()"
+                                >
+                                    ▼
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="time-actions">
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(9, 0)"
+                            >
+                                09:00
+                            </button>
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(12, 0)"
+                            >
+                                12:00
+                            </button>
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(15, 0)"
+                            >
+                                15:00
+                            </button>
+
+                            <button
+                                type="button"
+                                class="time-action-btn"
+                                @click="setPreset(18, 0)"
+                            >
+                                18:00
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <small
+                        class="time-error"
+                        x-show="error"
+                        x-text="error"
+                    ></small>
 
                     @error('end_time')
-                        <small class="error">{{ $message }}</small>
+                        <small class="error">
+                            {{ $message }}
+                        </small>
                     @enderror
 
                 </div>
 
             </div>
 
+
+            {{-- Tujuan --}}
 
             <div class="form-group">
 
@@ -207,10 +447,12 @@
                     rows="5"
                     placeholder="Contoh: Digunakan untuk kegiatan seminar mahasiswa."
                     required
-                ></textarea>
+                >{{ old('purpose') }}</textarea>
 
                 @error('purpose')
-                    <small class="error">{{ $message }}</small>
+                    <small class="error">
+                        {{ $message }}
+                    </small>
                 @enderror
 
                 <small>
@@ -219,6 +461,8 @@
 
             </div>
 
+
+            {{-- Submit --}}
 
             <div class="form-submit">
 

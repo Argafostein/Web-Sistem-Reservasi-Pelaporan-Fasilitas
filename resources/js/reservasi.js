@@ -1,239 +1,330 @@
-// const tanggalInput = document.getElementById('tanggal');
-// const waktuMulai = document.getElementById('waktu-mulai');
-// const waktuSelesai = document.getElementById('waktu-selesai');
+import Alpine from 'alpinejs';
+import flatpickr from 'flatpickr';
+// import 'flatpickr/dist/flatpickr.min.css';
 
-// const oldStartTime = @json(old('start_time'));
-// const oldEndTime = @json(old('end_time'));
 
-// // Membuat daftar waktu setiap 30 menit
-// function generateTimeSlots() {
-//     const slots = [];
+Alpine.data('timePicker', (initialTime, isEndTime = false) => {
 
-//     for (let hour = 7; hour <= 20; hour++) {
+    let parts = initialTime
+        ? initialTime.split(':')
+        : ['07', '00'];
 
-//         for (let minute of [0, 30]) {
+    return {
 
-//             // Waktu mulai tidak boleh lebih dari 19:30
-//             if (hour === 20 && minute === 30) {
-//                 continue;
-//             }
+        open: false,
+        hour: parseInt(parts[0]),
+        minute: parseInt(parts[1]),
+        hasValue: false,
 
-//             const time =
-//                 String(hour).padStart(2, '0') +
-//                 ':' +
-//                 String(minute).padStart(2, '0');
+        activeTab: 'hour',
 
-//             slots.push(time);
-//         }
-//     }
+        error: '',
 
-//     return slots;
-// }
+        isEndTime: isEndTime,
 
 
-// // Mendapatkan waktu sekarang dalam format HH:MM
-// function getCurrentTime() {
+        get timeString() {
+        if (!this.hasValue) {
+            return ''; 
+        }
+            return this.pad(this.hour) + ':' + this.pad(this.minute);
+        },
 
-//     const now = new Date();
 
-//     const hours = String(now.getHours()).padStart(2, '0');
-//     const minutes = String(now.getMinutes()).padStart(2, '0');
+        pad(num) {
+            return String(num).padStart(2, '0');
+        },
 
-//     return `${hours}:${minutes}`;
-// }
 
+        getStartMinutes() {
 
-// // Membulatkan waktu sekarang ke slot 30 menit berikutnya
-// function getNextAvailableTime() {
+            const startInput =
+                document.querySelector('input[name="start_time"]');
 
-//     const now = new Date();
+            if (!startInput || !startInput.value) {
+                return null;
+            }
 
-//     let hour = now.getHours();
-//     let minute = now.getMinutes();
+            const [hour, minute] =
+                startInput.value.split(':').map(Number);
 
-//     if (minute < 30) {
-//         minute = 30;
-//     } else {
-//         minute = 0;
-//         hour++;
-//     }
+            return (hour * 60) + minute;
+        },
 
-//     if (hour > 20) {
-//         return null;
-//     }
 
-//     return (
-//         String(hour).padStart(2, '0') +
-//         ':' +
-//         String(minute).padStart(2, '0')
-//     );
-// }
+        isValidTime(hour, minute) {
 
+            const totalMinutes =
+                (hour * 60) + minute;
 
-// // Mengecek apakah tanggal yang dipilih adalah hari ini
-// function isToday(selectedDate) {
+            // Batas 07:00 - 20:00
+            if (totalMinutes < 420) {
+                return false;
+            }
 
-//     const now = new Date();
+            if (totalMinutes > 1200) {
+                return false;
+            }
 
-//     const today =
-//         now.getFullYear() +
-//         '-' +
-//         String(now.getMonth() + 1).padStart(2, '0') +
-//         '-' +
-//         String(now.getDate()).padStart(2, '0');
 
-//     return selectedDate === today;
-// }
+            // Khusus Waktu Selesai
+            if (this.isEndTime) {
 
+                const startMinutes =
+                    this.getStartMinutes();
 
-// // Mengisi dropdown waktu mulai
-// function updateStartTime() {
+                if (
+                    startMinutes !== null &&
+                    totalMinutes <= startMinutes
+                ) {
+                    return false;
+                }
+            }
 
-//     const selectedDate = tanggalInput.value;
+            return true;
+        },
 
-//     waktuMulai.innerHTML = '';
-//     waktuSelesai.innerHTML = '';
 
-//     waktuSelesai.disabled = true;
+        validateTime() {
 
-//     if (!selectedDate) {
+            if (!this.isValidTime(this.hour, this.minute)) {
 
-//         waktuMulai.disabled = true;
+                if (this.isEndTime) {
 
-//         waktuMulai.innerHTML =
-//             '<option value="">Pilih tanggal terlebih dahulu</option>';
+                    this.error =
+                        'Waktu selesai harus lebih dari waktu mulai.';
 
-//         waktuSelesai.innerHTML =
-//             '<option value="">Pilih waktu mulai terlebih dahulu</option>';
+                }
 
-//         return;
-//     }
+                return false;
+            }
 
+            this.error = '';
 
-//     waktuMulai.disabled = false;
+            return true;
+        },
 
-//     const slots = generateTimeSlots();
+        checkEndTime(startHour, startMinute) {
 
-//     let minimumTime = '07:00';
+            this.$nextTick(() => {
 
-//     // Jika tanggal adalah hari ini,
-//     // waktu harus setelah waktu sekarang
-//     if (isToday(selectedDate)) {
+                const endInput =
+                    document.querySelector('input[name="end_time"]');
 
-//         const nextTime = getNextAvailableTime();
+                if (!endInput || !endInput.value) {
+                    return;
+                }
 
-//         if (!nextTime) {
+                const [endHour, endMinute] =
+                    endInput.value.split(':').map(Number);
 
-//             waktuMulai.disabled = true;
+                const startTotal =
+                    (startHour * 60) + startMinute;
 
-//             waktuMulai.innerHTML =
-//                 '<option value="">Tidak ada waktu tersedia hari ini</option>';
+                const endTotal =
+                    (endHour * 60) + endMinute;
 
-//             return;
-//         }
+                if (endTotal <= startTotal) {
 
-//         minimumTime = nextTime;
-//     }
+                    // Tampilkan peringatan di bawah box
+                    const endElement =
+                        endInput.closest('[x-data]');
 
+                    if (endElement) {
+                        const alpineData =
+                            Alpine.$data(endElement);
 
-//     waktuMulai.innerHTML =
-//         '<option value="">Pilih waktu mulai</option>';
+                        alpineData.error =
+                            'Waktu selesai harus lebih dari waktu mulai.';
+                    }
 
+                } else {
 
-//     slots.forEach(time => {
+                    // Hilangkan peringatan jika sudah valid
+                    const endElement =
+                        endInput.closest('[x-data]');
 
-//         if (time >= minimumTime && time <= '19:30') {
+                    if (endElement) {
+                        const alpineData =
+                            Alpine.$data(endElement);
 
-//             const option = document.createElement('option');
+                        alpineData.error = '';
+                    }
+                }
 
-//             option.value = time;
-//             option.textContent = time;
+            });
+        },
 
-//             if (time === oldStartTime) {
-//                 option.selected = true;
-//             }
+        /*
+        |--------------------------------------------------------------------------
+        | NAIK / TURUN JAM
+        |--------------------------------------------------------------------------
+        */
 
-//             waktuMulai.appendChild(option);
-//         }
-//     });
+        adjustHour(val) {
 
+            let newHour =
+                (this.hour + val + 24) % 24;
 
-//     // Kalau sebelumnya ada waktu mulai
-//     // langsung isi waktu selesai
-//     if (waktuMulai.value) {
-//         updateEndTime();
-//     }
-// }
+            const totalMinutes =
+                (newHour * 60) + this.minute;
 
+            if (this.isEndTime) {
 
-// // Mengisi dropdown waktu selesai
-// function updateEndTime() {
+                if (
+                    totalMinutes < 450 ||
+                    totalMinutes > 1200
+                ) {
+                    return;
+                }
 
-//     const selectedDate = tanggalInput.value;
-//     const startTime = waktuMulai.value;
+            } else {
 
-//     waktuSelesai.innerHTML = '';
+                if (
+                    totalMinutes < 420 ||
+                    totalMinutes > 1170
+                ) {
+                    return;
+                }
+            }
 
-//     if (!selectedDate || !startTime) {
+            this.hour = newHour;
+            this.hasValue = true;
 
-//         waktuSelesai.disabled = true;
+            this.validateTime();
 
-//         waktuSelesai.innerHTML =
-//             '<option value="">Pilih waktu mulai terlebih dahulu</option>';
+            // Jika yang diubah adalah Waktu Mulai
+            if (!this.isEndTime) {
 
-//         return;
-//     }
+                this.checkEndTime(
+                    this.hour,
+                    this.minute
+                );
+            }
+        },
 
 
-//     waktuSelesai.disabled = false;
+        /*
+        |--------------------------------------------------------------------------
+        | NAIK / TURUN MENIT
+        |--------------------------------------------------------------------------
+        */
 
-//     waktuSelesai.innerHTML =
-//         '<option value="">Pilih waktu selesai</option>';
+        adjustMinute() {
 
-//     const slots = generateTimeSlots();
+            let newMinute =
+                this.minute === 30 ? 0 : 30;
 
-//     slots.forEach(time => {
+            const totalMinutes =
+                (this.hour * 60) + newMinute;
 
-//         // Waktu selesai harus setelah waktu mulai
-//         // dan maksimal pukul 20:00
-//         if (time > startTime && time <= '20:00') {
+            if (this.isEndTime) {
 
-//             const option = document.createElement('option');
+                if (
+                    totalMinutes < 450 ||
+                    totalMinutes > 1200
+                ) {
+                    return;
+                }
 
-//             option.value = time;
-//             option.textContent = time;
+            } else {
 
-//             if (time === oldEndTime) {
-//                 option.selected = true;
-//             }
+                if (
+                    totalMinutes < 420 ||
+                    totalMinutes > 1170
+                ) {
+                    return;
+                }
+            }
 
-//             waktuSelesai.appendChild(option);
-//         }
-//     });
-// }
+            this.minute = newMinute;
+            this.hasValue = true;
 
+            this.validateTime();
 
-// // Ketika tanggal berubah
-// tanggalInput.addEventListener('change', function () {
+            // Jika yang diubah adalah Waktu Mulai
+            if (!this.isEndTime) {
 
-//     // Reset waktu lama
-//     waktuMulai.value = '';
-//     waktuSelesai.value = '';
+                this.checkEndTime(
+                    this.hour,
+                    this.minute
+                );
+            }
+        },
 
-//     updateStartTime();
-// });
+        setPreset(hour, minute) {
+            this.hour = hour;
+            this.minute = minute;
+            this.hasValue = true;
 
+            this.validateTime();
 
-// // Ketika waktu mulai berubah
-// waktuMulai.addEventListener('change', function () {
+            // Jika mengubah waktu mulai
+            if (!this.isEndTime) {
 
-//     waktuSelesai.value = '';
+                this.checkEndTime(
+                    this.hour,
+                    this.minute
+                );
+            }
+        },
+    };
 
-//     updateEndTime();
-// });
+});
 
 
-// // Jalankan saat halaman pertama kali dibuka
-// if (tanggalInput.value) {
-//     updateStartTime();
-// }
+/*
+|--------------------------------------------------------------------------
+| FLATPICKR - DATE PICKER
+|--------------------------------------------------------------------------
+*/
+
+flatpickr('#tanggal', {
+
+    dateFormat: 'd-m-Y',
+    minDate: 'today',
+    allowInput: false,
+    disableMobile: true
+
+});
+
+
+window.Alpine = Alpine;
+
+Alpine.start();
+
+window.validateReservationTime = function () {
+
+    const startInput =
+        document.querySelector('input[name="start_time"]');
+
+    const endInput =
+        document.querySelector('input[name="end_time"]');
+
+    if (!startInput || !endInput) {
+        return true;
+    }
+
+    const [startHour, startMinute] =
+        startInput.value.split(':').map(Number);
+
+    const [endHour, endMinute] =
+        endInput.value.split(':').map(Number);
+
+    const startTotal =
+        (startHour * 60) + startMinute;
+
+    const endTotal =
+        (endHour * 60) + endMinute;
+
+    if (endTotal <= startTotal) {
+
+        alert(
+            '* Waktu selesai harus lebih dari waktu mulai.'
+        );
+
+        return false;
+    }
+
+    return true;
+};
