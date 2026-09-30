@@ -2,6 +2,7 @@
 
 @push('styles')
     @vite('resources/css/riwayat-reservasi.css')
+    @vite('resources/css/riwayat.css')
 @endpush
 
 @section('content')
@@ -12,17 +13,37 @@
 
             {{-- Header --}}
             <div class="history-header">
-                <div>
-                    <span class="history-label">AKTIVITAS ANDA</span>
 
+                <div>
                     <h1>
                         Riwayat Reservasi
                     </h1>
 
                     <p>
-                        Lihat daftar fasilitas yang pernah Anda reservasi.
+                        Lihat aktivitas dan riwayat penggunaan fasilitas kampus.
                     </p>
                 </div>
+
+            </div>
+
+
+            {{-- Navigasi Riwayat --}}
+            <div class="history-tabs">
+
+                <a
+                    href="{{ route('riwayat-reservasi') }}"
+                    class="history-tab active"
+                >
+                    Riwayat Reservasi
+                </a>
+
+                <a
+                    href="{{ route('riwayat-laporan') }}"
+                    class="history-tab"
+                >
+                    Riwayat Laporan
+                </a>
+
             </div>
 
 
@@ -62,10 +83,6 @@
                             <div class="reservation-card-header">
 
                                 <div class="facility-name">
-
-                                    <div class="facility-icon">
-                                        🏫
-                                    </div>
 
                                     <div>
                                         <h2>

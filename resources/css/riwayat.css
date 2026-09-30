@@ -1,0 +1,68 @@
+/* =========================================
+   HEADER
+========================================= */
+
+.history-header {
+    margin-bottom: 35px;
+}
+
+.history-header h1 {
+    margin-bottom: 8px;
+    color: #172033;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.history-header p {
+    color: #667085;
+    font-size: 15px;
+}
+
+/* =========================================================
+NAVIGASI
+========================================================= */
+
+.history-tabs {
+display: flex;
+gap: 8px;
+
+
+margin-bottom: 28px;
+padding-bottom: 12px;
+
+border-bottom: 1px solid #eaecf0;
+
+
+}
+
+.history-tab {
+display: inline-flex;
+align-items: center;
+
+
+padding: 10px 16px;
+
+border-radius: 8px;
+
+text-decoration: none;
+
+font-size: 14px;
+font-weight: 600;
+
+color: #667085;
+
+transition: all 0.2s ease;
+
+
+}
+
+.history-tab:hover {
+background: #f2f4f7;
+color: #344054;
+}
+
+.history-tab.active {
+background: #2563eb;
+color: #ffffff;
+}

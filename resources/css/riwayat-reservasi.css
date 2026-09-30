@@ -14,35 +14,6 @@
 }
 
 
-/* =========================================
-   HEADER
-========================================= */
-
-.history-header {
-    margin-bottom: 35px;
-}
-
-.history-label {
-    display: inline-block;
-    margin-bottom: 8px;
-    color: #2563eb;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1.2px;
-}
-
-.history-header h1 {
-    margin-bottom: 8px;
-    color: #172033;
-    font-size: 32px;
-    font-weight: 800;
-    line-height: 1.2;
-}
-
-.history-header p {
-    color: #667085;
-    font-size: 15px;
-}
 
 
 /* =========================================
@@ -56,21 +27,6 @@
     border-radius: 16px;
     text-align: center;
     box-shadow: 0 4px 18px rgba(16, 24, 40, 0.05);
-}
-
-.empty-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #eff6ff;
-    border-radius: 50%;
-
-    font-size: 30px;
 }
 
 .empty-history h2 {
@@ -167,20 +123,6 @@
     display: flex;
     align-items: center;
     gap: 14px;
-}
-
-.facility-icon {
-    width: 46px;
-    height: 46px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #eff6ff;
-    border-radius: 10px;
-
-    font-size: 21px;
 }
 
 .facility-name h2 {

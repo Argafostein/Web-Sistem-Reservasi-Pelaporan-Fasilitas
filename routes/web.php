@@ -46,6 +46,7 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 Route::middleware('auth')->group(function () {
 
+    // RESERVASI
     Route::get('/reservasi', [ReservationController::class, 'create'])
         ->name('reservasi');
 
@@ -58,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/riwayat-reservasi/{id}/cancel', [ReservationController::class, 'cancel'])
     ->name('reservasi.cancel');
 
+    // LAPORAN
     Route::get('/laporan', [ReportController::class, 'create'])
         ->name('lapor');
 
@@ -69,11 +71,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/laporan/{report}', [ReportController::class, 'show'])
         ->name('lapor.show');
-});
-
-// Pengguna — laporan
-Route::get('/riwayat-laporan', function () {
-    return view('riwayat-laporan');
 });
 
 // Petugas
