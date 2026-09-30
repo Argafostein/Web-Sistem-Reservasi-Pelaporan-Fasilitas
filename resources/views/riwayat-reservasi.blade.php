@@ -5,6 +5,10 @@
     @vite('resources/css/riwayat.css')
 @endpush
 
+@push('scripts')
+    @vite('resources/js/riwayat-reservasi.js')
+@endpush
+
 @section('content')
 
     <section class="history-section">
@@ -80,7 +84,7 @@
                         <div class="reservation-history-card">
 
                             {{-- Header Card --}}
-                            <div class="reservation-card-header">
+                            <div class="reservation-card-header" onclick="toggleReservationDetail(this)">
 
                                 <div class="facility-name">
 

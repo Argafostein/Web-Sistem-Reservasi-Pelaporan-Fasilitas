@@ -308,3 +308,24 @@
     }
 
 }
+
+/* =========================================
+   COLLAPSE RESERVATION DETAIL
+========================================= */
+
+.reservation-details,
+.reservation-actions {
+    display: none;
+}
+
+.reservation-history-card.active .reservation-details {
+    display: grid;
+}
+
+.reservation-history-card.active .reservation-actions {
+    display: flex;
+}
+
+.reservation-card-header {
+    cursor: pointer;
+}

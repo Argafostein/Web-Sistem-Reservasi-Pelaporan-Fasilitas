@@ -53,6 +53,8 @@
             <p>
                 Pastikan fasilitas dan rentang waktu yang dipilih
                 masih tersedia sebelum mengajukan reservasi.
+
+                
             </p>
 
         </div>

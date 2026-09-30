@@ -26,3 +26,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+window.toggleReservationDetail = function (header) {
+
+    const card = header.closest('.reservation-history-card');
+
+    if (!card) {
+        return;
+    }
+
+    card.classList.toggle('active');
+
+};
