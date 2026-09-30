@@ -112,12 +112,12 @@
                     </label>
 
                     <input
-                        type="date"
+                        type="text"
                         id="tanggal"
                         placeholder="Pilih tanggal"
                         name="reservation_date"
                         value="{{ old('reservation_date') }}"
-                        min="{{ date('d-m-Y') }}"
+                        
                         required
                     >
 

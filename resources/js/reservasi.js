@@ -281,11 +281,12 @@ Alpine.data('timePicker', (initialTime, isEndTime = false) => {
 
 flatpickr('#tanggal', {
 
-    dateFormat: 'd-m-Y',
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: "d-m-Y",
     minDate: 'today',
     allowInput: false,
     disableMobile: true
-
 });
 
 
