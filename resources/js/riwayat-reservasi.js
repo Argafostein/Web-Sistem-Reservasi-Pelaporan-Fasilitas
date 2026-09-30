@@ -4,22 +4,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     cancelButtons.forEach(function (button) {
 
-        button.addEventListener('click', function () {
+        button.addEventListener('click', function (event) {
 
             const reservationCode =
                 button.dataset.reservation;
 
             const confirmed = confirm(
-                `Apakah Anda yakin ingin membatalkan reservasi ${reservationCode}?`
+                `Apakah Anda yakin ingin membatalkan reservasi ini?`
             );
 
             if (!confirmed) {
-                return;
+                event.preventDefault();
             }
-
-            alert(
-                `Pembatalan reservasi ${reservationCode} akan diproses oleh sistem.`
-            );
 
         });
 

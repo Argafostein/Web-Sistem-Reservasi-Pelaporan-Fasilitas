@@ -221,7 +221,6 @@
                                     <form
                                         action="{{ route('reservasi.cancel', $reservation->getKey()) }}"
                                         method="POST"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin membatalkan reservasi ini?')"
                                     >
 
                                         @csrf
