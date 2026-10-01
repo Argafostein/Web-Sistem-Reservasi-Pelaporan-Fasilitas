@@ -5,6 +5,10 @@
     @vite('resources/css/riwayat.css')
 @endpush
 
+@push('scripts')
+    @vite('resources/js/riwayat-laporan.js')
+@endpush
+
 @section('content')
 
 <section class="history-section">
@@ -52,28 +56,23 @@
 
             @forelse ($reports as $report)
 
-                <div class="report-card">
+                <div
+                    class="report-card"
+                    onclick="toggleReportDetail(this)"
+                >
 
+                    {{-- Header Card --}}
                     <div class="report-card-content">
 
                         <div class="report-info">
-
-                            <span class="report-category">
-                                {{ $report->category }}
-                            </span>
-
-                            <h3>
-                                {{ $report->title }}
-                            </h3>
 
                             <p class="report-facility">
                                 {{ $report->facility->name ?? 'Fasilitas tidak ditemukan' }}
                             </p>
 
-                            <p class="report-date">
-                                Dilaporkan pada
-                                {{ $report->created_at->format('d M Y, H:i') }}
-                            </p>
+                            <h3>
+                                {{ $report->title }}
+                            </h3>
 
                         </div>
 
@@ -116,6 +115,65 @@
                         </div>
 
                     </div>
+
+
+                    {{-- Detail Laporan --}}
+                    <div class="report-details">
+
+                        <div class="report-detail-item">
+
+                            <span class="report-detail-label">
+                                Kategori
+                            </span>
+
+                            <span class="report-detail-value">
+                                {{ $report->category }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="report-detail-item">
+
+                            <span class="report-detail-label">
+                                Dilaporkan pada
+                            </span>
+
+                            <span class="report-detail-value">
+                                {{ $report->created_at->format('d M Y, H:i') }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="report-detail-item report-detail-description">
+
+                            <span class="report-detail-label">
+                                Deskripsi
+                            </span>
+
+                            <span class="report-detail-value">
+                                {{ $report->description }}
+                            </span>
+
+                        </div>
+
+
+                        {{-- Tombol Detail --}}
+                        <div class="report-actions">
+
+                            <a
+                                href="{{ route('lapor.show', $report->getKey()) }}"
+                                class="report-detail-button"
+                                onclick="event.stopPropagation()"
+                            >
+                                Lihat Detail
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             @empty
@@ -150,4 +208,5 @@
     </div>
 
 </section>
+
 @endsection

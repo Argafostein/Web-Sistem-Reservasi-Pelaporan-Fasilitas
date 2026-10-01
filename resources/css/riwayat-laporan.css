@@ -257,6 +257,94 @@ transition: opacity 0.2s ease;
 opacity: 0.85;
 }
 
+/* =========================================
+   REPORT DETAILS
+========================================= */
+
+.report-details {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    padding: 22px 24px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+.report-card.active .report-details {
+    display: grid;
+}
+
+
+/* DETAIL ITEM */
+
+.report-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.report-detail-label {
+    color: #98a2b3;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.report-detail-value {
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+
+/* DESKRIPSI */
+
+.report-detail-description {
+    grid-column: 1 / -1;
+}
+
+.report-detail-description .report-detail-value {
+    font-weight: 400;
+}
+
+
+/* ACTION */
+
+.report-actions {
+    grid-column: 1 / -1;
+
+    display: flex;
+    justify-content: flex-end;
+
+    padding-top: 4px;
+}
+
+.report-detail-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.report-detail-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
 /* =========================================================
 RESPONSIVE
 ========================================================= */
@@ -294,4 +382,20 @@ RESPONSIVE
 }
 
 
+}
+
+
+.report-card {
+    cursor: pointer;
+}
+
+.report-details {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px 24px;
+}
+
+.report-card.active .report-details {
+    display: grid;
 }
