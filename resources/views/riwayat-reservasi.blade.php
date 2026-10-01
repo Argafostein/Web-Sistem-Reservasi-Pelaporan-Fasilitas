@@ -22,9 +22,8 @@
                     <h1>
                         Riwayat Reservasi
                     </h1>
-
                     <p>
-                        Lihat aktivitas dan riwayat penggunaan fasilitas kampus.
+                        Anda bisa membatalkan reservasi sampai 1 jam setelah reservasi dibuat.
                     </p>
                 </div>
 

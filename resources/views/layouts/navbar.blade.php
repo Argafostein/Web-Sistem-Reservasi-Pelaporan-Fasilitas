@@ -25,7 +25,7 @@
         </a>
 
         <a href="{{ route('riwayat-reservasi') }}"
-            class="nav-link {{ request()->routeIs('riwayat-reservasi') ? 'active' : '' }}">
+            class="nav-link {{ request()->routeIs('riwayat-reservasi', 'riwayat-laporan') ? 'active' : '' }}">
             Riwayat
         </a>
 
@@ -35,7 +35,7 @@
                 👤 {{ auth()->user()->name }}
             </a>
 
-            <div class="profile-dropdown">
+            <div class="profile-dropdown" onclick="">
 
                 <a href="#">
                     Profil Saya
