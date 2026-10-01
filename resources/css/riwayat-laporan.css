@@ -1,0 +1,297 @@
+/* =========================================================
+RIWAYAT LAPORAN
+========================================================= */
+
+.history-section {
+min-height: calc(100vh - 80px);
+padding: 50px 24px 80px;
+}
+
+.history-container {
+width: 100%;
+max-width: 1100px;
+margin: 0 auto;
+}
+
+/* =========================================================
+DAFTAR LAPORAN
+========================================================= */
+
+.report-list {
+display: flex;
+flex-direction: column;
+gap: 16px;
+}
+
+.report-card {
+overflow: hidden;
+
+
+background: #ffffff;
+
+border: 1px solid #eaecf0;
+border-radius: 14px;
+
+box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+
+transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+
+}
+
+.report-card:hover {
+transform: translateY(-2px);
+
+
+box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+
+
+}
+
+.report-card-content {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+
+
+gap: 20px;
+
+padding: 22px 24px;
+
+
+}
+
+.report-info {
+min-width: 0;
+}
+
+.report-category {
+display: inline-block;
+
+
+margin-bottom: 8px;
+
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+
+color: #667085;
+
+
+}
+
+.report-info h3 {
+margin: 0;
+
+
+font-size: 18px;
+line-height: 26px;
+font-weight: 700;
+
+color: #101828;
+
+
+}
+
+.report-facility {
+margin: 7px 0 0;
+
+
+font-size: 14px;
+font-weight: 500;
+
+color: #344054;
+
+
+}
+
+.report-date {
+margin: 5px 0 0;
+
+
+font-size: 12px;
+
+color: #98a2b3;
+
+
+}
+
+/* =========================================================
+STATUS
+========================================================= */
+
+.report-status {
+flex-shrink: 0;
+}
+
+.status-badge {
+display: inline-flex;
+align-items: center;
+
+
+padding: 6px 11px;
+
+border-radius: 999px;
+
+font-size: 12px;
+font-weight: 600;
+
+background: #f2f4f7;
+color: #344054;
+
+
+}
+
+.status-pending {
+background: #fff4e5;
+color: #b54708;
+}
+
+.status-process {
+background: #eff8ff;
+color: #175cd3;
+}
+
+.status-resolved {
+background: #ecfdf3;
+color: #027a48;
+}
+
+.status-rejected {
+background: #fef3f2;
+color: #b42318;
+}
+
+/* =========================================================
+EMPTY STATE
+========================================================= */
+
+.empty-history {
+display: flex;
+flex-direction: column;
+align-items: center;
+
+
+padding: 70px 20px;
+
+text-align: center;
+
+border: 1px dashed #d0d5dd;
+border-radius: 14px;
+
+background: #ffffff;
+
+
+}
+
+.empty-icon {
+display: flex;
+align-items: center;
+justify-content: center;
+
+
+width: 44px;
+height: 44px;
+
+margin-bottom: 16px;
+
+border-radius: 50%;
+
+background: #f2f4f7;
+
+font-size: 18px;
+font-weight: 700;
+
+color: #667085;
+
+
+}
+
+.empty-history h3 {
+margin: 0;
+
+
+font-size: 17px;
+
+color: #101828;
+
+
+}
+
+.empty-history p {
+margin: 7px 0 20px;
+
+
+font-size: 13px;
+
+color: #667085;
+
+
+}
+
+.empty-action {
+display: inline-flex;
+
+
+padding: 10px 16px;
+
+border-radius: 8px;
+
+background: #101828;
+color: #ffffff;
+
+text-decoration: none;
+
+font-size: 13px;
+font-weight: 600;
+
+transition: opacity 0.2s ease;
+
+
+}
+
+.empty-action:hover {
+opacity: 0.85;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+.history-section {
+    padding: 35px 16px 60px;
+}
+
+.history-header h1 {
+    font-size: 28px;
+}
+
+.history-tabs {
+    overflow-x: auto;
+}
+
+.history-tab {
+    flex-shrink: 0;
+}
+
+.report-card-content {
+    flex-direction: column;
+    gap: 14px;
+}
+
+.report-status {
+    align-self: flex-start;
+}
+
+.report-card-footer {
+    justify-content: flex-start;
+}
+
+
+}
