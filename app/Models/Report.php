@@ -17,9 +17,19 @@ class Report extends Model
         'description',
         'image',
         'status',
-        'admin_note',
+        'processed_at',
+        'resolved_at',
+        'rejected_at',
+        'resolution_note',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'processed_at' => 'datetime',
+        'resolved_at' => 'datetime',
+        'rejected_at' => 'datetime',
+    ];
 
     public function user(): BelongsTo
     {
@@ -31,4 +41,5 @@ class Report extends Model
     {
         return $this->belongsTo(Facility::class, 'facility_id', 'facility_id');
     }
+
 }

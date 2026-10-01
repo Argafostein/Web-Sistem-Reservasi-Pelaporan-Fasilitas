@@ -1,0 +1,459 @@
+/* =========================================
+   DETAIL LAPORAN
+========================================= */
+
+.report-detail-section {
+    min-height: calc(100vh - 75px);
+    padding: 60px 24px 80px;
+    background: #f7f9fc;
+}
+
+.report-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+/* HEADER */
+
+.report-detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 28px 30px;
+
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.report-detail-label {
+    color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.report-detail-header h1 {
+    margin: 6px 0 5px;
+
+    color: #172033;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.report-detail-header p {
+    margin: 0;
+
+    color: #667085;
+    font-size: 14px;
+}
+
+
+/* STATUS */
+
+.report-detail-status {
+    flex-shrink: 0;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 6px 11px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-process {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-resolved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* INFORMATION */
+
+.report-information {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    margin-top: 18px;
+    padding: 24px 30px;
+
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.information-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.information-full {
+    grid-column: 1 / -1;
+}
+
+.information-label {
+    color: #98a2b3;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.information-value {
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.information-value.description {
+    font-weight: 400;
+}
+
+
+/* TIMELINE */
+
+.report-timeline-card {
+    margin-top: 18px;
+    padding: 26px 30px;
+
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.report-timeline-card h2 {
+    margin: 0 0 28px;
+
+    color: #172033;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.report-timeline {
+    position: relative;
+}
+
+
+/* GARIS TIMELINE */
+
+.report-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 15px;
+    top: 16px;
+    bottom: 16px;
+
+    width: 2px;
+
+    background: #e5e7eb;
+}
+
+
+/* ITEM */
+
+.timeline-item {
+    position: relative;
+
+    display: flex;
+    gap: 16px;
+
+    min-height: 100px;
+}
+
+.timeline-item:last-child {
+    min-height: auto;
+}
+
+
+/* MARKER */
+
+.timeline-marker {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #f2f4f7;
+    border: 2px solid #d0d5dd;
+
+    color: #98a2b3;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* STATUS SELESAI */
+
+.timeline-item.completed .timeline-marker {
+    background: #dcfce7;
+    border-color: #86efac;
+    color: #166534;
+}
+
+
+/* CONTENT */
+
+.timeline-content {
+    padding-bottom: 24px;
+}
+
+.timeline-content h3 {
+    margin: 4px 0 4px;
+
+    color: #344054;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.timeline-content p {
+    margin: 0 0 5px;
+
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.timeline-time {
+    color: #98a2b3;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.timeline-muted {
+    color: #98a2b3 !important;
+}
+
+
+/* FOOTER */
+
+.report-detail-footer {
+    display: flex;
+    justify-content: flex-start;
+
+    margin-top: 20px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 10px 16px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.back-button:hover {
+    background: #f9fafb;
+}
+
+/* =========================================
+   FOTO LAPORAN
+========================================= */
+
+.report-image-card {
+    margin-top: 18px;
+    padding: 26px 30px;
+
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.report-image-card h2 {
+    margin: 0 0 18px;
+
+    color: #172033;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.report-image-wrapper {
+    overflow: hidden;
+
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+
+    background: #f8fafc;
+}
+
+.report-image {
+    display: block;
+
+    width: 100%;
+    max-height: 450px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   CATATAN RESOLUSI
+========================================= */
+
+.resolution-card {
+    margin-top: 18px;
+    padding: 24px 30px;
+
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
+}
+
+.resolution-card h2 {
+    margin: 0 0 10px;
+
+    color: #172033;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.resolution-card p {
+    margin: 0;
+
+    color: #475467;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   TIMELINE DITOLAK
+========================================= */
+
+.timeline-item.rejected .timeline-marker {
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #991b1b;
+}
+
+.timeline-item.rejected .timeline-content h3 {
+    color: #991b1b;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .report-detail-section {
+        padding: 40px 18px 60px;
+    }
+
+    .report-detail-header {
+        flex-direction: column;
+        padding: 22px;
+    }
+
+    .report-detail-header h1 {
+        font-size: 21px;
+    }
+
+    .report-information {
+        grid-template-columns: 1fr;
+        padding: 22px;
+    }
+
+    .information-full {
+        grid-column: auto;
+    }
+
+    .report-timeline-card {
+        padding: 22px;
+    }
+
+    .report-image-card {
+        padding: 22px;
+    }
+
+    .resolution-card {
+        padding: 22px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .report-detail-section {
+        padding: 30px 15px 50px;
+    }
+
+    .report-detail-header {
+        padding: 18px;
+    }
+
+    .report-information {
+        padding: 18px;
+    }
+
+    .report-timeline-card {
+        padding: 18px;
+    }
+
+    .report-image-card {
+        padding: 18px;
+    }
+
+    .resolution-card {
+        padding: 18px;
+    }
+
+}
