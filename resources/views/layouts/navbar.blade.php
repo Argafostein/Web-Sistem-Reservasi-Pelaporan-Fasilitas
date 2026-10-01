@@ -1,3 +1,11 @@
+@push('styles')
+    @vite('resources/css/navbar.css')
+@endpush
+
+@push('scripts')
+    @vite('resources/js/navbar.js')
+@endpush
+
 <div class="navbar-container">
 
 <a href="{{ route('fasilitas') }}" class="brand">
@@ -30,12 +38,11 @@
         </a>
 
         <div class="profile-menu">
+            <button type="button" class="profile-button" id="profileButton">
+                👤 {{ Auth::user()->name }}
+            </button>
 
-            <a href="#" class="profile-button">
-                👤 {{ auth()->user()->name }}
-            </a>
-
-            <div class="profile-dropdown" onclick="">
+            <div class="profile-dropdown" id="profileDropdown">
 
                 <a href="#">
                     Profil Saya
@@ -50,7 +57,6 @@
                 </form>
 
             </div>
-
         </div>
 
     @else
