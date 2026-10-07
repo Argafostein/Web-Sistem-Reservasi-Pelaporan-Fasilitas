@@ -5,18 +5,12 @@ use App\Http\Controllers\AuthController;
 use App\Models\Facility;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\FacilityController;
 
-Route::get('/', function () {
-    $facilities = Facility::limit(10)->get();
+Route::get('/', [FacilityController::class, 'index'])
+    ->name('fasilitas');
 
-    return view('fasilitas', compact('facilities'));
-})->name('fasilitas');
-
-Route::get('/fasilitas', function () {
-    $facilities = Facility::limit(10)->get();
-
-    return view('fasilitas', compact('facilities'));
-})->name('fasilitas');
+Route::get('/fasilitas', [FacilityController::class, 'index']);
 
 // Pengguna - Login
 Route::get('/login', function () {

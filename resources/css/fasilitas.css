@@ -1,622 +1,713 @@
-main {
-    overflow: hidden;
+.facility-page {
+    min-height: calc(100vh - 70px);
+    background: #fff;
+    padding: 45px 40px 70px;
 }
 
-/* =========================================================
-   GENERAL SECTION
-========================================================= */
-
-.search-section,
-.facility-section,
-.about-section {
-    max-width: 1180px;
-    margin-left: auto;
-    margin-right: auto;
+.facility-container {
+    max-width: 1250px;
+    margin: 0 auto;
 }
 
-.search-section {
-    margin-top: 50px;
+
+/* =====================================
+   HEADER
+===================================== */
+
+.facility-header {
+    margin-bottom: 25px;
 }
 
-.facility-section {
-    margin-top: 15px;
-}
-
-.about-section {
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
-
-.section-heading {
-    margin-bottom: 28px;
-
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.section-heading h2,
-.about-section h2 {
-    color: #101828;
-
-    font-size: 30px;
-    line-height: 1.2;
-    letter-spacing: -0.7px;
-}
-
-.section-heading p,
-.about-section p {
-    margin-top: 8px;
+.facility-label {
+    display: block;
+    margin-bottom: 6px;
 
     color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.facility-header h1 {
+    margin: 0;
+
+    color: #202124;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.facility-header p {
+    margin: 7px 0 0;
+
+    color: #5f6368;
     font-size: 14px;
 }
 
 
-/* =========================================================
-   SEARCH BOX
-========================================================= */
+/* =====================================
+   SEARCH
+===================================== */
 
-.search-box {
-    padding: 24px;
-
+.facility-search-panel {
     display: grid;
-    grid-template-columns: repeat(3, 1fr) auto;
-    gap: 16px;
+
+    grid-template-columns:
+        minmax(260px, 1.7fr)
+        minmax(140px, 1fr)
+        minmax(140px, 1fr)
+        minmax(140px, 1fr)
+        auto;
+
+    gap: 12px;
+
     align-items: end;
 
-    background: #ffffff;
-
-    border: 1px solid #e8ecf2;
-    border-radius: 16px;
-
-    box-shadow: 0 5px 20px rgba(16, 24, 40, 0.04);
+    margin-bottom: 24px;
 }
 
-.form-group {
+.search-main,
+.filter-group {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
 }
 
-.form-group label {
-    color: #344054;
-
-    font-size: 13px;
-    font-weight: 700;
+.search-main label,
+.filter-group label {
+    color: #3c4043;
+    font-size: 12px;
+    font-weight: 500;
 }
 
-.form-group select,
-.form-group input,
-.form-group textarea {
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+
+    left: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+.search-input-wrapper input,
+.filter-group select {
     width: 100%;
+    height: 42px;
 
-    padding: 11px 13px;
+    padding: 0 12px;
 
-    color: #344054;
+    border: 1px solid #dadce0;
+    border-radius: 7px;
 
-    background: #ffffff;
+    background: #fff;
 
-    border: 1px solid #d0d5dd;
-    border-radius: 9px;
+    color: #202124;
+    font-family: inherit;
+    font-size: 13px;
 
     outline: none;
-
-    transition: 0.2s ease;
 }
 
-.form-group select:focus,
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #2563eb;
+.search-input-wrapper input {
+    padding-left: 35px;
+}
 
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+.search-input-wrapper input:focus,
+.filter-group select:focus {
+    border-color: #1a73e8;
 }
 
 .search-button {
     height: 42px;
 
-    padding: 0 18px;
+    padding: 0 22px;
 
     border: none;
-    border-radius: 9px;
+    border-radius: 6px;
 
-    background: #2563eb;
+    background: #1a73e8;
     color: white;
 
+    font-family: inherit;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 500;
 
-    white-space: nowrap;
-
-    transition: 0.2s ease;
+    cursor: pointer;
 }
 
 .search-button:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
+    background: #1769d2;
 }
 
 
-/* =========================================================
-   DATE BOX
-========================================================= */
+/* =====================================
+   CALENDAR CARD
+===================================== */
 
-.date-box {
-    min-width: 190px;
+.calendar-card {
+    border: 1px solid #dadce0;
+    border-radius: 8px;
 
-    padding: 12px 16px;
-
-    display: flex;
-    flex-direction: column;
-
-    background: #ffffff;
-
-    border: 1px solid #e8ecf2;
-    border-radius: 10px;
-}
-
-.date-box span {
-    color: #98a2b3;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.date-box strong {
-    margin-top: 2px;
-
-    color: #344054;
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   FACILITY CARD
-========================================================= */
-
-.facility-card {
-    margin-bottom: 20px;
-    padding: 24px;
-
-    background: #ffffff;
-
-    border: 1px solid #e8ecf2;
-    border-radius: 16px;
-
-    box-shadow: 0 5px 20px rgba(16, 24, 40, 0.04);
-
-    transition: 0.2s ease;
-}
-
-.facility-card:hover {
-    border-color: #d5def0;
-    box-shadow: 0 8px 28px rgba(16, 24, 40, 0.07);
-}
-
-.facility-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.facility-main {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.facility-icon {
-    width: 52px;
-    height: 52px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #eff6ff;
-
-    border-radius: 12px;
-
-    font-size: 23px;
-}
-
-.facility-main h3 {
-    color: #101828;
-
-    font-size: 18px;
-    line-height: 1.3;
-}
-
-.location {
-    margin-top: 4px;
-
-    color: #667085;
-    font-size: 13px;
-}
-
-.facility-status {
-    padding: 7px 11px;
-
-    background: #ecfdf3;
-    color: #15803d;
-
-    border-radius: 20px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   FACILITY INFO
-========================================================= */
-
-.facility-info {
-    margin-top: 20px;
-    padding: 14px 0;
-
-    display: flex;
-    gap: 28px;
-
-    border-top: 1px solid #f0f2f5;
-    border-bottom: 1px solid #f0f2f5;
-
-    color: #667085;
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   SCHEDULE
-========================================================= */
-
-.schedule {
-    margin-top: 18px;
-
-    border: 1px solid #eaecf0;
-    border-radius: 10px;
+    background: #fff;
 
     overflow: hidden;
 }
 
-.schedule-title,
-.schedule-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-}
 
-.schedule-title {
-    padding: 11px 14px;
+/* =====================================
+   CALENDAR HEADER
+===================================== */
 
-    background: #f8fafc;
-
-    color: #667085;
-
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.schedule-row {
-    padding: 12px 14px;
-
-    border-top: 1px solid #eaecf0;
-
-    font-size: 13px;
-}
-
-.time {
-    color: #344054;
-    font-weight: 600;
-}
-
-.status {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-
-    width: fit-content;
-
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status i {
-    width: 7px;
-    height: 7px;
-
-    display: inline-block;
-
-    border-radius: 50%;
-}
-
-.status.available {
-    color: #15803d;
-}
-
-.status.available i {
-    background: #22c55e;
-}
-
-.status.unavailable {
-    color: #dc2626;
-}
-
-.status.unavailable i {
-    background: #ef4444;
-}
-
-
-/* =========================================================
-   FACILITY ACTION
-========================================================= */
-
-.facility-action {
-    margin-top: 18px;
-
+.calendar-header {
     display: flex;
-    justify-content: flex-end;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 22px 28px;
+
+    border-bottom: 1px solid #dadce0;
 }
 
-.reserve-button {
-    display: inline-flex;
+.calendar-title {
+    color: #202124;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.calendar-timezone {
+    color: #5f6368;
+    font-size: 12px;
+}
+
+
+/* =====================================
+   CALENDAR BODY
+===================================== */
+
+.calendar-body {
+    display: flex;
+
+    min-height: 560px;
+}
+
+
+/* =====================================
+   MINI CALENDAR
+===================================== */
+
+.mini-calendar {
+    width: 300px;
+
+    flex-shrink: 0;
+
+    padding: 24px 18px;
+
+    border-right: 1px solid #dadce0;
+}
+
+.mini-calendar-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.mini-calendar-header strong {
+    color: #202124;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.month-navigation {
+    display: flex;
+    gap: 2px;
+}
+
+.month-navigation button {
+    width: 28px;
+    height: 28px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #5f6368;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.month-navigation button:hover {
+    background: #f1f3f4;
+}
+
+
+/* =====================================
+   MINI DAYS
+===================================== */
+
+.calendar-weekdays,
+.mini-calendar-days {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    text-align: center;
+}
+
+.calendar-weekdays {
+    margin-bottom: 10px;
+}
+
+.calendar-weekdays span {
+    color: #5f6368;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.calendar-day {
+    display: flex;
+
     align-items: center;
     justify-content: center;
 
-    padding: 10px 16px;
+    width: 28px;
+    height: 28px;
 
-    background: #2563eb;
-    color: white;
+    margin: 2px auto;
 
-    border-radius: 9px;
+    border-radius: 50%;
 
-    font-size: 13px;
-    font-weight: 700;
+    color: #3c4043;
 
-    transition: 0.2s ease;
+    font-size: 11px;
+
+    cursor: pointer;
 }
 
-.reserve-button:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
+.calendar-day:hover {
+    background: #f1f3f4;
 }
 
-/* =========================================================
-   ABOUT
-========================================================= */
+.calendar-day.today {
+    border: 1px solid #1a73e8;
+}
 
-.about-section {
-    padding: 45px;
+.calendar-day.selected {
+    background: #1a73e8;
+    color: #fff;
+}
+
+.calendar-day.muted {
+    color: #b0b3b8;
+}
+
+
+/* =====================================
+   SCHEDULE
+===================================== */
+
+.schedule-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.schedule-navigation {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: 82px;
+
+    border-bottom: 1px solid #dadce0;
+
+    padding-left: 60px;
+}
+
+.schedule-arrow {
+    position: absolute;
+
+    width: 38px;
+    height: 5px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #5f6368;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#previousWeek {
+    left: 11px;
+}
+
+#nextWeek {
+    right: 0;
+}
+
+.schedule-arrow:hover {
+    background: #f8f9fa;
+}
+
+.schedule-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, minmax(0, 1fr));
+
+    width: 100%;
+    min-width: 0;
+}
+
+.schedule-day {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
 
     text-align: center;
 
-    background: #f0f6ff;
-
-    border: 1px solid #dbeafe;
-    border-radius: 18px;
+    min-width: 0;
 }
 
-.about-section h2 {
-    margin-bottom: 12px;
+.schedule-day-name {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #5f6368;
+
+    font-size: 10px;
+    font-weight: 500;
 }
 
-.about-section p {
-    max-width: 650px;
-    margin: 0 auto;
+.schedule-day-number {
+    display: inline-flex;
 
-    line-height: 1.7;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    color: #202124;
+
+    font-size: 16px;
+}
+
+.schedule-day.selected .schedule-day-number {
+    background: #1a73e8;
+    color: #fff;
 }
 
 
-/* =========================================================
-   RESPONSIVE - TABLET
-========================================================= */
+/* =====================================
+   SCHEDULE CONTENT
+===================================== */
 
-@media (max-width: 1000px) {
+.schedule-content {
+    display: flex;
 
-    .navbar-container,
-    .hero,
-    .summary,
-    .search-section,
-    .facility-section,
-    .reservation-section,
-    .about-section {
-        max-width: calc(100% - 40px);
+    min-height: 480px;
+}
+
+.schedule-grid {
+    display: flex;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.time-column {
+    width: 60px;
+
+    flex-shrink: 0;
+
+    border-right: 1px solid #dadce0;
+}
+
+.time-column-header {
+    height: 0;
+}
+.time-slot {
+    height: 38px;
+    padding-right: 8px;
+
+    background: #fff;
+    border: none;
+
+    color: #80868b;
+    font-size: 10px;
+
+    text-align: right;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    box-sizing: border-box;
+
+    transform: translateY(19px);
+}
+
+.day-columns {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    flex: 1;
+    min-width: 0;
+}
+
+.day-column {
+    min-width: 0;
+    border-right: 1px solid #cfcfcf;
+}
+
+.day-cell {
+    height: 38px;
+
+    border-bottom: 1px solid #cfcfcf;
+
+    cursor: pointer;
+}
+
+.day-cell:hover {
+    background: #f8fafd;
+}
+
+.day-cell.booked {
+    background: #ff7d7d;
+
+    cursor: not-allowed;
+}
+
+.day-cell.available:hover {
+    background: #eaf2ff;
+}
+
+
+/* ==========================================
+   FACILITY LIST
+========================================== */
+
+.facility-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.facility-item {
+    border: 1px solid #dadce0;
+    border-radius: 10px;
+    background: #fff;
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease,
+        transform .2s ease;
+}
+
+.facility-item:hover {
+    border-color: #1a73e8;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+    transform: translateY(-2px);
+}
+
+.facility-item-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.facility-item-info {
+    flex: 1;
+}
+
+.facility-item-type {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #1a73e8;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.facility-item h3 {
+    margin: 0 0 12px;
+    color: #202124;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.facility-item p {
+    margin: 5px 0;
+    color: #5f6368;
+    font-size: 12px;
+}
+
+.facility-select-button {
+    width: 100%;
+    height: 38px;
+    margin-top: 18px;
+    border: 1px solid #1a73e8;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a73e8;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.facility-item:hover .facility-select-button {
+    background: #1a73e8;
+    color: #fff;
+}
+
+.facility-empty {
+    padding: 30px;
+    margin-bottom: 28px;
+    border: 1px dashed #dadce0;
+    border-radius: 8px;
+    color: #80868b;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+/* ==========================================
+   SELECTED FACILITY
+========================================== */
+
+.selected-facility-name {
+    display: block;
+    margin-top: 5px;
+    color: #1a73e8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .facility-list {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .hero {
-        padding: 55px 45px;
-    }
+}
 
-    .search-box {
-        grid-template-columns: 1fr 1fr;
-    }
 
-    .search-button {
-        width: 100%;
-    }
+@media (max-width: 600px) {
 
-    .reservation-card {
+    .facility-list {
         grid-template-columns: 1fr;
-        gap: 25px;
     }
+
 }
 
+.calendar-info {
+    margin-top: 35px;
+    padding-top: 16px;
+    border-top: 1px solid #dadce0;
 
-/* =========================================================
-   RESPONSIVE - MOBILE
-========================================================= */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
 
-@media (max-width: 700px) {
-
-    .navbar-container {
-        padding: 13px 0;
-    }
-
-    .navigation {
-        gap: 2px;
-    }
-
-    .nav-link {
-        padding: 8px 9px;
-        font-size: 12px;
-    }
-
-    .brand-logo {
-        width: 38px;
-        height: 38px;
-    }
-
-    .hero {
-        min-height: auto;
-
-        margin-top: 20px;
-        padding: 45px 28px;
-
-        border-radius: 18px;
-    }
-
-    .hero h1 {
-        font-size: 38px;
-        letter-spacing: -1.5px;
-    }
-
-    .hero p {
-        font-size: 14px;
-    }
-
-    .summary {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .search-section,
-    .facility-section,
-    .reservation-section,
-    .about-section {
-        margin-top: 55px;
-    }
-
-    .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .section-heading h2,
-    .about-section h2 {
-        font-size: 25px;
-    }
-
-    .search-box {
-        grid-template-columns: 1fr;
-        padding: 18px;
-    }
-
-    .date-box {
-        width: 100%;
-    }
-
-    .facility-card {
-        padding: 18px;
-    }
-
-    .facility-top {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .facility-status {
-        margin-left: 66px;
-    }
-
-    .facility-info {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .schedule-title,
-    .schedule-row {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .reservation-card {
-        padding: 22px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .form-submit {
-        justify-content: stretch;
-    }
-
-    .submit-button {
-        width: 100%;
-    }
-
-    .about-section {
-        padding: 30px 22px;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    footer {
-        margin-top: 55px;
-    }
+    color: #5f6368;
+    font-size: 12px;
 }
 
+.calendar-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-/* =========================================================
-   VERY SMALL SCREEN
-========================================================= */
+.calendar-info-item strong {
+    display: block;
+    margin-top: 3px;
+    color: #202124;
+    font-weight: 500;
+}
 
-@media (max-width: 420px) {
+.calendar-info-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    display: inline-block;
+    flex-shrink: 0;
+}
 
-    .navbar-container,
-    .hero,
-    .summary,
-    .search-section,
-    .facility-section,
-    .reservation-section,
-    .about-section {
-        max-width: calc(100% - 24px);
-    }
+.calendar-info-dot.booked {
+    background: #ff7d7d;
+}
 
-    .navigation {
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
+.calendar-info-dot.available {
+    background: #fff;
+    border: 1px solid #cfcfcf;
+}
 
-    .nav-link {
-        padding: 6px 7px;
-        font-size: 11px;
-    }
+/* PAGINATION */
+.facility-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
 
-    .hero {
-        padding: 35px 22px;
-    }
+.facility-pagination button {
+    width: 34px;
+    height: 34px;
 
-    .hero h1 {
-        font-size: 32px;
-    }
+    border: 1px solid #dadce0;
+    border-radius: 6px;
 
-    .facility-main h3 {
-        font-size: 16px;
-    }
+    background: #fff;
+    color: #5f6368;
 
-    .schedule-title,
-    .schedule-row {
-        font-size: 11px;
-    }
+    font-family: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.facility-pagination button:hover {
+    background: #f8f9fa;
+}
+
+.facility-pagination button.active {
+    border-color: #1a73e8;
+    background: #1a73e8;
+    color: #fff;
 }

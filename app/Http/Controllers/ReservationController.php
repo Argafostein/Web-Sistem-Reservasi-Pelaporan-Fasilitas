@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Facility;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
@@ -14,7 +13,23 @@ class ReservationController extends Controller
     {
         $facilities = Facility::where('status', 'available')->get();
 
-        return view('reservasi', compact('facilities'));
+        $reservations = Reservation::whereIn(
+            'status',
+            ['pending', 'approved']
+        )
+            ->get([
+                'reservation_id',
+                'facility_id',
+                'reservation_date',
+                'start_time',
+                'end_time',
+                'status'
+            ]);
+
+        return view('reservasi', compact(
+            'facilities',
+            'reservations'
+        ));
     }
 
     public function store(Request $request)

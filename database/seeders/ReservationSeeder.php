@@ -2,90 +2,171 @@
 
 namespace Database\Seeders;
 
-use App\Models\Facility;
-use App\Models\Reservation;
 use Illuminate\Database\Seeder;
+use App\Models\Reservation;
 
 class ReservationSeeder extends Seeder
 {
-    /**
-     * Seed riwayat reservasi awal — disalin persis dari INITIAL_RESERVATIONS
-     * di public/script.js.
-     */
     public function run(): void
     {
-        $reservations = [
-            [
-                'id' => 'RES-2026-00412',
-                'facilityId' => 'fac-lab-pemweb',
-                'facilityName' => 'Laboratorium Komputer Pemrograman Web & AI',
-                'facilityType' => 'Laboratorium Komputer',
-                'location' => 'Gedung FTI (Lt. 3, Lab 301)',
-                'date' => 'Kamis, 01 Okt 2026',
-                'slotTime' => '10:00 - 12:00',
-                'purpose' => 'Asistensi Modul 4 Pemrograman Web & Pengerjaan Tugas Tim Kelompok 11',
-                'applicant' => 'Yoga Pratama',
-                'affiliation' => 'Teknik Informatika 2024 (Kelas C1)',
-                'status' => 'Disetujui',
-                'appliedAt' => '30 Sep 2026, 14:20 WIB',
-                'approvedBy' => 'Admin Lab Komputer FTI',
-                'notes' => 'Kunci lab dapat diambil di ruang staf lantai 3 dengan meninggalkan KTM asli.',
-            ],
-            [
-                'id' => 'RES-2026-00389',
-                'facilityId' => 'fac-ruang-podcast',
-                'facilityName' => 'Studio Multimedia, Podcast & Mini Broadcasting',
-                'facilityType' => 'Ruang Diskusi & Multimedia',
-                'location' => 'Gedung FTI (Lt. 1, Studio 102)',
-                'date' => 'Jumat, 02 Okt 2026',
-                'slotTime' => '15:30 - 17:30',
-                'purpose' => 'Rekaman Podcast Edukasi Mahasiswa Informatika seputar AI Agentic Coding',
-                'applicant' => 'Yoga Pratama',
-                'affiliation' => 'Himpunan Mahasiswa Informatika',
-                'status' => 'Menunggu Konfirmasi',
-                'appliedAt' => '01 Okt 2026, 09:15 WIB',
-                'approvedBy' => 'Menunggu verifikasi Koordinator Studio',
-                'notes' => 'Penggunaan mik Shure SM7B memerlukan briefing singkat sebelum rekaman dimulai.',
-            ],
-            [
-                'id' => 'RES-2026-00310',
-                'facilityId' => 'fac-ruang-sidang-feb',
-                'facilityName' => 'Ruang Seminar & Simulasi Pasar Modal',
-                'facilityType' => 'Ruang Kelas / Seminar',
-                'location' => 'Gedung FEB (Lt. 2, R.201)',
-                'date' => 'Senin, 28 Sep 2026',
-                'slotTime' => '13:00 - 15:00',
-                'purpose' => 'Presentasi Pitch Deck Proposal Startup Bisnis Digital',
-                'applicant' => 'Yoga Pratama',
-                'affiliation' => 'Tim Inkubator Bisnis Kampus',
-                'status' => 'Selesai',
-                'appliedAt' => '25 Sep 2026, 11:00 WIB',
-                'approvedBy' => 'Kasubag Sarpras FEB',
-                'notes' => 'Kegiatan berjalan lancar tanpa kendala teknis.',
-            ],
-        ];
+        Reservation::insert([
+            // ================================
+            // RUANG SEMINAR
+            // ================================
 
-        foreach ($reservations as $data) {
-            $facility = Facility::where('code', $data['facilityId'])->first();
+            [
+                'user_id' => 1,
+                'facility_id' => 1,
+                'reservation_date' => '2026-10-07',
+                'start_time' => '09:00:00',
+                'end_time' => '11:00:00',
+                'purpose' => 'Seminar organisasi mahasiswa',
+                'status' => 'approved',
+                'notes' => null,
+            ],
 
-            Reservation::updateOrCreate(
-                ['code' => $data['id']],
-                [
-                    'facility_id' => $facility?->id,
-                    'facility_name' => $data['facilityName'],
-                    'facility_type' => $data['facilityType'],
-                    'location' => $data['location'],
-                    'date_label' => $data['date'],
-                    'slot_time' => $data['slotTime'],
-                    'purpose' => $data['purpose'],
-                    'applicant' => $data['applicant'],
-                    'affiliation' => $data['affiliation'],
-                    'status' => $data['status'],
-                    'applied_at_label' => $data['appliedAt'],
-                    'approved_by' => $data['approvedBy'],
-                    'notes' => $data['notes'],
-                ]
-            );
-        }
+            [
+                'user_id' => 1,
+                'facility_id' => 1,
+                'reservation_date' => '2026-10-08',
+                'start_time' => '13:00:00',
+                'end_time' => '15:00:00',
+                'purpose' => 'Rapat kepanitiaan',
+                'status' => 'pending',
+                'notes' => null,
+            ],
+
+            [
+                'user_id' => 1,
+                'facility_id' => 1,
+                'reservation_date' => '2026-10-10',
+                'start_time' => '08:00:00',
+                'end_time' => '10:30:00',
+                'purpose' => 'Workshop mahasiswa',
+                'status' => 'approved',
+                'notes' => null,
+            ],
+
+            [
+                'user_id' => 1,
+                'facility_id' => 1,
+                'reservation_date' => '2026-10-13',
+                'start_time' => '09:00:00',
+                'end_time' => '12:00:00',
+                'purpose' => 'Seminar akademik',
+                'status' => 'approved',
+                'notes' => null,
+            ],
+
+
+            // ================================
+            // AULA
+            // ================================
+
+            [
+                'user_id' => 1,
+                'facility_id' => 2,
+                'reservation_date' => '2026-10-07',
+                'start_time' => '10:00:00',
+                'end_time' => '12:00:00',
+                'purpose' => 'Kegiatan organisasi mahasiswa',
+                'status' => 'approved',
+                'notes' => null,
+            ],
+
+            [
+                'user_id' => 1,
+                'facility_id' => 2,
+                'reservation_date' => '2026-10-09',
+                'start_time' => '14:00:00',
+                'end_time' => '16:00:00',
+                'purpose' => 'Pelatihan mahasiswa',
+                'status' => 'pending',
+                'notes' => null,
+            ],
+
+            [
+                'user_id' => 1,
+                'facility_id' => 2,
+                'reservation_date' => '2026-10-14',
+                'start_time' => '08:00:00',
+                'end_time' => '12:00:00',
+                'purpose' => 'Seminar nasional',
+                'status' => 'approved',
+                'notes' => null,
+            ],
+
+
+            // ================================
+            // LABORATORIUM
+            // ================================
+
+            [
+                'user_id' => 1,
+                'facility_id' => 3,
+                'reservation_date' => '2026-10-07',
+                'start_time' => '08:00:00',
+                'end_time' => '10:00:00',
+                'purpose' => 'Praktikum mahasiswa',
+                'status' => 'approved',
+                'notes' => null,
+            ],
+
+            [
+                'user_id' => 1,
+                'facility_id' => 3,
+                'reservation_date' => '2026-10-08',
+                'start_time' => '10:00:00',
+                'end_time' => '12:00:00',
+                'purpose' => 'Praktikum pemrograman',
+                'status' => 'approved',
+                'notes' => null,
+            ],
+
+            [
+                'user_id' => 1,
+                'facility_id' => 3,
+                'reservation_date' => '2026-10-12',
+                'start_time' => '13:00:00',
+                'end_time' => '15:30:00',
+                'purpose' => 'Penelitian mahasiswa',
+                'status' => 'pending',
+                'notes' => null,
+            ],
+
+
+            // ================================
+            // CONTOH CANCELLED
+            // Tidak akan dianggap booked
+            // ================================
+
+            [
+                'user_id' => 1,
+                'facility_id' => 1,
+                'reservation_date' => '2026-10-15',
+                'start_time' => '09:00:00',
+                'end_time' => '11:00:00',
+                'purpose' => 'Rapat organisasi',
+                'status' => 'cancelled',
+                'notes' => null,
+            ],
+
+
+            // ================================
+            // CONTOH REJECTED
+            // Tidak akan dianggap booked
+            // ================================
+
+            [
+                'user_id' => 1,
+                'facility_id' => 2,
+                'reservation_date' => '2026-10-16',
+                'start_time' => '13:00:00',
+                'end_time' => '15:00:00',
+                'purpose' => 'Kegiatan mahasiswa',
+                'status' => 'rejected',
+                'notes' => 'Jadwal fasilitas tidak tersedia.',
+            ],
+        ]);
     }
 }
