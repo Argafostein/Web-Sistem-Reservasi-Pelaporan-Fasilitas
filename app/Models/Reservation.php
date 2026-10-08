@@ -19,6 +19,7 @@ class Reservation extends Model
         'purpose',
         'status',
         'notes',
+        'rejection_reason',
     ];
 
     public function user()

@@ -77,6 +77,12 @@ Route::middleware(['auth', 'petugas'])
         Route::get('/dashboard', [PetugasController::class, 'dashboard'])
             ->name('petugas.dashboard');
 
+        Route::post('/reservasi/{reservation}/approve', [PetugasController::class, 'approveReservation'])
+            ->name('petugas.reservasi.approve');
+
+        Route::post('/reservasi/{reservation}/reject', [PetugasController::class, 'rejectReservation'])
+            ->name('petugas.reservasi.reject');
+
     });
 
 

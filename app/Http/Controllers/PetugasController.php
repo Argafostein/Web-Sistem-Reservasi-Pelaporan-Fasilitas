@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use Illuminate\Http\Request;
 
 class PetugasController extends Controller
 {
@@ -16,5 +17,69 @@ class PetugasController extends Controller
         return view('petugas.dashboard', compact(
             'pendingReservations'
         ));
+    }
+
+    public function approveReservation(Reservation $reservation)
+    {
+        // Pastikan reservasi masih pending
+        if ($reservation->status !== 'pending') {
+            return back()->with('error', 'Reservasi ini sudah diproses.');
+        }
+
+        // Cek apakah ada reservasi lain yang bentrok
+        $overlappingReservation = Reservation::where(
+                'facility_id',
+                $reservation->facility_id
+            )
+            ->where(
+                'reservation_date',
+                $reservation->reservation_date
+            )
+            ->whereIn('status', ['pending', 'approved'])
+            ->where(
+                'reservation_id',
+                '!=',
+                $reservation->reservation_id
+            )
+            ->where('start_time', '<', $reservation->end_time)
+            ->where('end_time', '>', $reservation->start_time)
+            ->first();
+
+        if ($overlappingReservation) {
+            return back()->with(
+                'error',
+                'Reservasi tidak dapat disetujui karena jadwal berbenturan dengan reservasi lain.'
+            );
+        }
+
+        $reservation->update([
+            'status' => 'approved',
+        ]);
+
+        return back()->with(
+            'success',
+            'Reservasi berhasil disetujui.'
+        );
+    }
+
+    public function rejectReservation(Request $request, Reservation $reservation)
+    {
+        if ($reservation->status !== 'pending') {
+            return back()->with('error', 'Reservasi ini sudah diproses.');
+        }
+
+        $request->validate([
+            'rejection_reason' => 'required|string|max:500',
+        ]);
+
+        $reservation->update([
+            'status' => 'rejected',
+            'rejection_reason' => $request->rejection_reason,
+        ]);
+
+        return back()->with(
+            'success',
+            'Reservasi berhasil ditolak.'
+        );
     }
 }

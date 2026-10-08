@@ -112,15 +112,33 @@
                                     Detail
                                 </a>
 
-                                <button type="button"
-                                        class="petugas-button approve">
-                                    Setujui
-                                </button>
+                                <form action="{{ route('petugas.reservasi.approve', $reservation->reservation_id) }}"
+                                    method="POST">
+                                    @csrf
 
-                                <button type="button"
-                                        class="petugas-button reject">
-                                    Tolak
-                                </button>
+                                    <button type="submit"
+                                            class="petugas-button approve"
+                                            onclick="return confirm('Apakah Anda yakin ingin menyetujui reservasi ini?')">
+                                        Setujui
+                                    </button>
+                                </form>
+
+                                <form action="{{ route('petugas.reservasi.reject', $reservation->reservation_id) }}"
+                                    method="POST">
+                                    @csrf
+
+                                    <input
+                                        type="text"
+                                        name="rejection_reason"
+                                        placeholder="Alasan penolakan"
+                                        required
+                                    >
+
+                                    <button type="submit"
+                                            class="petugas-button reject">
+                                        Tolak
+                                    </button>
+                                </form>
 
                             </div>
 
@@ -135,6 +153,18 @@
         </div>
 
     </div>
+    
+    @if (session('success'))
+        <div class="petugas-alert success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="petugas-alert error">
+            {{ session('error') }}
+        </div>
+    @endif
 
 </div>
 

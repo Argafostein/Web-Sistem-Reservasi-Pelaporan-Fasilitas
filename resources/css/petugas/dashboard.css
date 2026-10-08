@@ -166,3 +166,22 @@
     font-size: 13px;
     text-align: center;
 }
+
+.petugas-alert {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.petugas-alert.success {
+    background: #ecfdf3;
+    border: 1px solid #abefc6;
+    color: #067647;
+}
+
+.petugas-alert.error {
+    background: #fef3f2;
+    border: 1px solid #fecdca;
+    color: #b42318;
+}
