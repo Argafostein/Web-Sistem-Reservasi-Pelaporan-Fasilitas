@@ -178,7 +178,7 @@
 
                             <div class="reject-form-group">
 
-                                <label for="rejection_reason">
+                                <label for="reason">
                                     Alasan Penolakan
                                 </label>
 
@@ -199,8 +199,7 @@
                             <div class="reject-modal-actions">
 
                                 <button type="button"
-                                        class="petugas-button cancel"
-                                        onclick="closeRejectModal()">
+                                        class="petugas-button cancel">
                                     Batal
                                 </button>
 

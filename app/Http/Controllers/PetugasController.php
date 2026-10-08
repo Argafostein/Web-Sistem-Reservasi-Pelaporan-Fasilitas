@@ -63,10 +63,8 @@ class PetugasController extends Controller
         );
     }
 
-    public function rejectReservation(
-        Request $request,
-        Reservation $reservation
-    ) {
+    public function rejectReservation(Request $request, Reservation $reservation)
+    {
         if ($reservation->status !== 'pending') {
             return back()->with(
                 'error',
@@ -75,7 +73,7 @@ class PetugasController extends Controller
         }
 
         $request->validate([
-            'rejection_reason' => 'required|string|max:500',
+            'reason' => 'required|string|max:500',
         ]);
 
         $reservation->update([

@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    const rejectButtons = document.querySelectorAll('.reject-button');
+    const rejectButtons =
+        document.querySelectorAll('.reject-button');
 
     rejectButtons.forEach(function (button) {
 
@@ -22,26 +23,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
             modal.classList.add('show');
 
+            reason.value = '';
+
             reason.focus();
         });
 
     });
 
-    const closeButton =
-        document.querySelector('.reject-modal-close');
+    const closeButtons =
+        document.querySelectorAll('.reject-modal-close');
 
-    if (closeButton) {
-        closeButton.addEventListener('click', function () {
+    closeButtons.forEach(function (button) {
+
+        button.addEventListener('click', function () {
+
             modal.classList.remove('show');
+
             form.reset();
+
         });
-    }
+
+    });
 
     modal.addEventListener('click', function (event) {
 
         if (event.target === modal) {
+
             modal.classList.remove('show');
+
             form.reset();
+
         }
 
     });
