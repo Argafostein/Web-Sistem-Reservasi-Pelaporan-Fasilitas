@@ -20,7 +20,13 @@ class Reservation extends Model
         'status',
         'notes',
         'reason',
+        'cancelled_by',
     ];
+
+    public function cancelledBy()
+    {
+        return $this->belongsTo(User::class, 'cancelled_by', 'id_user');
+    }
 
     public function user()
     {
