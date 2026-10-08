@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PetugasController extends Controller
 {
@@ -62,10 +63,15 @@ class PetugasController extends Controller
         );
     }
 
-    public function rejectReservation(Request $request, Reservation $reservation)
-    {
+    public function rejectReservation(
+        Request $request,
+        Reservation $reservation
+    ) {
         if ($reservation->status !== 'pending') {
-            return back()->with('error', 'Reservasi ini sudah diproses.');
+            return back()->with(
+                'error',
+                'Reservasi ini sudah diproses.'
+            );
         }
 
         $request->validate([

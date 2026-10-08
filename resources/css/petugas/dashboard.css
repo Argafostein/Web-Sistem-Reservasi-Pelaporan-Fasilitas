@@ -185,3 +185,193 @@
     border: 1px solid #fecdca;
     color: #b42318;
 }
+
+/* =========================
+   REJECT MODAL
+========================= */
+
+.reject-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+.reject-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.reject-modal-content {
+    width: 100%;
+    max-width: 480px;
+
+    background: #fff;
+    border-radius: 10px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+
+    transform: translateY(10px);
+    transition: transform 0.2s ease;
+}
+
+.reject-modal.show .reject-modal-content {
+    transform: translateY(0);
+}
+
+.reject-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #dadce0;
+}
+
+.reject-modal-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #d92d20;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.reject-modal-header h3 {
+    margin: 0;
+
+    color: #202124;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.reject-modal-header p {
+    margin: 6px 0 0;
+
+    color: #5f6368;
+
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.reject-modal-close {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #5f6368;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.reject-modal-close:hover {
+    background: #f1f3f4;
+}
+
+.reject-form-group {
+    padding: 22px 24px 10px;
+}
+
+.reject-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #202124;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.reject-form-group textarea {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+
+    color: #202124;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    resize: vertical;
+
+    outline: none;
+
+    box-sizing: border-box;
+}
+
+.reject-form-group textarea:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 1px #1a73e8;
+}
+
+.reject-form-hint {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #80868b;
+
+    font-size: 11px;
+}
+
+.reject-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    padding: 16px 24px 22px;
+}
+
+.petugas-button.cancel {
+    border: 1px solid #dadce0;
+
+    background: #fff;
+
+    color: #5f6368;
+}
+
+.petugas-button.cancel:hover {
+    background: #f8f9fa;
+}
+
+.petugas-button.reject-confirm {
+    border: 1px solid #d92d20;
+
+    background: #d92d20;
+
+    color: #fff;
+}
+
+.petugas-button.reject-confirm:hover {
+    background: #b42318;
+}

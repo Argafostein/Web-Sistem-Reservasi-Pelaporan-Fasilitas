@@ -4,11 +4,27 @@
     @vite('resources/css/petugas/dashboard.css')
 @endpush
 
+@push('scripts')
+    @vite('resources/js/petugas/dashboard.js')
+@endpush
+
 @section('content')
 
 <div class="petugas-page">
 
     <div class="petugas-container">
+
+        @if (session('success'))
+            <div class="petugas-alert success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="petugas-alert error">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="petugas-header">
             <span class="petugas-label">OPERASIONAL PETUGAS</span>
@@ -123,22 +139,11 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('petugas.reservasi.reject', $reservation->reservation_id) }}"
-                                    method="POST">
-                                    @csrf
-
-                                    <input
-                                        type="text"
-                                        name="rejection_reason"
-                                        placeholder="Alasan penolakan"
-                                        required
-                                    >
-
-                                    <button type="submit"
-                                            class="petugas-button reject">
-                                        Tolak
-                                    </button>
-                                </form>
+                                <button type="button"
+                                        class="petugas-button reject reject-button"
+                                        data-reservation-id="{{ $reservation->reservation_id }}">
+                                    Tolak
+                                </button>
 
                             </div>
 
@@ -147,24 +152,76 @@
                     @endforeach
 
                 </div>
+                {{-- Modal Tolak Reservasi --}}
+                <div id="rejectModal" class="reject-modal">
+
+                    <div class="reject-modal-content">
+
+                        <div class="reject-modal-header">
+                            <div>
+
+                                <h3>Tolak Reservasi</h3>
+
+                                <p>
+                                    Berikan alasan mengapa reservasi ini ditolak.
+                                </p>
+                            </div>
+
+                            <button type="button"
+                                    class="reject-modal-close">
+                                &times;
+                            </button>
+                        </div>
+
+                        <form id="rejectForm" method="POST">
+                            @csrf
+
+                            <div class="reject-form-group">
+
+                                <label for="rejection_reason">
+                                    Alasan Penolakan
+                                </label>
+
+                                <textarea
+                                    id="rejection_reason"
+                                    name="rejection_reason"
+                                    rows="4"
+                                    placeholder="Masukkan alasan penolakan..."
+                                    required
+                                    maxlength="500"></textarea>
+
+                                <span class="reject-form-hint">
+                                    Maksimal 500 karakter.
+                                </span>
+
+                            </div>
+
+                            <div class="reject-modal-actions">
+
+                                <button type="button"
+                                        class="petugas-button cancel"
+                                        onclick="closeRejectModal()">
+                                    Batal
+                                </button>
+
+                                <button type="submit"
+                                        class="petugas-button reject-confirm">
+                                    Tolak Reservasi
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
 
             @endif
 
         </div>
 
     </div>
-    
-    @if (session('success'))
-        <div class="petugas-alert success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="petugas-alert error">
-            {{ session('error') }}
-        </div>
-    @endif
 
 </div>
 
