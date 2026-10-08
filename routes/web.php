@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\PetugasController;
 
 Route::get('/', [FacilityController::class, 'index'])
     ->name('fasilitas');
@@ -68,6 +69,18 @@ Route::middleware('auth')->group(function () {
 });
 
 // Petugas
+
+Route::middleware(['auth', 'petugas'])
+    ->prefix('petugas')
+    ->group(function () {
+
+        Route::get('/dashboard', [PetugasController::class, 'dashboard'])
+            ->name('petugas.dashboard');
+
+    });
+
+
+
 Route::get('/dashboard-petugas', function () {
     return view('dashboard-petugas');
 });
