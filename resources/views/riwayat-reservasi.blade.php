@@ -207,7 +207,7 @@
                                     <div class="detail-item detail-reason">
 
                                         <span class="detail-label">
-                                            Alasan
+                                            Alasan pembatalan:
                                         </span>
 
                                         <span class="detail-value reason-text">
