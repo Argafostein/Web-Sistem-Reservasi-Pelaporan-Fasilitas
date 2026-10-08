@@ -80,7 +80,7 @@ class PetugasController extends Controller
 
         $reservation->update([
             'status' => 'rejected',
-            'rejection_reason' => $request->rejection_reason,
+            'reason' => $request->reason,
         ]);
 
         return back()->with(

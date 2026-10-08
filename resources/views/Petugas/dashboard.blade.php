@@ -183,8 +183,8 @@
                                 </label>
 
                                 <textarea
-                                    id="rejection_reason"
-                                    name="rejection_reason"
+                                    id="reason"
+                                    name="reason"
                                     rows="4"
                                     placeholder="Masukkan alasan penolakan..."
                                     required

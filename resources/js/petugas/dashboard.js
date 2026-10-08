@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const modal = document.getElementById('rejectModal');
     const form = document.getElementById('rejectForm');
-    const reason = document.getElementById('rejection_reason');
+    const reason = document.getElementById('reason');
 
     if (!modal || !form || !reason) {
         return;
