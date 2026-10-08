@@ -199,6 +199,25 @@
 
                                 @endif
 
+                                @if (
+                                    in_array($reservation->status, ['rejected', 'cancelled'])
+                                    && !empty($reservation->reason)
+                                )
+
+                                    <div class="detail-item detail-reason">
+
+                                        <span class="detail-label">
+                                            Alasan
+                                        </span>
+
+                                        <span class="detail-value reason-text">
+                                            {{ $reservation->reason }}
+                                        </span>
+
+                                    </div>
+
+                                @endif
+
                             </div>
 
                             @php
