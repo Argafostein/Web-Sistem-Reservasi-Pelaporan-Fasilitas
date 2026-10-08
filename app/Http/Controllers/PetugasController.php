@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Reservation;
 
 class PetugasController extends Controller
 {
     public function dashboard()
     {
-        return view('petugas.dashboard');
+        $pendingReservations = Reservation::where('status', 'pending')
+            ->with(['user', 'facility'])
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return view('petugas.dashboard', compact(
+            'pendingReservations'
+        ));
     }
 }

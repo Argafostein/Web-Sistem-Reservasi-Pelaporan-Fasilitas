@@ -1,0 +1,168 @@
+.petugas-page {
+    min-height: calc(100vh - 70px);
+    background: #fff;
+    padding: 45px 40px 70px;
+}
+
+.petugas-container {
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.petugas-header {
+    margin-bottom: 28px;
+}
+
+.petugas-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #667085;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.petugas-header h1 {
+    margin: 0;
+    color: #202124;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.petugas-header p {
+    margin: 7px 0 0;
+    color: #5f6368;
+    font-size: 14px;
+}
+
+.petugas-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    padding: 20px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.summary-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #667085;
+    font-size: 12px;
+}
+
+.summary-card strong {
+    color: #202124;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.petugas-section {
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #dadce0;
+}
+
+.section-header h2 {
+    margin: 0;
+    color: #202124;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.section-header p {
+    margin: 5px 0 0;
+    color: #5f6368;
+    font-size: 12px;
+}
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #dadce0;
+}
+
+.reservation-card:last-child {
+    border-bottom: none;
+}
+
+.reservation-status {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #b7791f;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.reservation-info h3 {
+    margin: 0 0 8px;
+    color: #202124;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.reservation-info p {
+    margin: 4px 0;
+    color: #5f6368;
+    font-size: 12px;
+}
+
+.reservation-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.petugas-button {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.petugas-button.detail {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid #dadce0;
+    color: #5f6368;
+}
+
+.petugas-button.approve {
+    border: 1px solid #1a73e8;
+    background: #1a73e8;
+    color: #fff;
+}
+
+.petugas-button.reject {
+    border: 1px solid #d92d20;
+    background: #fff;
+    color: #d92d20;
+}
+
+.petugas-empty {
+    padding: 35px 24px;
+    color: #80868b;
+    font-size: 13px;
+    text-align: center;
+}
