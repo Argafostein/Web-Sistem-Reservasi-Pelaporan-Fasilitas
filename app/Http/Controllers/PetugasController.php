@@ -88,4 +88,29 @@ class PetugasController extends Controller
             'Reservasi berhasil ditolak.'
         );
     }
+
+    public function cancelReservation(Request $request, Reservation $reservation)
+    {
+        if ($reservation->status !== 'approved') {
+            return back()->with(
+                'error',
+                'Hanya reservasi yang sudah disetujui yang dapat dibatalkan.'
+            );
+        }
+
+        $request->validate([
+            'reason' => 'required|string|max:500',
+        ]);
+
+        $reservation->update([
+            'status' => 'cancelled',
+            'cancelled_by' => Auth::id(),
+            'reason' => $request->reason,
+        ]);
+
+        return back()->with(
+            'success',
+            'Reservasi berhasil dibatalkan.'
+        );
+    }
 }

@@ -83,6 +83,9 @@ Route::middleware(['auth', 'petugas'])
         Route::post('/reservasi/{reservation}/reject', [PetugasController::class, 'rejectReservation'])
             ->name('petugas.reservasi.reject');
 
+        Route::post('/reservasi/{reservation}/cancel', [PetugasController::class, 'cancelReservation'])
+            ->name('petugas.reservasi.cancel');
+
     });
 
 
