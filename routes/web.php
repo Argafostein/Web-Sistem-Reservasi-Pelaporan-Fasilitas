@@ -104,4 +104,7 @@ Route::middleware(['auth', 'petugas'])
         
         Route::patch('/petugas/laporan/{report}/status',[PetugasLaporanController::class, 'updateReportStatus'])
             ->name('petugas.laporan.update-status');
+
+        Route::patch( '/petugas/laporan/{report}/selesai', [PetugasLaporanController::class, 'markResolved'] )
+            ->name('petugas.laporan.selesai');
     });

@@ -149,4 +149,26 @@ class PetugasLaporanController extends Controller
         );
     }
 
+    public function markResolved(Report $report)
+    {
+        if ($report->status !== 'processing') {
+            return back()->with(
+                'error',
+                'Hanya laporan yang sedang diproses yang dapat diselesaikan.'
+            );
+        }
+
+        DB::transaction(function () use ($report) {
+            $report->update([
+                'status' => 'resolved',
+                'resolved_at' => now(),
+            ]);
+        });
+
+        return back()->with(
+            'success',
+            'Laporan berhasil ditandai selesai.'
+        );
+    }
+
 }

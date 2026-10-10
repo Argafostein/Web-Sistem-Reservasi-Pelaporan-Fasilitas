@@ -170,6 +170,22 @@
                                 </div>
                             @endif
 
+                            @if ($report->status === 'processing')
+                                <form
+                                    action="{{ route('petugas.laporan.selesai', $report->report_id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Apakah laporan ini sudah selesai ditangani?')"
+                                    style="margin-top: 20px;"
+                                >
+                                    @csrf
+                                    @method('PATCH')
+
+                                    <button type="submit" class="petugas-antrian-button approve">
+                                        Tandai Selesai
+                                    </button>
+                                </form>
+                            @endif
+
                         </div>
 
                         {{-- Riwayat perubahan status --}}
