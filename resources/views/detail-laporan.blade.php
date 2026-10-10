@@ -212,8 +212,8 @@
                      HANYA MUNCUL JIKA SUDAH DIPROSES
                 ========================================= --}}
                 @if (
-                    $report->processed_at ||
-                    in_array($report->status, ['diproses', 'selesai', 'ditolak'])
+                    $report->status === 'processing' ||
+                    $report->status === 'resolved'
                 )
 
                     <div class="timeline-item completed">
@@ -251,7 +251,7 @@
                      3. SELESAI
                      HANYA MUNCUL JIKA SELESAI
                 ========================================= --}}
-                @if ($report->status === 'selesai' && $report->resolved_at)
+                @if ($report->status === 'resolved' && $report->resolved_at)
 
                     <div class="timeline-item completed">
 
@@ -284,7 +284,7 @@
                      4. DITOLAK
                      HANYA MUNCUL JIKA DITOLAK
                 ========================================= --}}
-                @if ($report->status === 'ditolak' && $report->rejected_at)
+                @if ($report->status === 'rejected' && $report->rejected_at)
 
                     <div class="timeline-item rejected">
 
@@ -315,29 +315,6 @@
             </div>
 
         </div>
-
-
-        {{-- =========================================
-             CATATAN RESOLUSI
-        ========================================= --}}
-        @if (
-            in_array($report->status, ['selesai', 'ditolak'])
-            && $report->resolution_note
-        )
-
-            <div class="resolution-card">
-
-                <h2>
-                    Catatan Resolusi
-                </h2>
-
-                <p>
-                    {{ $report->resolution_note }}
-                </p>
-
-            </div>
-
-        @endif
 
 
         {{-- KEMBALI --}}

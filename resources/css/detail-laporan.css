@@ -340,39 +340,6 @@
     object-fit: contain;
 }
 
-
-/* =========================================
-   CATATAN RESOLUSI
-========================================= */
-
-.resolution-card {
-    margin-top: 18px;
-    padding: 24px 30px;
-
-    background: #ffffff;
-    border: 1px solid #e5eaf1;
-    border-radius: 14px;
-
-    box-shadow: 0 4px 16px rgba(16, 24, 40, 0.04);
-}
-
-.resolution-card h2 {
-    margin: 0 0 10px;
-
-    color: #172033;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.resolution-card p {
-    margin: 0;
-
-    color: #475467;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-
 /* =========================================
    TIMELINE DITOLAK
 ========================================= */
