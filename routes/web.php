@@ -18,16 +18,18 @@ Route::middleware(['auth'])
     ->name('admin.')
     ->group(function () {
 
-        // Route custom ditaruh SEBELUM resource
         Route::get('users/pending', [Admin\UserController::class, 'pending'])
             ->name('users.pending');
         Route::patch('users/{user}/approve', [Admin\UserController::class, 'approve'])
             ->name('users.approve');
         Route::patch('users/{user}/reject', [Admin\UserController::class, 'reject'])
             ->name('users.reject');
-
         Route::resource('users', Admin\UserController::class)
             ->only(['index', 'create', 'store']);
+        Route::patch('facilities/{facility}/toggle', [Admin\FacilityController::class, 'toggle'])
+            ->name('facilities.toggle');
+        Route::resource('facilities', Admin\FacilityController::class)
+            ->except(['show', 'destroy']);
     });
 
 
