@@ -30,6 +30,11 @@ Route::middleware(['auth'])
             ->name('facilities.toggle');
         Route::resource('facilities', Admin\FacilityController::class)
             ->except(['show', 'destroy']);
+        Route::get('reports', [Admin\ReportController::class, 'index'])
+            ->name('reports.index');
+        Route::get('reports/export/{format}', [Admin\ReportController::class, 'export'])
+            ->whereIn('format', ['csv', 'xlsx', 'pdf'])
+            ->name('reports.export');
     });
 
 
