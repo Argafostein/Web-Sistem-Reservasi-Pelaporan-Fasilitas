@@ -33,25 +33,25 @@
             {{-- STATUS --}}
             <div class="report-detail-status">
 
-                @if ($report->status === 'baru')
+                @if ($report->status === 'pending')
 
                     <span class="status-badge status-pending">
                         Baru
                     </span>
 
-                @elseif ($report->status === 'diproses')
+                @elseif ($report->status === 'processing')
 
                     <span class="status-badge status-process">
                         Diproses
                     </span>
 
-                @elseif ($report->status === 'selesai')
+                @elseif ($report->status === 'resolved')
 
                     <span class="status-badge status-resolved">
                         Selesai
                     </span>
 
-                @elseif ($report->status === 'ditolak')
+                @elseif ($report->status === 'rejected')
 
                     <span class="status-badge status-rejected">
                         Ditolak

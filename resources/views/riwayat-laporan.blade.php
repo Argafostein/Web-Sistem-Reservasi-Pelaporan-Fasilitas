@@ -86,7 +86,7 @@
                                     Menunggu
                                 </span>
 
-                            @elseif ($report->status === 'process')
+                            @elseif ($report->status === 'processing')
 
                                 <span class="status-badge status-process">
                                     Diproses
