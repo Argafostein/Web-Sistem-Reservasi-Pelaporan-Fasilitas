@@ -40,15 +40,20 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+
+    
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::attempt(
+            [...$this->only('email', 'password'), 'status' => 'approved'],
+            $this->boolean('remember')
+        )) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Email/password salah, atau akun belum diverifikasi admin.',
             ]);
-        }
+}
 
         RateLimiter::clear($this->throttleKey());
     }
