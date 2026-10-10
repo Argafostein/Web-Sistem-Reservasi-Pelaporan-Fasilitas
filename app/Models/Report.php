@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Report extends Model
 {
@@ -40,6 +41,15 @@ class Report extends Model
     public function facility(): BelongsTo
     {
         return $this->belongsTo(Facility::class, 'facility_id', 'facility_id');
+    }
+
+    public function logs(): HasMany
+    {
+        return $this->hasMany(
+            ReportLog::class,
+            'report_id',
+            'report_id'
+        )->orderBy('created_at', 'desc');
     }
 
 }

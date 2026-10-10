@@ -6,6 +6,8 @@ use App\Models\Facility;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ReportLog;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -50,7 +52,20 @@ class ReportController extends Controller
         $validated['status'] = 'pending';
 
 
-        Report::create($validated);
+
+        DB::transaction(function () use ($validated) {
+            $report = Report::create($validated);
+
+            ReportLog::create([
+                'report_id' => $report->report_id,
+                'user_id' => Auth::user()->user_id,
+                'action' => 'submitted',
+                'old_status' => null,
+                'new_status' => 'pending',
+                'note' => null,
+            ]);
+        });
+
 
 
         return redirect()

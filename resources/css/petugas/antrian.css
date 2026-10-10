@@ -699,3 +699,208 @@
         grid-column: 1 / -1;
     }
 }
+
+
+/* Antrean Laporan */
+
+.petugas-antrian-report-list {
+    display: grid;
+    gap: 20px;
+}
+
+.petugas-antrian-report-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.75fr);
+    gap: 24px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.petugas-antrian-report-info h3 {
+    margin: 12px 0 16px;
+    font-size: 20px;
+    color: #1f2937;
+}
+
+.petugas-report-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.petugas-report-status.in_progress {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.petugas-antrian-report-details {
+    display: grid;
+    gap: 12px;
+}
+
+.petugas-antrian-report-details p {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+}
+
+.petugas-antrian-report-details span {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.petugas-antrian-report-details strong {
+    color: #374151;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.petugas-antrian-report-description {
+    margin-top: 20px;
+}
+
+.petugas-antrian-report-description > strong,
+.petugas-antrian-report-image > strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.petugas-antrian-report-description p {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.7;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.petugas-antrian-report-image {
+    margin-top: 16px;
+}
+
+.petugas-antrian-report-image a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.petugas-report-update-form {
+    align-self: start;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f9fafb;
+}
+
+.petugas-report-update-form h4 {
+    margin: 0 0 18px;
+    color: #1f2937;
+    font-size: 16px;
+}
+
+.petugas-report-form-group {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.petugas-report-form-group label {
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.petugas-report-status-select,
+.petugas-report-form-group textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #374151;
+    font: inherit;
+    font-size: 14px;
+}
+
+.petugas-report-form-group textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.petugas-report-status-select:focus,
+.petugas-report-form-group textarea:focus {
+    outline: 2px solid #bfdbfe;
+    border-color: #2563eb;
+}
+
+.petugas-report-form-group small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.petugas-report-note-group[hidden] {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .petugas-antrian-report-card {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 18px;
+    }
+
+    .petugas-report-update-form {
+        padding: 16px;
+    }
+}
+
+
+
+.petugas-report-history {
+    margin-top: 22px;
+}
+
+.petugas-report-history h4 {
+    margin-bottom: 12px;
+    color: #1f2937;
+}
+
+.petugas-report-history-list {
+    display: grid;
+    gap: 12px;
+}
+
+.petugas-report-history-item {
+    padding: 12px 14px;
+    border-left: 3px solid #93c5fd;
+    border-radius: 4px;
+    background: #f9fafb;
+}
+
+.petugas-report-history-item strong {
+    color: #1f2937;
+    font-size: 14px;
+}
+
+.petugas-report-history-item p {
+    margin: 6px 0;
+    color: #4b5563;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.petugas-report-history-item small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.petugas-report-history-item .petugas-report-history-note {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e5e7eb;
+    white-space: pre-line;
+}

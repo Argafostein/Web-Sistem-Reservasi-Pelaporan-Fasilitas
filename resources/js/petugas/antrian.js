@@ -58,3 +58,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const reportStatusSelects = document.querySelectorAll(
+        '[data-report-status]'
+    );
+
+    reportStatusSelects.forEach(function (select) {
+        const form = select.closest('form');
+
+        if (!form) return;
+
+        const noteGroup = form.querySelector(
+            '[data-report-note-group]'
+        );
+
+        const note = form.querySelector('[data-report-note]');
+
+        if (!noteGroup || !note) return;
+
+        function updateReportNote() {
+            const requiresNote = [
+                'resolved',
+                'rejected'
+            ].includes(select.value);
+
+            note.required = requiresNote;
+            noteGroup.hidden = !requiresNote;
+
+            if (!requiresNote) {
+                note.value = '';
+            }
+        }
+
+        select.addEventListener('change', updateReportNote);
+
+        updateReportNote();
+    });
+});

@@ -1,551 +1,321 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@push('styles')
+    @vite('resources/css/petugas/antrian.css')
+@endpush
 
-    <title>Antrian Laporan — Fasilitas Kampus</title>
+@push('scripts')
+    @vite('resources/js/petugas/antrian.js')
+@endpush
 
-    <link rel="stylesheet" href="{{ asset('fasilitas.css') }}">
-</head>
+@section('content')
+    <div class="petugas-antrian-page">
+        <div class="petugas-antrian-container">
 
-<body>
-
-    <!-- =========================
-         NAVBAR
-    ========================== -->
-
-    <header class="navbar">
-
-        <div class="navbar-container">
-
-            <a href="/fasilitas" class="brand">
-
-                <div class="brand-logo">
-                    FK
+            {{-- Notifikasi --}}
+            @if (session('success'))
+                <div class="petugas-antrian-alert success">
+                    {{ session('success') }}
                 </div>
+            @endif
 
-                <div class="brand-text">
-                    <strong>Fasilitas Kampus</strong>
-                    <span>Panel Petugas</span>
+            @if (session('error'))
+                <div class="petugas-antrian-alert error">
+                    {{ session('error') }}
                 </div>
+            @endif
 
-            </a>
-
-
-            <nav class="navigation">
-
-                <a href="/dashboard-petugas" class="nav-link">
-                    Dashboard
-                </a>
-
-                <a href="/antrian-reservasi" class="nav-link">
-                    Reservasi
-                </a>
-
-                <a href="/antrian-laporan" class="nav-link active">
-                    Laporan
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <main>
-
-        <!-- =========================
-             PAGE HEADER
-        ========================== -->
-
-        <section class="page-header">
-
-            <div class="page-header-content">
-
-                <span class="hero-badge">
-                    PANEL PETUGAS
+            {{-- Header --}}
+            <div class="petugas-antrian-header">
+                <span class="petugas-antrian-eyebrow">
+                    OPERASIONAL PETUGAS
                 </span>
 
-                <h1>
-                    Antrian laporan
-                    <span>kerusakan fasilitas</span>
-                </h1>
+                <h1>Antrean Laporan</h1>
 
                 <p>
-                    Tinjau dan perbarui status setiap laporan kerusakan
-                    yang masuk dari pengguna.
+                    Periksa laporan kerusakan dan perbarui status penanganannya.
                 </p>
-
             </div>
 
-            <div class="hero-decoration decoration-one"></div>
-            <div class="hero-decoration decoration-two"></div>
+            {{-- Navigasi --}}
+            <div class="petugas-antrian-tabs">
+                <a
+                    href="{{ route('petugas.antrian.reservasi') }}"
+                    class="petugas-antrian-tab"
+                >
+                    Antrean Reservasi
+                </a>
 
-        </section>
-
-
-        <!-- =========================
-             SUMMARY
-        ========================== -->
-
-        <section class="summary">
-
-            <div class="summary-card">
-
-                <div class="summary-icon blue">
-                    📋
-                </div>
-
-                <div class="summary-content">
-
-                    <span>Total Laporan</span>
-
-                    <strong>5</strong>
-
-                </div>
-
+                <a
+                    href="{{ route('petugas.antrian.laporan') }}"
+                    class="petugas-antrian-tab active"
+                >
+                    Antrean Laporan
+                </a>
             </div>
 
+            <div class="petugas-antrian-section">
 
-            <div class="summary-card">
-
-                <div class="summary-icon red">
-                    ⏳
-                </div>
-
-                <div class="summary-content">
-
-                    <span>Menunggu</span>
-
-                    <strong>2</strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <div class="summary-icon green">
-                    ✓
-                </div>
-
-                <div class="summary-content">
-
-                    <span>Selesai</span>
-
-                    <strong>2</strong>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             LAPORAN LIST
-        ========================== -->
-
-        <section class="riwayat-section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="section-label">
-                        DAFTAR LAPORAN
-                    </span>
-
-                    <h2>
-                        Semua laporan
-                    </h2>
-
-                    <p>
-                        Klik "Tinjau" untuk melihat detail dan memperbarui status laporan.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- LAPORAN 1 — Menunggu -->
-
-            <article class="reservasi-item">
-
-                <div class="reservasi-left">
-
-                    <div class="facility-icon">
-                        🏫
-                    </div>
-
-                    <div class="reservasi-info">
-
-                        <span class="facility-type">
-                            ELEKTRONIK — RUANG SEMINAR
-                        </span>
-
-                        <h3>
-                            AC tidak menyala
-                        </h3>
-
+                <div class="petugas-antrian-section-header">
+                    <div>
+                        <h2>Daftar Laporan</h2>
                         <p>
-                            📍 Ruang Seminar, Gedung A
-                            &nbsp;·&nbsp; 👤 Budi Santoso
-                            &nbsp;·&nbsp; 14 Sep 2026
+                            Periksa laporan baru dan laporan yang sedang diproses.
                         </p>
-
-                        <p class="reservasi-tujuan">
-                            AC di sudut kiri tidak menyala sejak kemarin meskipun sudah dicoba via remote.
-                        </p>
-
                     </div>
 
-                </div>
-
-                <div class="reservasi-right">
-
-                    <span class="status-badge status-menunggu">
-                        Menunggu
+                    <span class="petugas-antrian-count">
+                        {{ $activeReports->count() }} antrean
                     </span>
-
-                    <div class="reservasi-actions">
-
-                        <button
-                            class="btn-detail"
-                            data-id="1"
-                            data-fasilitas="Ruang Seminar, Gedung A"
-                            data-kategori="Elektronik"
-                            data-judul="AC tidak menyala"
-                            data-deskripsi="AC di sudut kiri tidak menyala sejak kemarin meskipun sudah dicoba via remote."
-                            data-pelapor="Budi Santoso"
-                            data-tanggal="14 September 2026"
-                            data-status="menunggu"
-                        >
-                            Tinjau
-                        </button>
-
-                    </div>
-
                 </div>
 
-            </article>
+                @if ($activeReports->isEmpty())
 
-
-            <!-- LAPORAN 2 — Diproses -->
-
-            <article class="reservasi-item">
-
-                <div class="reservasi-left">
-
-                    <div class="facility-icon">
-                        🏛️
-                    </div>
-
-                    <div class="reservasi-info">
-
-                        <span class="facility-type">
-                            PERABOTAN — AULA FAKULTAS
-                        </span>
-
-                        <h3>
-                            Kursi rusak
-                        </h3>
-
+                    <div class="petugas-antrian-empty">
+                        <div class="petugas-antrian-empty-icon">📄</div>
+                        <h3>Tidak Ada Antrean Laporan</h3>
                         <p>
-                            📍 Aula Fakultas, Gedung B
-                            &nbsp;·&nbsp; 👤 Dewi Lestari
-                            &nbsp;·&nbsp; 10 Sep 2026
+                            Belum ada laporan baru atau laporan yang sedang diproses.
                         </p>
+                    </div>
 
-                        <p class="reservasi-tujuan">
-                            Terdapat 5 kursi di baris depan yang kaki penyangganya patah.
-                        </p>
+                @else
+
+                    <div class="petugas-antrian-report-list">
+
+                        @foreach ($activeReports as $report)
+
+                            <article class="petugas-antrian-report-card">
+
+                                <div class="petugas-antrian-report-info">
+
+                                    <span class="petugas-report-status {{ $report->status }}">
+                                        {{ $report->status === 'pending' ? 'BARU' : 'DIPROSES' }}
+                                    </span>
+
+                                    <h3>{{ $report->title }}</h3>
+
+                                    <div class="petugas-antrian-report-details">
+
+                                        <p>
+                                            <span>Pelapor</span>
+                                            <strong>{{ $report->user->name ?? '-' }}</strong>
+                                        </p>
+
+                                        <p>
+                                            <span>Fasilitas</span>
+                                            <strong>{{ $report->facility->name ?? '-' }}</strong>
+                                        </p>
+
+                                        <p>
+                                            <span>Kategori</span>
+                                            <strong>{{ $report->category }}</strong>
+                                        </p>
+
+                                        <p>
+                                            <span>Tanggal laporan</span>
+                                            <strong>
+                                                {{ $report->created_at?->format('d/m/Y H:i') ?? '-' }}
+                                            </strong>
+                                        </p>
+
+                                    </div>
+
+                                    <div class="petugas-antrian-report-description">
+                                        <strong>Deskripsi Kerusakan</strong>
+                                        <p>{{ $report->description }}</p>
+                                    </div>
+
+                                    @if ($report->image)
+                                        <div class="petugas-antrian-report-image">
+                                            <strong>Foto Kerusakan</strong>
+                                            <p>
+                                                <a
+                                                    href="{{ asset('storage/' . $report->image) }}"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Lihat Foto Laporan
+                                                </a>
+                                            </p>
+                                        </div>
+                                    @endif
+
+                                </div>
+
+                                {{-- Riwayat laporan --}}
+                                @if ($report->logs->isNotEmpty())
+                                    <div class="petugas-report-history">
+                                        <h4>Riwayat Laporan</h4>
+
+                                        <div class="petugas-report-history-list">
+                                            @foreach ($report->logs as $log)
+                                                <div class="petugas-report-history-item">
+
+                                                    <strong>
+                                                        @if ($log->action === 'submitted')
+                                                            Laporan Dibuat
+                                                        @else
+                                                            Status Diperbarui
+                                                        @endif
+                                                    </strong>
+
+                                                    <p>
+                                                        Status:
+                                                        {{ $log->old_status
+                                                            ? ucfirst(str_replace('_', ' ', $log->old_status))
+                                                            : '—' }}
+                                                        →
+                                                        {{ ucfirst(str_replace('_', ' ', $log->new_status)) }}
+                                                    </p>
+
+                                                    <p>
+                                                        Oleh:
+                                                        {{ $log->user->name ?? 'Pengguna tidak tersedia' }}
+                                                    </p>
+
+                                                    <small>
+                                                        {{ $log->created_at->format('d/m/Y H:i') }}
+                                                    </small>
+
+                                                    @if ($log->note)
+                                                        <p class="petugas-report-history-note">
+                                                            Catatan: {{ $log->note }}
+                                                        </p>
+                                                    @endif
+
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+
+                                {{-- Tombol aksi --}}
+                                <div class="petugas-antrian-actions">
+
+                                    <button
+                                        type="button"
+                                        class="petugas-antrian-button detail"
+                                        onclick="const detail = document.getElementById('report-detail-{{ $report->report_id }}'); detail.hidden = !detail.hidden;"
+                                    >
+                                        Detail
+                                    </button>
+
+                                    @if ($report->status === 'pending')
+
+                                        <form
+                                            action="{{ route('petugas.laporan.update-status', $report->report_id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Mulai proses penanganan laporan ini?')"
+                                        >
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <input
+                                                type="hidden"
+                                                name="status"
+                                                value="processing"
+                                            >
+
+                                            <button
+                                                type="submit"
+                                                class="petugas-antrian-button approve"
+                                            >
+                                                Proses
+                                            </button>
+                                        </form>
+
+                                        <form
+                                            action="{{ route('petugas.laporan.update-status', $report->report_id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Yakin ingin menolak laporan ini?')"
+                                        >
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <input
+                                                type="hidden"
+                                                name="status"
+                                                value="rejected"
+                                            >
+
+                                            <input
+                                                type="hidden"
+                                                name="resolution_note"
+                                                value="Laporan ditolak oleh petugas."
+                                            >
+
+                                            <button
+                                                type="submit"
+                                                class="petugas-antrian-button reject"
+                                            >
+                                                Tolak
+                                            </button>
+                                        </form>
+
+                                    @endif
+
+                                    @if ($report->status === 'processing')
+                                        <span class="petugas-antrian-status">
+                                            SEDANG DIPROSES
+                                        </span>
+                                    @endif
+
+                                </div>
+
+                                {{-- Form detail dan penyelesaian --}}
+                                <div
+                                    id="report-detail-{{ $report->report_id }}"
+                                    hidden
+                                >
+                                    <form
+                                        action="{{ route('petugas.laporan.update-status', $report->report_id) }}"
+                                        method="POST"
+                                        class="petugas-report-update-form"
+                                    >
+                                        @csrf
+                                        @method('PATCH')
+
+                                        <h4>Detail Penanganan Laporan</h4>
+
+                                        <label for="note-{{ $report->report_id }}">
+                                            Catatan Petugas
+                                        </label>
+
+                                        <textarea
+                                            id="note-{{ $report->report_id }}"
+                                            name="resolution_note"
+                                            rows="3"
+                                            maxlength="2000"
+                                            placeholder="Catatan hasil penanganan laporan..."
+                                        ></textarea>
+
+                                        <input
+                                            type="hidden"
+                                            name="status"
+                                            value="resolved"
+                                        >
+
+                                        <button
+                                            type="submit"
+                                            class="petugas-antrian-button approve"
+                                            onclick="return confirm('Apakah laporan ini sudah selesai ditangani?')"
+                                        >
+                                            Selesai
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </article>
+
+                        @endforeach
 
                     </div>
 
-                </div>
-
-                <div class="reservasi-right">
-
-                    <span class="status-badge status-diproses">
-                        Diproses
-                    </span>
-
-                    <div class="reservasi-actions">
-
-                        <button
-                            class="btn-detail"
-                            data-id="2"
-                            data-fasilitas="Aula Fakultas, Gedung B"
-                            data-kategori="Perabotan"
-                            data-judul="Kursi rusak"
-                            data-deskripsi="Terdapat 5 kursi di baris depan yang kaki penyangganya patah dan tidak bisa digunakan."
-                            data-pelapor="Dewi Lestari"
-                            data-tanggal="10 September 2026"
-                            data-status="diproses"
-                        >
-                            Tinjau
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- LAPORAN 3 — Selesai -->
-
-            <article class="reservasi-item">
-
-                <div class="reservasi-left">
-
-                    <div class="facility-icon">
-                        💻
-                    </div>
-
-                    <div class="reservasi-info">
-
-                        <span class="facility-type">
-                            KELISTRIKAN — LAB KOMPUTER
-                        </span>
-
-                        <h3>
-                            Stop kontak mati
-                        </h3>
-
-                        <p>
-                            📍 Lab Komputer, Gedung C
-                            &nbsp;·&nbsp; 👤 Eko Prasetyo
-                            &nbsp;·&nbsp; 3 Sep 2026
-                        </p>
-
-                        <p class="reservasi-tujuan">
-                            Dua stop kontak di meja nomor 12 dan 13 tidak mengalirkan listrik.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="reservasi-right">
-
-                    <span class="status-badge status-selesai">
-                        Selesai
-                    </span>
-
-                    <div class="reservasi-actions">
-
-                        <button
-                            class="btn-detail"
-                            data-id="3"
-                            data-fasilitas="Lab Komputer, Gedung C"
-                            data-kategori="Kelistrikan"
-                            data-judul="Stop kontak mati"
-                            data-deskripsi="Dua stop kontak di meja nomor 12 dan 13 tidak mengalirkan listrik sama sekali."
-                            data-pelapor="Eko Prasetyo"
-                            data-tanggal="3 September 2026"
-                            data-status="selesai"
-                        >
-                            Detail
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         MODAL — TINJAU LAPORAN
-    ========================== -->
-
-    <div class="modal-overlay" id="modal-tinjau">
-
-        <div class="modal modal-wide">
-
-            <div class="modal-header">
-
-                <h3 id="tinjau-title">
-                    Tinjau Laporan
-                </h3>
-
-                <button class="modal-close" id="close-tinjau">
-                    ✕
-                </button>
-
-            </div>
-
-            <div class="modal-body">
-
-                <div class="detail-grid">
-
-                    <div class="detail-row">
-                        <span>Pelapor</span>
-                        <strong id="tinjau-pelapor">—</strong>
-                    </div>
-
-                    <div class="detail-row">
-                        <span>Fasilitas</span>
-                        <strong id="tinjau-fasilitas">—</strong>
-                    </div>
-
-                    <div class="detail-row">
-                        <span>Kategori</span>
-                        <strong id="tinjau-kategori">—</strong>
-                    </div>
-
-                    <div class="detail-row">
-                        <span>Judul</span>
-                        <strong id="tinjau-judul">—</strong>
-                    </div>
-
-                    <div class="detail-row">
-                        <span>Deskripsi</span>
-                        <strong id="tinjau-deskripsi">—</strong>
-                    </div>
-
-                    <div class="detail-row">
-                        <span>Tanggal Laporan</span>
-                        <strong id="tinjau-tanggal">—</strong>
-                    </div>
-
-                    <div class="detail-row">
-                        <span>Status</span>
-                        <strong id="tinjau-status">—</strong>
-                    </div>
-
-                </div>
-
-
-                <!-- UPDATE STATUS -->
-
-                <div class="form-group" id="update-status-group" style="margin-top:22px;">
-
-                    <label for="status-baru">
-                        Perbarui Status
-                    </label>
-
-                    <select id="status-baru">
-                        <option value="menunggu">Menunggu</option>
-                        <option value="diproses">Diproses</option>
-                        <option value="selesai">Selesai</option>
-                    </select>
-
-                </div>
-
-                <div class="form-group" style="margin-top:8px;">
-
-                    <label for="catatan-petugas">
-                        Catatan Petugas
-                    </label>
-
-                    <textarea
-                        id="catatan-petugas"
-                        rows="3"
-                        placeholder="Tambahkan catatan tindak lanjut (opsional)..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button class="btn-secondary" id="close-tinjau-btn">
-                    Tutup
-                </button>
-
-                <button class="btn-success" id="simpan-status">
-                    Simpan Perubahan
-                </button>
-
+                @endif
             </div>
 
         </div>
-
     </div>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="footer-content">
-
-            <strong>
-                Fasilitas Kampus
-            </strong>
-
-            <span>
-                Sistem Informasi Fasilitas Kampus
-            </span>
-
-        </div>
-
-        <p>
-            © 2026 Fasilitas Kampus
-        </p>
-
-    </footer>
-
-
-    <script>
-        const modalTinjau = document.getElementById('modal-tinjau');
-        const statusMap   = {
-            menunggu : 'status-menunggu',
-            diproses : 'status-diproses',
-            selesai  : 'status-selesai',
-        };
-
-        document.querySelectorAll('.btn-detail').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const status = btn.dataset.status;
-
-                document.getElementById('tinjau-pelapor').textContent   = btn.dataset.pelapor;
-                document.getElementById('tinjau-fasilitas').textContent = btn.dataset.fasilitas;
-                document.getElementById('tinjau-kategori').textContent  = btn.dataset.kategori;
-                document.getElementById('tinjau-judul').textContent     = btn.dataset.judul;
-                document.getElementById('tinjau-deskripsi').textContent = btn.dataset.deskripsi;
-                document.getElementById('tinjau-tanggal').textContent   = btn.dataset.tanggal;
-
-                const statusEl = document.getElementById('tinjau-status');
-                statusEl.innerHTML = `<span class="status-badge ${statusMap[status] || ''}">${btn.dataset.status}</span>`;
-
-                document.getElementById('status-baru').value = status;
-                document.getElementById('tinjau-title').textContent =
-                    status === 'selesai' ? 'Detail Laporan' : 'Tinjau Laporan';
-
-                modalTinjau.classList.add('active');
-            });
-        });
-
-        function closeTinjau() { modalTinjau.classList.remove('active'); }
-
-        document.getElementById('close-tinjau').addEventListener('click', closeTinjau);
-        document.getElementById('close-tinjau-btn').addEventListener('click', closeTinjau);
-
-        document.getElementById('simpan-status').addEventListener('click', closeTinjau);
-
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', e => {
-                if (e.target === overlay) overlay.classList.remove('active');
-            });
-        });
-    </script>
-
-</body>
-
-</html>
+@endsection

@@ -7,6 +7,8 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\PetugasLaporanController;
+use App\Http\Controllers\PetugasReservasiController;
 
 Route::get('/', [FacilityController::class, 'index'])
     ->name('fasilitas');
@@ -77,28 +79,24 @@ Route::middleware(['auth', 'petugas'])
         Route::get('/dashboard', [PetugasController::class, 'dashboard'])
             ->name('petugas.dashboard');
 
-        Route::post('/reservasi/{reservation}/approve', [PetugasController::class, 'approveReservation'])
+        Route::post('/reservasi/{reservation}/approve', [PetugasReservasiController::class, 'approveReservation'])
             ->name('petugas.reservasi.approve');
 
-        Route::post('/reservasi/{reservation}/reject', [PetugasController::class, 'rejectReservation'])
+        Route::post('/reservasi/{reservation}/reject', [PetugasReservasiController::class, 'rejectReservation'])
             ->name('petugas.reservasi.reject');
 
-        Route::post('/reservasi/{reservation}/cancel', [PetugasController::class, 'cancelReservation'])
+        Route::post('/reservasi/{reservation}/cancel', [PetugasReservasiController::class, 'cancelReservation'])
             ->name('petugas.reservasi.cancel');
 
-        Route::get('/petugas/riwayat', [PetugasController::class, 'history'])
+        Route::get('/petugas/riwayat', [PetugasReservasiController::class, 'history'])
             ->name('petugas.riwayat');
-
-        Route::get('/petugas/antrian', [PetugasController::class, 'queue'])
-            ->name('petugas.antrian');
-
+            
+        Route::get('/petugas/antrian/reservasi', [ PetugasReservasiController::class, 'antrianReservasi' ])
+            ->name('petugas.antrian.reservasi');
+        
+        Route::get('/petugas/antrian/laporan', [ PetugasLaporanController::class, 'antrianLaporan'])
+            ->name('petugas.antrian.laporan');
+        
+        Route::patch('/petugas/laporan/{report}/status',[PetugasLaporanController::class, 'updateReportStatus'])
+            ->name('petugas.laporan.update-status');
     });
-
-
-Route::get('/antrian-reservasi', function () {
-    return view('antrian-reservasi');
-});
-
-Route::get('/antrian-laporan', function () {
-    return view('antrian-laporan');
-});

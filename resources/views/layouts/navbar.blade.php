@@ -33,8 +33,8 @@
                 Fasilitas
             </a>
 
-            <a href="{{ route('petugas.antrian') }}"
-            class="nav-link {{ request()->routeIs('petugas.antrian') ? 'active' : '' }}">
+            <a href="{{ route('petugas.antrian.reservasi') }}"
+            class="nav-link {{ request()->routeIs('petugas.antrian.reservasi', 'petugas.antrian.laporan') ? 'active' : '' }}">
                 Antrean
             </a>
 
