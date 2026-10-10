@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Reservation extends Model
 {
@@ -36,5 +37,14 @@ class Reservation extends Model
     public function facility()
     {
         return $this->belongsTo(Facility::class, 'facility_id', 'facility_id');
+    }
+
+    public function logs(): HasMany
+    {
+        return $this->hasMany(
+            ReservationLog::class,
+            'reservation_id',
+            'reservation_id'
+        );
     }
 }
