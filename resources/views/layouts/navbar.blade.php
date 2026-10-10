@@ -8,9 +8,13 @@
 
 <div class="navbar-container">
 
-    <a href="{{ auth()->check() && auth()->user()->role === 'petugas'
-        ? route('petugas.dashboard')
-        : route('fasilitas') }}"
+    <a href="{{ auth()->check()
+         ? (auth()->user()->role === 'admin'
+             ? route('admin.users')
+             : (auth()->user()->role === 'petugas'
+                 ? route('petugas.dashboard')
+                 : route('fasilitas')))
+         : route('fasilitas') }}"
        class="brand">
         <div class="brand-logo">
             FK
@@ -19,7 +23,37 @@
 
     <nav class="navigation">
 
-        @if (auth()->check() && auth()->user()->role === 'petugas')
+        @if (auth()->check() && auth()->user()->role === 'admin')
+
+            <a href="{{ route('admin.users') }}"
+               class="nav-link {{ request()->routeIs('admin.users') ? 'active' : '' }}">
+                Pengguna
+            </a>
+
+            <a href="{{ route('admin.facilities') }}"
+               class="nav-link {{ request()->routeIs('admin.facilities') ? 'active' : '' }}">
+                Fasilitas
+            </a>
+
+            <a href="{{ route('admin.reports') }}"
+               class="nav-link {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
+                Pelaporan
+            </a>
+
+            <div class="profile-menu">
+                <button type="button" class="profile-button" id="profileButton">
+                    👤 {{ Auth::user()->name }}
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+
+        @elseif (auth()->check() && auth()->user()->role === 'petugas')
 
         {{-- NAVBAR PETUGAS --}}
 

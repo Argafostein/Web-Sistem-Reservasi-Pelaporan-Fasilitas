@@ -28,6 +28,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => $validated['password'],
             'role' => 'user',
+            'account_status' => 'pending',
         ]);
 
         // Setelah berhasil register
@@ -52,6 +53,19 @@ class AuthController extends Controller
             $credentials,
             $request->boolean('remember')
         )) {
+            $accountStatus = Auth::user()->account_status;
+
+            if ($accountStatus !== 'active') {
+                Auth::logout();
+
+                return back()
+                    ->withErrors([
+                        'email' => $accountStatus === 'rejected'
+                            ? 'Akun Anda ditolak oleh admin.'
+                            : 'Akun Anda masih menunggu verifikasi admin.',
+                    ])
+                    ->onlyInput('email');
+            }
 
             $request->session()->regenerate();
 

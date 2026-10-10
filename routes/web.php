@@ -9,6 +9,7 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\PetugasLaporanController;
 use App\Http\Controllers\PetugasReservasiController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [FacilityController::class, 'index'])
     ->name('fasilitas');
@@ -40,6 +41,24 @@ Route::post('/register', [AuthController::class, 'register'])
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/pengguna', [AdminController::class, 'users'])->name('users');
+        Route::post('/pengguna', [AdminController::class, 'storeUser'])->name('users.store');
+        Route::patch('/pengguna/{user}/verifikasi', [AdminController::class, 'verifyUser'])->name('users.verify');
+        Route::patch('/pengguna/{user}/tolak', [AdminController::class, 'rejectUser'])->name('users.reject');
+
+        Route::get('/fasilitas', [AdminController::class, 'facilities'])->name('facilities');
+        Route::post('/fasilitas', [AdminController::class, 'storeFacility'])->name('facilities.store');
+        Route::patch('/fasilitas/{facility}', [AdminController::class, 'updateFacility'])->name('facilities.update');
+        Route::patch('/fasilitas/{facility}/nonaktifkan', [AdminController::class, 'deactivateFacility'])->name('facilities.deactivate');
+
+        Route::get('/laporan', [AdminController::class, 'reports'])->name('reports');
+        Route::get('/laporan/export', [AdminController::class, 'exportReports'])->name('reports.export');
+    });
 
 Route::middleware('auth')->group(function () {
 

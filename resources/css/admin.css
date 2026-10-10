@@ -1,0 +1,489 @@
+.admin-page {
+    min-height: calc(100vh - 90px);
+    padding: 48px 24px 72px;
+}
+
+.admin-container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.admin-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.admin-label {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.admin-header h1 {
+    margin: 6px 0;
+    color: #172033;
+    font-size: clamp(28px, 4vw, 40px);
+}
+
+.admin-header p {
+    color: #667085;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 340px) 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.admin-card {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e8ecf2;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(23, 32, 51, .05);
+}
+
+.admin-card h2 {
+    margin-bottom: 18px;
+    font-size: 18px;
+}
+
+.admin-form {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-form label {
+    display: grid;
+    gap: 6px;
+    color: #344054;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.admin-form textarea {
+    min-height: 86px;
+    resize: vertical;
+}
+
+.admin-button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 700;
+}
+
+.admin-button.secondary {
+    background: #eef4ff;
+    color: #1d4ed8;
+}
+
+.admin-button.danger {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.facilities-page {
+    background:
+        radial-gradient(circle at 85% 0%, rgba(219, 234, 254, .7), transparent 28rem),
+        #f7f9fc;
+}
+
+.facilities-header {
+    align-items: center;
+}
+
+.facilities-header .admin-button {
+    white-space: nowrap;
+}
+
+.facility-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.facility-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, .86);
+    border: 1px solid #e8ecf2;
+    border-radius: 14px;
+    box-shadow: 0 5px 16px rgba(23, 32, 51, .04);
+}
+
+.facility-stat-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.facility-stat-icon.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.facility-stat-icon.green {
+    background: #ecfdf3;
+    color: #039855;
+}
+
+.facility-stat-icon.orange {
+    background: #fffaeb;
+    color: #dc6803;
+}
+
+.facility-stat-card strong,
+.facility-stat-card span {
+    display: block;
+}
+
+.facility-stat-card strong {
+    color: #172033;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.facility-stat-card div span {
+    color: #667085;
+    font-size: 12px;
+}
+
+.facilities-layout {
+    grid-template-columns: minmax(260px, 310px) 1fr;
+    align-items: start;
+}
+
+.facility-create-card {
+    position: sticky;
+    top: 24px;
+}
+
+.card-heading,
+.section-heading,
+.facility-card-topline,
+.facility-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.card-heading h2,
+.section-heading h2 {
+    margin: 3px 0 0;
+}
+
+.card-eyebrow {
+    color: #98a2b3;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.card-heading-icon {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border-radius: 9px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card-description {
+    margin: -8px 0 22px;
+    color: #667085;
+    font-size: 13px;
+}
+
+.input-with-suffix {
+    position: relative;
+}
+
+.input-with-suffix input {
+    padding-right: 58px;
+}
+
+.input-with-suffix span {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    color: #98a2b3;
+    font-size: 12px;
+    transform: translateY(-50%);
+}
+
+.facility-submit {
+    width: 100%;
+    margin-top: 4px;
+}
+
+.facility-list-section {
+    min-width: 0;
+}
+
+.section-heading {
+    margin: 0 4px 16px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+}
+
+.facility-count {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #eef4ff;
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.facility-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.facility-admin-card {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e8ecf2;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(23, 32, 51, .04);
+}
+
+.facility-card-icon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 11px;
+    background: #f2f4f7;
+    color: #475467;
+    font-size: 20px;
+}
+
+.facility-admin-card h3 {
+    margin: 17px 0 4px;
+    color: #172033;
+    font-size: 17px;
+}
+
+.facility-location {
+    color: #475467;
+    font-size: 13px;
+}
+
+.facility-description {
+    min-height: 42px;
+    margin: 14px 0;
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.facility-meta {
+    padding: 12px 0;
+    border-top: 1px solid #f0f2f5;
+    border-bottom: 1px solid #f0f2f5;
+    color: #667085;
+    font-size: 11px;
+}
+
+.facility-edit {
+    margin-top: 14px;
+}
+
+.facility-edit summary {
+    color: #2563eb;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    list-style-position: inside;
+}
+
+.facility-edit[open] summary {
+    margin-bottom: 14px;
+}
+
+.facility-edit .admin-form {
+    padding: 14px;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.facility-deactivate {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px;
+    border: 1px solid #fecdd3;
+    border-radius: 8px;
+    background: #fff;
+    color: #be123c;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.facility-deactivate:hover {
+    background: #fff1f2;
+}
+
+.empty-state {
+    display: grid;
+    min-height: 220px;
+    place-content: center;
+    gap: 6px;
+    padding: 24px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .7);
+    color: #667085;
+    text-align: center;
+}
+
+.empty-state strong {
+    color: #344054;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 13px 10px;
+    border-bottom: 1px solid #eaecf0;
+    text-align: left;
+    vertical-align: top;
+}
+
+.admin-table th {
+    color: #667085;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.admin-actions form {
+    margin: 0;
+}
+
+.admin-alert {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.admin-alert.error {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.admin-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #f2f4f7;
+    color: #475467;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.admin-status.active,
+.admin-status.available {
+    background: #ecfdf3;
+    color: #027a48;
+}
+
+.admin-status.pending {
+    background: #fffaeb;
+    color: #b54708;
+}
+
+.admin-status.rejected,
+.admin-status.unavailable {
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.admin-pagination {
+    margin-top: 20px;
+}
+
+.admin-pagination nav {
+    display: flex;
+    justify-content: center;
+}
+
+.report-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 820px) {
+    .facility-stat-grid,
+    .facility-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facilities-header .admin-button {
+        display: inline-block;
+        margin-top: 18px;
+    }
+
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-header {
+        display: block;
+    }
+
+    .facility-create-card {
+        position: static;
+    }
+}
