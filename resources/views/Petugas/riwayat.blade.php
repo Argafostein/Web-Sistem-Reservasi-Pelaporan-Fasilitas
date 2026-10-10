@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @push('styles')
-    @vite('resources/css/riwayat-reservasi.css')
+    @vite('resources/css/petugas/riwayat-reservasi.css')
     @vite('resources/css/riwayat.css')
 @endpush
 
 @push('scripts')
-    @vite('resources/js/riwayat-reservasi.js')
+    @vite('resources/js/petugas/riwayat-reservasi.js')
 @endpush
 
 @section('content')
@@ -162,14 +162,15 @@
 
                                 @if ($latestLog)
                                     <div class="reservation-log-info">
-
                                         <h4>
                                             @if ($latestLog->action === 'approved')
                                                 Informasi Persetujuan
                                             @elseif ($latestLog->action === 'rejected')
                                                 Alasan Penolakan
+                                            @elseif ($latestLog->action === 'cancelled')
+                                                Alasan Pembatalan
                                             @else
-                                                Informasi Pembatalan
+                                                Informasi Tindakan
                                             @endif
                                         </h4>
 
@@ -181,8 +182,7 @@
 
                                         @if ($latestLog->user)
                                             <small>
-                                                Petugas:
-                                                {{ $latestLog->user->name }}
+                                                Dilakukan oleh: {{ $latestLog->user->name }}
                                             </small>
                                         @endif
 
@@ -190,7 +190,20 @@
                                             Waktu tindakan:
                                             {{ $latestLog->created_at->format('d-m-Y H:i') }}
                                         </small>
+                                    </div>
+                                @endif
 
+                                {{-- Tombol pembatalan darurat --}}
+                                @if ($reservation->status === 'approved')
+                                    <div class="reservation-emergency-action">
+                                        <button
+                                            type="button"
+                                            class="emergency-cancel-button"
+                                            data-cancel-url="{{ route('petugas.reservasi.cancel', $reservation->reservation_id) }}"
+                                            data-facility="{{ $reservation->facility->name ?? 'Fasilitas' }}"
+                                        >
+                                            Batalkan Reservasi
+                                        </button>
                                     </div>
                                 @endif
 
@@ -199,6 +212,70 @@
                         </div>
 
                     @endforeach
+
+                    {{-- Modal pembatalan darurat --}}
+                    <div id="emergencyCancelModal" class="emergency-modal">
+                        <div class="emergency-modal-content">
+
+                            <div class="emergency-modal-header">
+                                <div>
+                                    <span class="emergency-modal-label">TINDAKAN DARURAT</span>
+                                    <h3>Batalkan Reservasi</h3>
+                                    <p id="emergencyFacilityName">
+                                        Reservasi yang dipilih
+                                    </p>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    class="emergency-modal-close"
+                                    aria-label="Tutup"
+                                >
+                                    &times;
+                                </button>
+                            </div>
+
+                            <form id="emergencyCancelForm" method="POST">
+                                @csrf
+
+                                <div class="emergency-form-group">
+                                    <label for="emergencyReason">
+                                        Alasan Pembatalan <span>*</span>
+                                    </label>
+
+                                    <textarea
+                                        id="emergencyReason"
+                                        name="reason"
+                                        rows="4"
+                                        maxlength="500"
+                                        placeholder="Jelaskan alasan darurat pembatalan reservasi..."
+                                        required
+                                    ></textarea>
+
+                                    <small>
+                                        Wajib diisi, maksimal 500 karakter.
+                                    </small>
+                                </div>
+
+                                <div class="emergency-modal-actions">
+                                    <button
+                                        type="button"
+                                        class="emergency-cancel-close"
+                                    >
+                                        Kembali
+                                    </button>
+
+                                    <button
+                                        type="submit"
+                                        class="emergency-cancel-submit"
+                                    >
+                                        Konfirmasi Pembatalan
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
 
                 </div>
 

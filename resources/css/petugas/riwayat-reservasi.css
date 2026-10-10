@@ -1,0 +1,772 @@
+/* =========================================================
+   HALAMAN RIWAYAT PETUGAS
+========================================================= */
+
+.history-section {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding: 40px 24px 64px;
+    background: #f8fafc;
+    box-sizing: border-box;
+}
+
+.history-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+   Style judul dan tab tetap menggunakan riwayat.css
+========================================================= */
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* =========================================================
+   TAB NAVIGASI
+   Style utama tetap menggunakan riwayat.css
+========================================================= */
+
+.history-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    padding: 40px 24px;
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 16px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    background: #eff6ff;
+    font-size: 30px;
+}
+
+.empty-history h2 {
+    margin: 0 0 10px;
+    color: #172033;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.empty-history p {
+    max-width: 440px;
+    margin: 0;
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   DAFTAR RESERVASI
+========================================================= */
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+.reservation-history-card {
+    width: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(16, 24, 40, 0.035);
+    box-sizing: border-box;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.reservation-history-card:hover {
+    border-color: #d0d5dd;
+    box-shadow: 0 5px 16px rgba(16, 24, 40, 0.06);
+}
+
+/* =========================================================
+   HEADER KARTU
+========================================================= */
+
+.reservation-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 100px;
+    padding: 22px 24px;
+    cursor: pointer;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+}
+
+.reservation-card-header:hover {
+    background: #f9fafb;
+}
+
+.facility-name {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
+}
+
+.facility-name > div {
+    min-width: 0;
+}
+
+.facility-name h2 {
+    margin: 0 0 8px;
+    color: #172033;
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.facility-name span {
+    display: block;
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   STATUS RESERVASI
+========================================================= */
+
+.reservation-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.reservation-status .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 29px;
+    padding: 5px 11px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.reservation-status .status.approved {
+    color: #067647;
+    background: #ecfdf3;
+    border-color: #abefc6;
+}
+
+.reservation-status .status.rejected {
+    color: #b42318;
+    background: #fef3f2;
+    border-color: #fecdca;
+}
+
+.reservation-status .status.cancelled {
+    color: #b54708;
+    background: #fffaeb;
+    border-color: #fedf89;
+}
+
+.reservation-status .status.completed {
+    color: #175cd3;
+    background: #eff8ff;
+    border-color: #b2ddff;
+}
+
+/* =========================================================
+   DETAIL RESERVASI
+   Default terbuka. Jika JS menggunakan class .show,
+   bagian ini akan mengikuti state tersebut.
+========================================================= */
+
+.reservation-details {
+    display: none;
+    padding: 24px;
+    border-top: 1px solid #eaecf0;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.reservation-history-card.active .reservation-details,
+.reservation-history-card.expanded .reservation-details,
+.reservation-details.show {
+    display: block;
+}
+
+/* =========================================================
+   INFORMASI DETAIL
+========================================================= */
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f2f4f7;
+}
+
+.detail-item:first-child {
+    padding-top: 0;
+}
+
+.detail-item:last-of-type {
+    border-bottom: none;
+}
+
+.detail-label {
+    flex: 0 0 130px;
+    color: #667085;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.detail-value {
+    flex: 1;
+    min-width: 0;
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.detail-purpose {
+    align-items: flex-start;
+}
+
+/* =========================================================
+   INFORMASI TINDAKAN / LOG
+========================================================= */
+
+.reservation-log-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 18px 20px;
+    border: 1px solid #dbeafe;
+    border-left: 4px solid #2563eb;
+    border-radius: 10px;
+    background: #f8fbff;
+    box-sizing: border-box;
+}
+
+.reservation-log-info h4 {
+    margin: 0;
+    color: #1d4ed8;
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+.reservation-log-info p {
+    margin: 0;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.reservation-log-info small {
+    display: block;
+    color: #667085;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   TOMBOL PEMBATALAN DARURAT
+========================================================= */
+
+.reservation-emergency-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #eaecf0;
+}
+
+.emergency-cancel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 17px;
+    border: 1px solid #f04438;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #d92d20;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.emergency-cancel-button:hover {
+    background: #d92d20;
+    border-color: #d92d20;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(217, 45, 32, 0.16);
+}
+
+.emergency-cancel-button:focus-visible {
+    outline: 3px solid rgba(240, 68, 56, 0.2);
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   MODAL PEMBATALAN DARURAT
+========================================================= */
+
+.emergency-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(16, 24, 40, 0.55);
+    backdrop-filter: blur(3px);
+    box-sizing: border-box;
+}
+
+.emergency-modal.show {
+    display: flex;
+}
+
+.emergency-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 28px;
+    border: 1px solid #eaecf0;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 24px 60px rgba(16, 24, 40, 0.22);
+    box-sizing: border-box;
+    animation: emergencyModalEnter 0.2s ease-out;
+}
+
+@keyframes emergencyModalEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header modal */
+
+.emergency-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.emergency-modal-header > div {
+    min-width: 0;
+}
+
+.emergency-modal-label {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: #d92d20;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    line-height: 1.5;
+}
+
+.emergency-modal-header h3 {
+    margin: 0 0 8px;
+    color: #172033;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.emergency-modal-header p {
+    margin: 0;
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.emergency-modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: #f2f4f7;
+    color: #475467;
+    font-family: inherit;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.emergency-modal-close:hover {
+    background: #e4e7ec;
+    color: #101828;
+}
+
+/* Form modal */
+
+.emergency-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 25px;
+}
+
+.emergency-form-group label {
+    color: #344054;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.emergency-form-group label span {
+    color: #d92d20;
+}
+
+.emergency-form-group textarea {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    outline: none;
+    background: #ffffff;
+    color: #344054;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    box-sizing: border-box;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.emergency-form-group textarea::placeholder {
+    color: #98a2b3;
+}
+
+.emergency-form-group textarea:hover {
+    border-color: #98a2b3;
+}
+
+.emergency-form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.emergency-form-group textarea:invalid:focus {
+    border-color: #f04438;
+}
+
+.emergency-form-group small {
+    color: #667085;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Tombol modal */
+
+.emergency-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #eaecf0;
+}
+
+.emergency-cancel-close,
+.emergency-cancel-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.emergency-cancel-close {
+    border-color: #d0d5dd;
+    background: #ffffff;
+    color: #344054;
+}
+
+.emergency-cancel-close:hover {
+    background: #f9fafb;
+    border-color: #98a2b3;
+}
+
+.emergency-cancel-submit {
+    background: #d92d20;
+    border-color: #d92d20;
+    color: #ffffff;
+}
+
+.emergency-cancel-submit:hover {
+    background: #b42318;
+    border-color: #b42318;
+}
+
+.emergency-cancel-close:focus-visible,
+.emergency-cancel-submit:focus-visible,
+.emergency-modal-close:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.2);
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+    .history-section {
+        padding: 30px 18px 48px;
+    }
+
+    .history-header {
+        margin-bottom: 25px;
+    }
+
+    .reservation-card-header {
+        min-height: 88px;
+        padding: 18px;
+    }
+
+    .reservation-details {
+        padding: 20px 18px;
+    }
+
+    .facility-name h2 {
+        font-size: 16px;
+    }
+
+    .detail-item {
+        gap: 16px;
+    }
+
+    .detail-label {
+        flex-basis: 105px;
+    }
+
+    .emergency-modal-content {
+        padding: 24px;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+    .history-section {
+        padding: 24px 14px 40px;
+    }
+
+    .history-header {
+        margin-bottom: 24px;
+    }
+
+    .history-tabs {
+        gap: 6px;
+        margin-bottom: 22px;
+        padding-bottom: 10px;
+    }
+
+    .history-tab {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+
+    .reservation-list {
+        gap: 14px;
+    }
+
+    .reservation-history-card {
+        border-radius: 12px;
+    }
+
+    .reservation-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding: 17px;
+    }
+
+    .facility-name h2 {
+        font-size: 15px;
+    }
+
+    .facility-name span {
+        font-size: 12px;
+    }
+
+    .reservation-status {
+        justify-content: flex-start;
+    }
+
+    .reservation-details {
+        padding: 18px 16px;
+    }
+
+    .detail-item {
+        flex-direction: column;
+        gap: 5px;
+        padding: 12px 0;
+    }
+
+    .detail-label {
+        flex: initial;
+        font-size: 12px;
+    }
+
+    .detail-value {
+        width: 100%;
+        font-size: 13px;
+        text-align: left;
+    }
+
+    .reservation-log-info {
+        padding: 15px;
+    }
+
+    .reservation-emergency-action {
+        justify-content: stretch;
+    }
+
+    .emergency-cancel-button {
+        width: 100%;
+    }
+
+    .emergency-modal {
+        align-items: center;
+        padding: 14px;
+    }
+
+    .emergency-modal-content {
+        max-height: calc(100vh - 28px);
+        padding: 21px 18px;
+        border-radius: 13px;
+    }
+
+    .emergency-modal-header h3 {
+        font-size: 20px;
+    }
+
+    .emergency-modal-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .emergency-cancel-close,
+    .emergency-cancel-submit {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   AKSESIBILITAS
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .reservation-history-card,
+    .reservation-card-header,
+    .emergency-cancel-button,
+    .emergency-modal-close,
+    .emergency-cancel-close,
+    .emergency-cancel-submit {
+        transition: none;
+    }
+
+    .emergency-modal-content {
+        animation: none;
+    }
+}

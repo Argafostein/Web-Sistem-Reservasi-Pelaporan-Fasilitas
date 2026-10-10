@@ -7,6 +7,7 @@ use App\Models\ReservationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class PetugasController extends Controller
 {
@@ -102,38 +103,42 @@ class PetugasController extends Controller
         );
     }
 
-    public function cancelReservation(
-        Request $request,
-        Reservation $reservation
-    ) {
-        if ($reservation->status !== 'approved') {
-            return back()->with(
-                'error',
-                'Hanya reservasi yang sudah disetujui yang dapat dibatalkan.'
-            );
-        }
-
+    public function cancelReservation(Request $request, $reservation)
+    {
         $validated = $request->validate([
-            'reason' => 'required|string|max:500',
+            'reason' => ['required', 'string', 'max:500'],
+        ], [
+            'reason.required' => 'Alasan pembatalan wajib diisi.',
+            'reason.max' => 'Alasan pembatalan maksimal 500 karakter.',
         ]);
 
         DB::transaction(function () use ($reservation, $validated) {
+            $reservation = Reservation::where(
+                'reservation_id',
+                $reservation
+            )->lockForUpdate()->firstOrFail();
+
+            if ($reservation->status !== 'approved') {
+                throw ValidationException::withMessages([
+                    'reservation' => 'Hanya reservasi yang sudah disetujui yang dapat dibatalkan oleh petugas.',
+                ]);
+            }
+
             $reservation->update([
                 'status' => 'cancelled',
             ]);
 
             ReservationLog::create([
                 'reservation_id' => $reservation->reservation_id,
-                'user_id' => Auth::id(),
+                'user_id' => Auth::user()->user_id,
                 'action' => 'cancelled',
-                'reason' => $validated['reason'],
+                'reason' => trim($validated['reason']),
             ]);
         });
 
-        return back()->with(
-            'success',
-            'Reservasi berhasil dibatalkan.'
-        );
+        return redirect()
+            ->route('petugas.riwayat', ['type' => 'reservasi'])
+            ->with('success', 'Reservasi berhasil dibatalkan. Alasan darurat telah dicatat.');
     }
 
     public function history()
@@ -149,25 +154,13 @@ class PetugasController extends Controller
                 'cancelled',
                 'completed',
             ])
-            ->latest('created_at')
-            ->get()
-            ->filter(function ($reservation) {
-                $latestLog = $reservation->logs->first();
-
-                return $latestLog
-                    && in_array($latestLog->action, [
-                        'approved',
-                        'rejected',
-                        'cancelled',
-                    ])
-                    && $latestLog->user
-                    && $latestLog->user->role === 'petugas';
+            ->whereHas('logs.user', function ($query) {
+                $query->where('role', 'petugas');
             })
-            ->values();
+            ->orderByDesc('created_at')
+            ->get();
 
-        return view('petugas.riwayat', compact(
-            'reservations'
-        ));
+        return view('petugas.riwayat', compact('reservations'));
     }
 
     public function queue()
