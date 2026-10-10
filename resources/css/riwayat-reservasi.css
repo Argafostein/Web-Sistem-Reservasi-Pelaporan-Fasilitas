@@ -340,3 +340,31 @@
     color: #000000;
     line-height: 1.6;
 }
+
+.reservation-log-info {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.reservation-log-info h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.reservation-log-info p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.reservation-log-info small {
+    display: block;
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 12px;
+}

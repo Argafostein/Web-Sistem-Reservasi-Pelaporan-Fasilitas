@@ -199,23 +199,37 @@
 
                                 @endif
 
-                                @if (
-                                    in_array($reservation->status, ['rejected', 'cancelled'])
-                                    && !empty($reservation->reason)
-                                )
+                                @php
+                                    $latestLog = $reservation->logs->first();
+                                @endphp
 
-                                    <div class="detail-item detail-reason">
+                                @if ($latestLog && in_array($latestLog->action, ['rejected', 'cancelled']))
+                                    <div class="reservation-log-info">
+                                        <h4>
+                                            @if ($latestLog->action === 'rejected')
+                                                Alasan Penolakan
+                                            @else
+                                                Informasi Pembatalan
+                                            @endif
+                                        </h4>
 
-                                        <span class="detail-label">
-                                            Alasan ditolak / dibatalkan:
-                                        </span>
+                                        @if ($latestLog->reason)
+                                            <p>{{ $latestLog->reason }}</p>
+                                        @elseif ($latestLog->action === 'cancelled')
+                                            <p>Reservasi dibatalkan oleh pengguna.</p>
+                                        @endif
 
-                                        <span class="detail-value reason-text">
-                                            {{ $reservation->reason }}
-                                        </span>
+                                        @if ($latestLog->user)
+                                            <small>
+                                                Diproses oleh: {{ $latestLog->user->name }}
+                                            </small>
+                                        @endif
 
+                                        <small>
+                                            Waktu tindakan:
+                                            {{ $latestLog->created_at->format('d-m-Y H:i') }}
+                                        </small>
                                     </div>
-
                                 @endif
 
                             </div>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Facility;
 use App\Models\Reservation;
+use App\Models\ReservationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -79,7 +81,7 @@ class ReservationController extends Controller
     public function history()
     {
         $reservations = Reservation::where('user_id', Auth::id())
-            ->with('facility')
+            ->with(['facility','logs.user'])
             ->latest()
             ->get();
 
@@ -88,30 +90,28 @@ class ReservationController extends Controller
 
     public function cancel($id)
     {
-        // Cari reservasi
-        $reservation = Reservation::findOrFail($id);
+        $reservation = Reservation::where(
+            'reservation_id',
+            $id
+        )
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
 
-        // Pastikan reservasi memang milik user yang sedang login
-        if ($reservation->user_id !== Auth::id()) {
-            abort(403);
-        }
-
-        // Deadline = 1 jam setelah reservasi dibuat
+        // Periksa batas waktu pembatalan: 1 jam sejak dibuat.
         $deadline = $reservation->created_at->copy()->addHour();
 
-        // Cek apakah sudah melewati deadline
         if (now()->greaterThan($deadline)) {
             return back()->with(
                 'error',
-                'Reservasi tidak dapat dibatalkan karena sudah melewati batas waktu 1 jam.'
+                'Reservasi hanya dapat dibatalkan dalam 1 jam setelah pengajuan.'
             );
         }
 
-        // Reservasi yang sudah selesai/ditolak/dibatalkan tidak bisa dibatalkan lagi
+        // Pastikan reservasi belum berada pada status akhir.
         if (in_array($reservation->status, [
             'completed',
             'rejected',
-            'cancelled'
+            'cancelled',
         ])) {
             return back()->with(
                 'error',
@@ -119,9 +119,18 @@ class ReservationController extends Controller
             );
         }
 
-        // Ubah status menjadi cancelled
-        $reservation->status = 'cancelled';
-        $reservation->save();
+        DB::transaction(function () use ($reservation) {
+            $reservation->update([
+                'status' => 'cancelled',
+            ]);
+
+            ReservationLog::create([
+                'reservation_id' => $reservation->reservation_id,
+                'user_id' => Auth::id(),
+                'action' => 'cancelled',
+                'reason' => null,
+            ]);
+        });
 
         return back()->with(
             'success',

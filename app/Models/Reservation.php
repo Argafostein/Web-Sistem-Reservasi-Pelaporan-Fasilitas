@@ -45,6 +45,6 @@ class Reservation extends Model
             ReservationLog::class,
             'reservation_id',
             'reservation_id'
-        );
+        )->orderBy('created_at', 'desc');;
     }
 }
