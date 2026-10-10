@@ -28,8 +28,8 @@
                 Dashboard
             </a>
 
-            <a href="{{ route('fasilitas') }}"
-            class="nav-link {{ request()->routeIs('fasilitas') ? 'active' : '' }}">
+            <a href="{{ route('petugas.fasilitas') }}"
+            class="nav-link {{ request()->routeIs('petugas.fasilitas') ? 'active' : '' }}">
                 Fasilitas
             </a>
 
