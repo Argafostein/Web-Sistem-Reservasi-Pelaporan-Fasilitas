@@ -107,4 +107,19 @@ Route::middleware(['auth', 'petugas'])
 
         Route::patch( '/petugas/laporan/{report}/selesai', [PetugasLaporanController::class, 'markResolved'] )
             ->name('petugas.laporan.selesai');
+
+        // Pengelolaan fasilitas
+        Route::get('/fasilitas', [PetugasController::class, 'fasilitas'])
+            ->name('petugas.fasilitas');
+
+        Route::patch( '/fasilitas/{facility}/mulai-perbaikan', [PetugasController::class, 'mulaiPerbaikan'] )
+            ->name('petugas.fasilitas.mulai-perbaikan'); 
+
+        Route::patch( '/fasilitas/{facility}/selesaikan-perbaikan', [PetugasController::class, 'selesaikanPerbaikan'])
+            ->name('petugas.fasilitas.selesaikan-perbaikan');
+
+        Route::post(
+        '/fasilitas/{facility}/ubah-status',
+        [PetugasController::class, 'ubahStatusFasilitas']
+    )->name('petugas.fasilitas.ubah-status');
     });
