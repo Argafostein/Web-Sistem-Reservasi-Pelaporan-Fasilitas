@@ -145,7 +145,7 @@ class PetugasReservasiController extends Controller
         });
 
         return redirect()
-            ->route('petugas.riwayat', ['type' => 'reservasi'])
+            ->route('petugas.riwayat.reservasi')
             ->with(
                 'success',
                 'Reservasi berhasil dibatalkan. Alasan darurat telah dicatat.'
@@ -171,6 +171,6 @@ class PetugasReservasiController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return view('petugas.riwayat', compact('reservations'));
+        return view('petugas.riwayat-reservasi', compact('reservations'));
     }
 }

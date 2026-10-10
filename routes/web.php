@@ -79,6 +79,14 @@ Route::middleware(['auth', 'petugas'])
         Route::get('/dashboard', [PetugasController::class, 'dashboard'])
             ->name('petugas.dashboard');
 
+        // Riwayat reservasi
+        Route::get('/petugas/riwayat/reservasi', [ PetugasReservasiController::class, 'history' ])
+            ->name('petugas.riwayat.reservasi');
+
+        // Riwayat laporan
+        Route::get('/petugas/riwayat/laporan', [ PetugasLaporanController::class, 'history' ])
+            ->name('petugas.riwayat.laporan');
+
         Route::post('/reservasi/{reservation}/approve', [PetugasReservasiController::class, 'approveReservation'])
             ->name('petugas.reservasi.approve');
 
@@ -87,9 +95,6 @@ Route::middleware(['auth', 'petugas'])
 
         Route::post('/reservasi/{reservation}/cancel', [PetugasReservasiController::class, 'cancelReservation'])
             ->name('petugas.reservasi.cancel');
-
-        Route::get('/petugas/riwayat', [PetugasReservasiController::class, 'history'])
-            ->name('petugas.riwayat');
             
         Route::get('/petugas/antrian/reservasi', [ PetugasReservasiController::class, 'antrianReservasi' ])
             ->name('petugas.antrian.reservasi');

@@ -38,8 +38,8 @@
                 Antrean
             </a>
 
-            <a href="{{ route('petugas.riwayat') }}"
-            class="nav-link {{ request()->routeIs('petugas.riwayat') ? 'active' : '' }}">
+            <a href="{{ route('petugas.riwayat.reservasi') }}"
+            class="nav-link {{ request()->routeIs('petugas.riwayat.reservasi', 'petugas.riwayat.laporan') ? 'active' : '' }}">
                 Riwayat
             </a>
 

@@ -135,4 +135,25 @@ class PetugasLaporanController extends Controller
             'Status laporan berhasil diperbarui.'
         );
     }
+    
+    public function history()
+    {
+        $reports = Report::with([
+            'user',
+            'facility',
+            'logs' => function ($query) {
+                $query->with('user')
+                    ->orderByDesc('created_at');
+            },
+        ])
+            ->whereIn('status', ['resolved', 'rejected'])
+            ->orderByDesc('updated_at')
+            ->get();
+
+        return view(
+            'petugas.riwayat-laporan',
+            compact('reports')
+        );
+    }
+
 }
