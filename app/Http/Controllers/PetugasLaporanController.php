@@ -18,14 +18,7 @@ class PetugasLaporanController extends Controller
             'facility',
             'logs.user',
         ])
-            ->whereIn('status', ['pending', 'processing'])
-            ->orderByRaw("
-                CASE
-                    WHEN status = 'pending' THEN 0
-                    WHEN status = 'processing' THEN 1
-                    ELSE 2
-                END
-            ")
+            ->whereIn('status', ['pending'])
             ->orderBy('created_at', 'asc')
             ->get();
 
@@ -146,7 +139,7 @@ class PetugasLaporanController extends Controller
                     ->orderByDesc('created_at');
             },
         ])
-            ->whereIn('status', ['resolved', 'rejected'])
+            ->whereIn('status', ['resolved', 'rejected', 'processing'])
             ->orderByDesc('updated_at')
             ->get();
 
