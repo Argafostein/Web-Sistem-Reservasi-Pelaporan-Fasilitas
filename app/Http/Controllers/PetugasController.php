@@ -36,7 +36,7 @@ class PetugasController extends Controller
                 $reservation->facility_id
             )
             ->where('reservation_date', $reservation->reservation_date)
-            ->whereIn('status', ['pending', 'approved'])
+            ->where('status', 'approved')
             ->where('reservation_id', '!=', $reservation->reservation_id)
             ->where('start_time', '<', $reservation->end_time)
             ->where('end_time', '>', $reservation->start_time)
