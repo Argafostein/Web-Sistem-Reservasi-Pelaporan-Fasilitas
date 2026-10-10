@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\ReservationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PetugasController extends Controller
 {
@@ -22,26 +24,20 @@ class PetugasController extends Controller
 
     public function approveReservation(Reservation $reservation)
     {
-        // Pastikan reservasi masih pending
         if ($reservation->status !== 'pending') {
-            return back()->with('error', 'Reservasi ini sudah diproses.');
+            return back()->with(
+                'error',
+                'Reservasi ini sudah diproses.'
+            );
         }
 
-        // Cek apakah ada reservasi lain yang bentrok
         $overlappingReservation = Reservation::where(
                 'facility_id',
                 $reservation->facility_id
             )
-            ->where(
-                'reservation_date',
-                $reservation->reservation_date
-            )
+            ->where('reservation_date', $reservation->reservation_date)
             ->whereIn('status', ['pending', 'approved'])
-            ->where(
-                'reservation_id',
-                '!=',
-                $reservation->reservation_id
-            )
+            ->where('reservation_id', '!=', $reservation->reservation_id)
             ->where('start_time', '<', $reservation->end_time)
             ->where('end_time', '>', $reservation->start_time)
             ->first();
@@ -53,9 +49,18 @@ class PetugasController extends Controller
             );
         }
 
-        $reservation->update([
-            'status' => 'approved',
-        ]);
+        DB::transaction(function () use ($reservation) {
+            $reservation->update([
+                'status' => 'approved',
+            ]);
+
+            ReservationLog::create([
+                'reservation_id' => $reservation->reservation_id,
+                'user_id' => Auth::id(),
+                'action' => 'approved',
+                'reason' => null,
+            ]);
+        });
 
         return back()->with(
             'success',
@@ -63,8 +68,10 @@ class PetugasController extends Controller
         );
     }
 
-    public function rejectReservation(Request $request, Reservation $reservation)
-    {
+    public function rejectReservation(
+        Request $request,
+        Reservation $reservation
+    ) {
         if ($reservation->status !== 'pending') {
             return back()->with(
                 'error',
@@ -72,14 +79,22 @@ class PetugasController extends Controller
             );
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'reason' => 'required|string|max:500',
         ]);
 
-        $reservation->update([
-            'status' => 'rejected',
-            'reason' => $request->reason,
-        ]);
+        DB::transaction(function () use ($reservation, $validated) {
+            $reservation->update([
+                'status' => 'rejected',
+            ]);
+
+            ReservationLog::create([
+                'reservation_id' => $reservation->reservation_id,
+                'user_id' => Auth::id(),
+                'action' => 'rejected',
+                'reason' => $validated['reason'],
+            ]);
+        });
 
         return back()->with(
             'success',
@@ -87,8 +102,10 @@ class PetugasController extends Controller
         );
     }
 
-    public function cancelReservation(Request $request, Reservation $reservation)
-    {
+    public function cancelReservation(
+        Request $request,
+        Reservation $reservation
+    ) {
         if ($reservation->status !== 'approved') {
             return back()->with(
                 'error',
@@ -96,15 +113,22 @@ class PetugasController extends Controller
             );
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'reason' => 'required|string|max:500',
         ]);
 
-        $reservation->update([
-            'status' => 'cancelled',
-            'cancelled_by' => Auth::id(),
-            'reason' => $request->reason,
-        ]);
+        DB::transaction(function () use ($reservation, $validated) {
+            $reservation->update([
+                'status' => 'cancelled',
+            ]);
+
+            ReservationLog::create([
+                'reservation_id' => $reservation->reservation_id,
+                'user_id' => Auth::id(),
+                'action' => 'cancelled',
+                'reason' => $validated['reason'],
+            ]);
+        });
 
         return back()->with(
             'success',
