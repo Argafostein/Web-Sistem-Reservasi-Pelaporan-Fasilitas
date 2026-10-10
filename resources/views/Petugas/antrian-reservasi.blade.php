@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @push('styles')
+    @vite('resources/css/petugas/antrian-reservasi.css')
     @vite('resources/css/petugas/antrian.css')
 @endpush
 
