@@ -86,13 +86,14 @@ Route::middleware(['auth', 'petugas'])
         Route::post('/reservasi/{reservation}/cancel', [PetugasController::class, 'cancelReservation'])
             ->name('petugas.reservasi.cancel');
 
+        Route::get('/petugas/riwayat', [PetugasController::class, 'history'])
+            ->name('petugas.riwayat');
+
+        Route::get('/petugas/antrian', [PetugasController::class, 'queue'])
+            ->name('petugas.antrian');
+
     });
 
-
-
-Route::get('/dashboard-petugas', function () {
-    return view('dashboard-petugas');
-});
 
 Route::get('/antrian-reservasi', function () {
     return view('antrian-reservasi');

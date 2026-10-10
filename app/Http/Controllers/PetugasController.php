@@ -135,4 +135,51 @@ class PetugasController extends Controller
             'Reservasi berhasil dibatalkan.'
         );
     }
+
+    public function history()
+    {
+        $reservations = Reservation::with([
+            'user',
+            'facility',
+            'logs.user',
+        ])
+            ->whereIn('status', [
+                'approved',
+                'rejected',
+                'cancelled',
+                'completed',
+            ])
+            ->latest('created_at')
+            ->get()
+            ->filter(function ($reservation) {
+                $latestLog = $reservation->logs->first();
+
+                return $latestLog
+                    && in_array($latestLog->action, [
+                        'approved',
+                        'rejected',
+                        'cancelled',
+                    ])
+                    && $latestLog->user
+                    && $latestLog->user->role === 'petugas';
+            })
+            ->values();
+
+        return view('petugas.riwayat', compact(
+            'reservations'
+        ));
+    }
+
+    public function queue()
+    {
+        $pendingReservations = Reservation::with([
+            'user',
+            'facility',
+        ])
+            ->where('status', 'pending')
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return view('petugas.antrian', compact('pendingReservations'));
+    }
 }
