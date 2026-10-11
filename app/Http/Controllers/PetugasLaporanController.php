@@ -114,7 +114,7 @@ class PetugasLaporanController extends Controller
             ) {
                 ReportLog::create([
                     'report_id' => $report->report_id,
-                    'user_id' => Auth::user()->user_id,
+                    'user_id' => Auth::id(),
                     'action' => 'status_updated',
                     'old_status' => $oldStatus,
                     'new_status' => $status,

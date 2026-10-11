@@ -138,7 +138,7 @@ class PetugasReservasiController extends Controller
 
             ReservationLog::create([
                 'reservation_id' => $reservation->reservation_id,
-                'user_id' => Auth::user()->user_id,
+                'user_id' => Auth::id(),
                 'action' => 'cancelled',
                 'reason' => trim($validated['reason']),
             ]);
