@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Facility;
 use App\Models\Reservation;
+use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 
 class PetugasController extends Controller
@@ -18,9 +19,22 @@ class PetugasController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
+        // Nilai jumlah rekapitulasi (langsung count)
+        $pendingReportsCount = Report::where('status', 'pending')->count();
+
+        $maintenanceFacilitiesCount = Facility::where(
+            'status',
+            'maintenance'
+        )
+            ->count();
+
+        // output ke view
         return view(
             'petugas.dashboard',
-            compact('pendingReservations')
+            compact('pendingReservations',
+                    'pendingReportsCount',
+                    'maintenanceFacilitiesCount'            
+            )
         );
     }
 

@@ -53,7 +53,9 @@
                     Laporan Baru
                 </span>
 
-                <strong>0</strong>
+                <strong>
+                    {{ $pendingReportsCount }}
+                </strong>
             </div>
 
             <div class="summary-card">
@@ -61,7 +63,9 @@
                     Dalam Perbaikan
                 </span>
 
-                <strong>0</strong>
+                <strong>
+                    {{ $maintenanceFacilitiesCount }}
+                </strong>
             </div>
 
         </div>
