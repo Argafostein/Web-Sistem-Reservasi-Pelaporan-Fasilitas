@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Models\ReservationLog;
+use App\Models\Facility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,51 +28,104 @@ class PetugasReservasiController extends Controller
         );
     }
 
+
     public function approveReservation(Reservation $reservation)
     {
-        if ($reservation->status !== 'pending') {
-            return back()->with(
-                'error',
-                'Reservasi ini sudah diproses.'
-            );
-        }
+        $result = DB::transaction(function () use ($reservation) {
 
-        $overlappingReservation = Reservation::where(
+            $facility = Facility::where(
                 'facility_id',
                 $reservation->facility_id
             )
-            ->where('reservation_date', $reservation->reservation_date)
-            ->where('status', 'approved')
-            ->where('reservation_id', '!=', $reservation->reservation_id)
-            ->where('start_time', '<', $reservation->end_time)
-            ->where('end_time', '>', $reservation->start_time)
-            ->first();
+                ->lockForUpdate() // Mengunci fasilitas terlebih dahulu, semua proses persetujuan harus memakai urutan yang sama.
+                ->firstOrFail();
 
-        if ($overlappingReservation) {
+            $currentReservation = Reservation::where(
+                'reservation_id',
+                $reservation->reservation_id
+            )
+                ->lockForUpdate() // Baca ulang reservasi dan kunci barisnya.
+                ->firstOrFail();
+
+            if ($currentReservation->status !== 'pending') { // Pastikan reservasi belum diproses
+                return 'already_processed';
+            }
+            if ($facility->status !== 'available') { // Pastikan fasilitas dapat digunakan
+                return 'facility_unavailable';
+            }
+
+            $overlappingReservation = Reservation::where(
+                    'facility_id',
+                    $currentReservation->facility_id
+                )
+                // Periksa konflik setelah kunci fasilitas diperoleh
+                ->where(
+                    'reservation_date',
+                    $currentReservation->reservation_date
+                )
+                ->where('status', 'approved')
+                ->where(
+                    'reservation_id',
+                    '!=',
+                    $currentReservation->reservation_id
+                )
+                ->where(
+                    'start_time',
+                    '<',
+                    $currentReservation->end_time
+                )
+                ->where(
+                    'end_time',
+                    '>',
+                    $currentReservation->start_time
+                )
+                ->exists();
+
+            if ($overlappingReservation) {
+                return 'overlap';
+            }
+
+            $currentReservation->update([
+                'status' => 'approved',
+            ]);
+
+            ReservationLog::create([
+                'reservation_id' => $currentReservation->reservation_id,
+                'user_id' => Auth::id(),
+                'action' => 'approved',
+                'reason' => null,
+            ]);
+
+            return 'approved';
+        });
+
+        if ($result === 'overlap') {
             return back()->with(
                 'error',
                 'Reservasi tidak dapat disetujui karena jadwal berbenturan dengan reservasi lain.'
             );
         }
 
-        DB::transaction(function () use ($reservation) {
-            $reservation->update([
-                'status' => 'approved',
-            ]);
+        if ($result === 'facility_unavailable') {
+            return back()->with(
+                'error',
+                'Reservasi tidak dapat disetujui karena fasilitas tidak tersedia.'
+            );
+        }
 
-            ReservationLog::create([
-                'reservation_id' => $reservation->reservation_id,
-                'user_id' => Auth::id(),
-                'action' => 'approved',
-                'reason' => null,
-            ]);
-        });
+        if ($result === 'already_processed') {
+            return back()->with(
+                'error',
+                'Reservasi ini sudah diproses.'
+            );
+        }
 
         return back()->with(
             'success',
             'Reservasi berhasil disetujui.'
         );
     }
+
 
     public function rejectReservation(
         Request $request,
