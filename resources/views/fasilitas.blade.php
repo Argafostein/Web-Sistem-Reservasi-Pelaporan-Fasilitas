@@ -87,6 +87,10 @@
                         Laboratorium
                     </option>
 
+                    <option value="lainnya">
+                        Lainnya
+                    </option>
+
                 </select>
 
             </div>
@@ -168,7 +172,13 @@
                     class="facility-item"
                     data-id="{{ $facility->facility_id }}"
                     data-name="{{ strtolower($facility->name) }}"
-                    data-type="{{ strtolower($facility->type) }}"
+                    data-type="{{ strtolower(trim($facility->type ?? '')) ?: (
+                        str_contains(strtolower($facility->name), 'seminar') ? 'ruang seminar' :
+                        (str_contains(strtolower($facility->name), 'laboratorium') ? 'laboratorium' :
+                        (str_contains(strtolower($facility->name), 'aula') ||
+                         str_contains(strtolower($facility->name), 'auditorium') ? 'aula' :
+                        'lainnya'))
+                    ) }}"
                     data-location="{{ strtolower($facility->location) }}"
                     data-capacity="{{ $facility->capacity }}"
                 >

@@ -35,6 +35,31 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+
+            [
+                'name' => 'User Kampus 2',
+                'email' => 'user2@kampus.ac.id',
+                'password' => Hash::make('password123'),
+                'role' => 'user',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Admin Kampus 2',
+                'email' => 'admin2@kampus.ac.id',
+                'password' => Hash::make('password123'),
+                'role' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Petugas Kampus 2',
+                'email' => 'petugas2@kampus.ac.id',
+                'password' => Hash::make('password123'),
+                'role' => 'petugas',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

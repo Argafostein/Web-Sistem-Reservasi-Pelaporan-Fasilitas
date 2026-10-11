@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Models\Reservation;
 use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PetugasController extends Controller
 {
@@ -58,7 +59,7 @@ class PetugasController extends Controller
             'status',
         ]);
 
-        return view('Petugas.fasilitas', compact(
+        return view('petugas.fasilitas', compact(
             'facilities',
             'reservations'
         ));
@@ -69,15 +70,15 @@ class PetugasController extends Controller
      */
     public function mulaiPerbaikan(Facility $facility)
     {
-        if ($facility->status !== 'available') {
+        if ($facility->operational_status !== 'active') {
             return back()->with(
                 'error',
                 'Fasilitas tidak tersedia untuk memulai perbaikan.'
             );
         }
-
+        
         $facility->update([
-            'status' => 'maintenance',
+            'operational_status' => 'maintenance',
         ]);
 
         return back()->with(
@@ -91,7 +92,7 @@ class PetugasController extends Controller
      */
     public function selesaikanPerbaikan(Facility $facility)
     {
-        if ($facility->status !== 'maintenance') {
+        if ($facility->operational_status !== 'maintenance') {
             return back()->with(
                 'error',
                 'Fasilitas tidak sedang dalam perbaikan.'
@@ -99,7 +100,7 @@ class PetugasController extends Controller
         }
 
         $facility->update([
-            'status' => 'available',
+            'operational_status' => 'active',
         ]);
 
         return back()->with(

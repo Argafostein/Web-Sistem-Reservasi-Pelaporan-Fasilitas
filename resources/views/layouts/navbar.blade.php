@@ -50,7 +50,7 @@
                 </button>
 
                 <div class="profile-dropdown" id="profileDropdown">
-                    <a href="#">Profil Saya</a>
+                    <a href="{{ route('profile.edit') }}">Profil Saya</a>
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -92,7 +92,7 @@
 
                 <div class="profile-dropdown" id="profileDropdown">
 
-                    <a href="#">
+                    <a href="{{ route('profile.edit') }}">
                         Profil Saya
                     </a>
 

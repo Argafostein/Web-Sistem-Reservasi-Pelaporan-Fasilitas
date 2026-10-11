@@ -9,6 +9,7 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\PetugasLaporanController;
 use App\Http\Controllers\PetugasReservasiController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [FacilityController::class, 'index'])
     ->name('fasilitas');
@@ -68,6 +69,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/laporan/{report}', [ReportController::class, 'show'])
         ->name('lapor.show');
+
+    
+    // Profil Pengguna
+    Route::get('/profil', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/profil', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
 });
 
 // Petugas

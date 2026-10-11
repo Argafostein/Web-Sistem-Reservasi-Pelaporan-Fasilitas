@@ -16,5 +16,6 @@ class Facility extends Model
         'location',
         'capacity',
         'status',
+        'operational_status',
     ];
 }
